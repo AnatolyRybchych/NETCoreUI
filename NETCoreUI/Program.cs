@@ -1,4 +1,5 @@
 ﻿
+using NETCoreUI.Core;
 
 namespace NETCoreUI
 {
@@ -6,7 +7,9 @@ namespace NETCoreUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("qwe");
+            IEnvironmant ev = EnvironmantProvider.CreateEnvironmantForCurrentOS();
+
+            ev.JoinUIThread();
         }
     }
 }
