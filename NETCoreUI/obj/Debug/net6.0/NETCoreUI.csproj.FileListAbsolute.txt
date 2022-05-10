@@ -1,0 +1,15 @@
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Debug\net6.0\NETCoreUI.exe
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Debug\net6.0\NETCoreUI.deps.json
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Debug\net6.0\NETCoreUI.runtimeconfig.json
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Debug\net6.0\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Debug\net6.0\NETCoreUI.pdb
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.csproj.AssemblyReference.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.AssemblyInfoInputs.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.AssemblyInfo.cs
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.csproj.CoreCompileInputs.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\refint\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.pdb
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.genruntimeconfig.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\ref\NETCoreUI.dll
