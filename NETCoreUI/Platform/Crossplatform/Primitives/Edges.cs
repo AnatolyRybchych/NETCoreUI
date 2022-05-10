@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NETCoreUI.Platform.Crossplatform.Primitives;
+namespace NETCoreUI.Platform.Crossplatform.Primitives
 {
     public struct Edges
     {

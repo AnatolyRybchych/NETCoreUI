@@ -1,4 +1,5 @@
 ﻿using NETCoreUI.Core;
+using NETCoreUI.Platform.Crossplatform.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,10 @@ namespace NETCoreUI.Platform.Linux
 {
     public class LinuxWindow : Crossplatform.Window
     {
+        public override IUIThread UIThread => throw new NotImplementedException();
+
+        public override Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override Size Size { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override Rect Rect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
