@@ -12,7 +12,7 @@ namespace NETCoreUI
             ev.StartUIThread();
             ev.UIThread.Execute(() =>
             {
-                IWIndow window = ev.CreateWindowWithoutTitleBar();
+                IWIndow window = ev.CreateWindow("Window");
             });
 
             ev.JoinUIThread();

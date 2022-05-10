@@ -11,8 +11,20 @@ namespace NETCoreUI.Platform.Crossplatform
     public abstract class Window : IWIndow
     {
         public abstract IUIThread UIThread { get; }
+
+        public abstract string Title { get; set; }
         public abstract Point Position { get; set; }
         public abstract Size Size { get; set; }
         public abstract Rect Rect { get; set; }
+
+        public abstract void Close();
+        public abstract void Maximize();
+        public abstract void Minimize();
+        public abstract void Show();
+
+        ~Window()
+        {
+            Close();
+        }
     }
 }

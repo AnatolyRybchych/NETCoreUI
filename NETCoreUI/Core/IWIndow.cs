@@ -9,15 +9,16 @@ namespace NETCoreUI.Core
 {
     public interface IWIndow
     {
-        public IUIThread UIThread { get; }
+        IUIThread UIThread { get; }
 
+        public string Title { get; set; }
         public Point Position { get; set; }
         public Size Size { get; set; }
         public Rect Rect { get; set; }
-        
-        
 
-        //protected void OnCreate();
-        //protected void OnResize();
+        void Show();
+        void Maximize();
+        void Minimize();
+        void Close();
     }
 }

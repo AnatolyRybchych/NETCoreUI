@@ -23,34 +23,50 @@ namespace NETCoreUI.Platform.Crossplatform
 
         public IWIndow CreateWindow(string title)
         {
+#if DEBUG
             if (uiThread.IsCurrentThread)
                 return CreateBaseWindow(title);
             else
                 throw new NotUIThreadException();
+#else
+            return CreateBaseWindow(title);
+#endif
         }
 
         public IWIndow CreateWindow(string title, int width, int height)
         {
+#if DEBUG
             if (uiThread.IsCurrentThread)
                 return CreateBaseWindow(title, width, height);
             else
                 throw new NotUIThreadException();
+#else
+            return CreateBaseWindow(title, width, height);
+#endif
         }
 
         public IWIndow CreateWindowWithoutTitleBar()
         {
+#if DEBUG
             if (uiThread.IsCurrentThread)
                 return CreateBaseWindowWithoutTitleBar();
             else
                 throw new NotUIThreadException();
+#else
+            return CreateBaseWindowWithoutTitleBar();
+#endif
         }
 
         public IWIndow CreateWindowWithoutTitleBar(int width, int height)
         {
+#if DEBUG
             if (uiThread.IsCurrentThread)
                 return CreateBaseWindowWithoutTitleBar(width, height);
             else
                 throw new NotUIThreadException();
+#else
+            return CreateBaseWindowWithoutTitleBar(width, height);
+#endif
         }
     }
 }
