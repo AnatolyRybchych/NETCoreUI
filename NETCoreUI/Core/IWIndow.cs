@@ -11,7 +11,6 @@ namespace NETCoreUI.Core
     {
         public IUIThread UIThread { get; }
 
-
         public Point Position { get; set; }
         public Size Size { get; set; }
         public Rect Rect { get; set; }

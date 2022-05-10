@@ -16,17 +16,6 @@ namespace NETCoreUI.Platform.Crossplatform
         private Queue<Action> backActionsQueue;
         private object queueLocker;
 
-        public void Execute(Action action)
-        {
-            lock (queueLocker)
-                backActionsQueue.Enqueue(action);
-        }
-
-        public void Join()
-        {
-            thread.Join();
-        }
-
         public UIThread()
         {
             queueLocker = new object();
@@ -37,19 +26,28 @@ namespace NETCoreUI.Platform.Crossplatform
             thread = new Thread(() =>
             {
                 while (isRunning)
-                {
-                    if (ReceiveMessages())
-                        if (HandleMessages())
-                            isRunning = false;
-
-                    SwapActionQueues();
-                    Action? action;
-                    while (actionsQueue.TryDequeue(out action))
-                        action?.Invoke();
-                }
+                    ReceiveMessages();
             });
+        }
 
-            thread.Start();
+        public bool IsCurrentThread => thread == Thread.CurrentThread;
+
+        public void Start() => thread.Start();
+        public void Join() => thread.Join();
+        public void Stop() => isRunning = false;
+
+        public void Execute(Action action)
+        {
+            lock (queueLocker)
+                backActionsQueue.Enqueue(action);
+        }
+
+        public void HandleActions()
+        {
+            SwapActionQueues();
+            Action? action;
+            while (actionsQueue.TryDequeue(out action))
+                action?.Invoke();
         }
 
         private void SwapActionQueues()
@@ -59,9 +57,6 @@ namespace NETCoreUI.Platform.Crossplatform
             backActionsQueue = tmp;
         }
 
-        //returns true if required to handle
-        protected abstract bool ReceiveMessages();
-        //returns false if reuired to close thread
-        protected abstract bool HandleMessages();
+        protected abstract void ReceiveMessages();
     }
 }

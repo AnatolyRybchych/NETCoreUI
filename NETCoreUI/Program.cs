@@ -7,7 +7,13 @@ namespace NETCoreUI
     {
         static void Main(string[] args)
         {
-            IEnvironmant ev = EnvironmantProvider.CreateEnvironmantForCurrentOS();
+            IEnvironmant ev = EnvironmantProvider.GetEnvironmant();
+
+            ev.StartUIThread();
+            ev.UIThread.Execute(() =>
+            {
+                IWIndow window = ev.CreateWindowWithoutTitleBar();
+            });
 
             ev.JoinUIThread();
         }

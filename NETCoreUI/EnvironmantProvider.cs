@@ -9,14 +9,34 @@ namespace NETCoreUI
 {
     public static class EnvironmantProvider
     {
-        public static IEnvironmant CreateEnvironmantForCurrentOS()
+        private static IEnvironmant? env = null;
+
+        private static void CreateEnvironmant()
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
-                return new Platform.Linux.LinuxEnvironamnt();
+                env = new Platform.Linux.LinuxEnvironamnt();
             else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                return new Platform.Windows.NTEnvironmant();
+                env = new Platform.Windows.NTEnvironmant();
             else
                 throw new PlatformNotSupportedException();
+        }
+
+        public static void SplitActionsByEnvironments(Action<Platform.Linux.LinuxEnvironamnt>? linuxAction, Action<Platform.Windows.NTEnvironmant>? windowsAction)
+        {
+            var env = GetEnvironmant();
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                linuxAction?.Invoke((Platform.Linux.LinuxEnvironamnt)env);
+            else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                windowsAction?.Invoke((Platform.Windows.NTEnvironmant)env);
+            else
+                throw new PlatformNotSupportedException();
+        }
+
+        public static IEnvironmant GetEnvironmant()
+        {
+            if (env == null)
+                CreateEnvironmant();
+            return env;
         }
     }
 }

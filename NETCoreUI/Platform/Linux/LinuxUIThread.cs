@@ -8,12 +8,11 @@ namespace NETCoreUI.Platform.Linux
 {
     public class LinuxUIThread : Crossplatform.UIThread
     {
-        protected override bool HandleMessages()
+        private void HandleMessages()
         {
-            throw new NotImplementedException();
         }
 
-        protected override bool ReceiveMessages()
+        protected override void ReceiveMessages()
         {
             throw new NotImplementedException();
         }

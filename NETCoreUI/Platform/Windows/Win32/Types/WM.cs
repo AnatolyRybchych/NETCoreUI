@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NETCoreUI.Core
+namespace NETCoreUI.Platform.Windows.Win32.Types
 {
-    public interface IUIThread
+    public enum WM : Int32
     {
-        void Execute(Action action);
-        bool IsCurrentThread { get; }
+        QUIT = 0x12,
     }
 }
