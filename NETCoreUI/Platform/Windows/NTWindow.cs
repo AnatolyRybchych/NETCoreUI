@@ -1,4 +1,5 @@
 ﻿using NETCoreUI.Core;
+using NETCoreUI.Core.WindowEvents;
 using NETCoreUI.Platform.Crossplatform.Primitives;
 using NETCoreUI.Platform.Windows.Win32;
 using NETCoreUI.Platform.Windows.Win32.Types;
@@ -22,7 +23,7 @@ namespace NETCoreUI.Platform.Windows
         public IntPtr HInstance { get; private set; }
         public IntPtr HWindow { get; private set; }
 
-        public event WndProcHandler OnWindowProc;
+        public event WndProcHandler? WindowProc;
 
         public override IUIThread UIThread => NTUIThread;
         public override Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -56,12 +57,24 @@ namespace NETCoreUI.Platform.Windows
 
         protected virtual IntPtr WndProc(IntPtr hwnd, WM msg, IntPtr wparam, IntPtr lparam)
         {
-            OnWindowProc?.Invoke(hwnd, msg, wparam, lparam);
+            WindowProc?.Invoke(hwnd, msg, wparam, lparam);
             switch (msg)
             {
-                case WM.QUIT:
+                case WM.MOUSEMOVE:
+                    OnMouseMove(new MouseMoveEventArgs(0, 0));
                     break;
-                    
+                case WM.LBUTTONDOWN:
+                    OnLeftMouseButtonDown(new MouseButtonEventArgs(0, 0));
+                    break;
+                case WM.LBUTTONUP:
+                    OnLeftMouseButtonUp(new MouseButtonEventArgs(0, 0));
+                    break;
+                case WM.RBUTTONDOWN:
+                    OnRightMouseButtonDown(new MouseButtonEventArgs(0, 0));
+                    break;
+                case WM.RBUTTONUP:
+                    OnRigthMouseButtonUp(new MouseButtonEventArgs(0, 0));
+                    break;
             }
             return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
         }

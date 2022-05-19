@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Core
 {
-    public interface IEnvironmant
+    public interface IEnvironment
     {
         IUIThread UIThread { get; }
         IWIndow CreateWindowWithoutTitleBar();

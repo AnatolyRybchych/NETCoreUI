@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Platform.Windows
 {
-    public class NTEnvironmant : Crossplatform.Environmant
+    public class NTEnvironmant : Crossplatform.Environment
     {
         protected override UIThread uiThread => NTUIThread;
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Platform.Crossplatform
 {
-    public abstract class Environmant : IEnvironmant
+    public abstract class Environment : IEnvironment
     {
         protected abstract UIThread uiThread { get; }
 

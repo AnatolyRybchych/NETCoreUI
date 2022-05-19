@@ -9,44 +9,44 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI
 {
-    public static class EnvironmantProvider
+    public static class EnvironmentProvider
     {
-        private static IEnvironmant? env = null;
+        private static IEnvironment? env = null;
 
-        private static IEnvironmant CreateEnvironmant()
+        private static IEnvironment CreateEnvironment()
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
-                return env = new LinuxEnvironamnt();
+                return env = new LinuxEnvironment();
             else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 return env = new NTEnvironmant();
             else
                 throw new PlatformNotSupportedException();
         }
 
-        public static void SplitActionsByEnvironments(Action<LinuxEnvironamnt>? linuxAction, 
+        public static void SplitActionsByEnvironments(Action<LinuxEnvironment>? linuxAction, 
             Action<NTEnvironmant>? windowsAction)
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
-                linuxAction?.Invoke((LinuxEnvironamnt)GetEnvironmant());
+                linuxAction?.Invoke((LinuxEnvironment)GetEnvironment());
             else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                windowsAction?.Invoke((NTEnvironmant)GetEnvironmant());
+                windowsAction?.Invoke((NTEnvironmant)GetEnvironment());
             else
                 throw new PlatformNotSupportedException();
         }
 
-        public static IEnvironmant GetEnvironmant()
+        public static IEnvironment GetEnvironment()
         {
             if (env == null)
-                return CreateEnvironmant();
+                return CreateEnvironment();
             else
                 return env;
         }
     }
 
-    public static class WindowInterpreter
+    public static class SymbolInterpreter
     {
-        public static LinuxEnvironamnt ToLinux(this IEnvironmant env) => (LinuxEnvironamnt)env;
-        public static NTEnvironmant ToWindows(this IEnvironmant env) => (NTEnvironmant)env;
+        public static LinuxEnvironment ToLinux(this IEnvironment env) => (LinuxEnvironment)env;
+        public static NTEnvironmant ToWindows(this IEnvironment env) => (NTEnvironmant)env;
 
         public static LinuxWindow ToLinux(this IWIndow wnd) => (LinuxWindow)wnd;
         public static NTWindow ToWindows(this IWIndow wnd) => (NTWindow)wnd;

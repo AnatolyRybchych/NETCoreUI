@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Platform.Linux
 {
-    public class LinuxEnvironamnt : Crossplatform.Environmant
+    public class LinuxEnvironment : Crossplatform.Environment
     {
         private LinuxUIThread linuxUIThread;
         protected override UIThread uiThread => linuxUIThread;
 
-        public LinuxEnvironamnt()
+        public LinuxEnvironment()
         {
             linuxUIThread = new LinuxUIThread();
         }
