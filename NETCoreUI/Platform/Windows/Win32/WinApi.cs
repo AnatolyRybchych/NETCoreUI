@@ -11,12 +11,15 @@ namespace NETCoreUI.Platform.Windows.Win32
     public static class WinApi
     {
         [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool PeekMessageW(out MSG lpMsg, IntPtr hwnd, UInt32 msgFilterMin = 0, uint msgFiletMax = 0, PM removeMsg = PM.REMOVE);
 
         [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetMessageW(out MSG lpMsg, IntPtr hwnd, UInt32 msgFilterMin = 0, uint msgFiletMax = 0);
 
         [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool TranslateMessage(in MSG lpMsg);
 
         [DllImport("user32.dll")]

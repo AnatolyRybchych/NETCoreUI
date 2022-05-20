@@ -18,6 +18,7 @@ namespace NETCoreUI.Platform.Windows
     public class NTWindow : Crossplatform.Window
     {
         private static int counter = 0;
+        private fnWndProc __wndProcDelegate;
 
         public NTUIThread NTUIThread { get; private set; }
         public IntPtr HInstance { get; private set; }
@@ -37,7 +38,8 @@ namespace NETCoreUI.Platform.Windows
             WNDCLASSEXW wc = new WNDCLASSEXW();
             wc.HInstance = HInstance;
             wc.CbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf<WNDCLASSEXW>();
-            wc.LpfnWndProc = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(new fnWndProc(WndProc));
+            __wndProcDelegate = WndProc;
+            wc.LpfnWndProc = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(__wndProcDelegate);
             wc.LpszClassName = $"CoreUIWnd{counter++}";
 
             if (WinApi.RegisterClassExW(in wc) == 0)

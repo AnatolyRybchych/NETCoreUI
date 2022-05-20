@@ -21,7 +21,7 @@ namespace NETCoreUI.Platform.Windows
 
         protected override void ReceiveMessages()
         {
-            switch (WinApi.MsgWaitForMultipleObjectsEx(0, IntPtr.Zero, 12, QS.ALLINPUT, 0))
+            switch (WinApi.MsgWaitForMultipleObjectsEx(0, IntPtr.Zero, 0, QS.ALLINPUT, 0))
             {
                 case WAIT.OBJECT_0:
                     while (WinApi.PeekMessageW(out message, IntPtr.Zero, 0, 0, PM.REMOVE))
