@@ -954,7 +954,7 @@ public struct XIMValuesList {
 
 
 public static class X{
-    public const string LibPath = "libX11";
+    public const string LibPath = "libX11.so.6";
     
     
     public const string XNRequiredCharSet = "requiredCharSet";
