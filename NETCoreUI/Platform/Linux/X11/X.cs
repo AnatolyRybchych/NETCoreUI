@@ -156,8 +156,12 @@ public struct __pthread_list_t {
     public System.IntPtr /*|__pthread_internal_list*|*/  __next;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 24 * sizeof(long))]
+
+
+[StructLayout(LayoutKind.Explicit, Size = StructSize)]
 public struct XEvent {
+    public const int StructSize = 24 * sizeof(long);
+
     [System.Runtime.InteropServices.FieldOffset(0)] public int type;		/* must not be changed; first element */
 	[System.Runtime.InteropServices.FieldOffset(0)] public XAnyEvent xany;
 	[System.Runtime.InteropServices.FieldOffset(0)] public XKeyEvent xkey;

@@ -18,11 +18,18 @@ namespace NETCoreUI.Platform.Crossplatform
         public abstract Size Size { get; set; }
         public abstract Rect Rect { get; set; }
 
+        public IEnvironment Environment { get; private set; }
+
         public event LeftMouseDownEventHandler? LeftMouseButtonDown;
         public event LeftMouseUpEventHandler? LeftMouseButtonUp;
         public event RightMouseDownEventHandler? RightMouseButtonDown;
         public event RightMouseUpEventHandler? RightMouseButtonUp;
         public event MouseMoveEventHandler? MouseMove;
+
+        public Window(IEnvironment environment)
+        {
+            Environment = environment;
+        }
 
         public abstract void Close();
         public abstract void Maximize();

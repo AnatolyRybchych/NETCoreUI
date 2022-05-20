@@ -16,8 +16,9 @@ namespace NETCoreUI.Platform.Crossplatform
         private Queue<Action> backActionsQueue;
         private object queueLocker;
 
-        public UIThread()
+        public UIThread(IEnvironment environment)
         {
+            Environment = environment;
             queueLocker = new object();
             actionsQueue = new Queue<Action>();
             backActionsQueue = new Queue<Action>();
@@ -31,6 +32,8 @@ namespace NETCoreUI.Platform.Crossplatform
         }
 
         public bool IsCurrentThread => thread == Thread.CurrentThread;
+
+        public IEnvironment Environment { get; private set; }
 
         public void Start() => thread.Start();
         public void Join() => thread.Join();

@@ -22,6 +22,7 @@ namespace NETCoreUI.Platform.Windows
         public NTUIThread NTUIThread { get; private set; }
         public IntPtr HInstance { get; private set; }
         public IntPtr HWindow { get; private set; }
+        public NTEnvironment NTEnvironamnt => (NTEnvironment)Environment;
 
         public event WndProcHandler? WindowProc;
 
@@ -29,7 +30,7 @@ namespace NETCoreUI.Platform.Windows
         public override Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override Size Size { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override Rect Rect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string Title { get => "qwe"; set => throw new NotImplementedException(); }
 
         private string RegisterClass()
         {
@@ -44,7 +45,7 @@ namespace NETCoreUI.Platform.Windows
             return wc.LpszClassName;
         }
 
-        public NTWindow(NTUIThread uiThread, IntPtr hInstance, string title,WS_EX ex_styles, WS styles, int x, int y, int width, int height, IntPtr parent)
+        public NTWindow(NTEnvironment environment, NTUIThread uiThread, IntPtr hInstance, string title,WS_EX ex_styles, WS styles, int x, int y, int width, int height, IntPtr parent):base(environment)
         {
             NTUIThread = uiThread;
             HInstance = hInstance;

@@ -12,7 +12,9 @@ namespace NETCoreUI.Platform.Windows
     {
         private MSG message;
 
-        public NTUIThread()
+        public NTEnvironment NTEnvironment => (NTEnvironment)Environment;
+
+        public NTUIThread(NTEnvironment environment):base(environment)
         {
             message = new MSG();
         }

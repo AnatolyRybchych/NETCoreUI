@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 namespace NETCoreUI.Core
 {
     public interface IWIndow
-    {
+    { 
+        public IEnvironment Environment { get; }
+
         public event LeftMouseDownEventHandler LeftMouseButtonDown;
         public event LeftMouseUpEventHandler LeftMouseButtonUp;
         public event RightMouseDownEventHandler RightMouseButtonDown;

@@ -8,6 +8,7 @@ namespace NETCoreUI.Core
 {
     public interface IUIThread
     {
+        IEnvironment Environment { get; }
         void Execute(Action action);
         bool IsCurrentThread { get; }
     }

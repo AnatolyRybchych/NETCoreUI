@@ -18,18 +18,18 @@ namespace NETCoreUI
             if (Environment.OSVersion.Platform == PlatformID.Unix)
                 return env = new LinuxEnvironment();
             else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                return env = new NTEnvironmant();
+                return env = new NTEnvironment();
             else
                 throw new PlatformNotSupportedException();
         }
 
         public static void SplitActionsByEnvironments(Action<LinuxEnvironment>? linuxAction, 
-            Action<NTEnvironmant>? windowsAction)
+            Action<NTEnvironment>? windowsAction)
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
                 linuxAction?.Invoke((LinuxEnvironment)GetEnvironment());
             else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                windowsAction?.Invoke((NTEnvironmant)GetEnvironment());
+                windowsAction?.Invoke((NTEnvironment)GetEnvironment());
             else
                 throw new PlatformNotSupportedException();
         }
@@ -46,7 +46,7 @@ namespace NETCoreUI
     public static class SymbolInterpreter
     {
         public static LinuxEnvironment ToLinux(this IEnvironment env) => (LinuxEnvironment)env;
-        public static NTEnvironmant ToWindows(this IEnvironment env) => (NTEnvironmant)env;
+        public static NTEnvironment ToWindows(this IEnvironment env) => (NTEnvironment)env;
 
         public static LinuxWindow ToLinux(this IWIndow wnd) => (LinuxWindow)wnd;
         public static NTWindow ToWindows(this IWIndow wnd) => (NTWindow)wnd;

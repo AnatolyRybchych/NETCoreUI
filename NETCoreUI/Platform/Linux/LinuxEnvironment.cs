@@ -20,18 +20,19 @@ namespace NETCoreUI.Platform.Linux
         public LinuxEnvironment()
         {
             Display = X.XOpenDisplay(IntPtr.Zero);
-            linuxUIThread = new LinuxUIThread();
+            linuxUIThread = new LinuxUIThread(this);
             
         }
 
         protected override IWIndow CreateBaseWindow(string title)
         {
-            throw new NotImplementedException();
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0xff00ff00, 0xffffffff);
         }
+        
 
         protected override IWIndow CreateBaseWindow(string title, int width, int height)
         {
-            throw new NotImplementedException();
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, width, height, 0, 0xff00ff00, 0xffffffff);
         }
 
         protected override IWIndow CreateBaseWindowWithoutTitleBar()

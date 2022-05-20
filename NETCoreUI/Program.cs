@@ -10,9 +10,10 @@ namespace NETCoreUI
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
             ev.StartUIThread();
+            IWIndow window;
             ev.UIThread.Execute(() =>
             {
-                IWIndow window = ev.CreateWindow("Window");
+                window = ev.CreateWindow("Window");
                 window.RightMouseButtonDown += Window_RightMouseButtonDown;
             });
 
