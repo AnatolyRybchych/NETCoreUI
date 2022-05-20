@@ -1814,7 +1814,7 @@ public static class X{
     public static extern System.Int32 XQueryExtension ( System.IntPtr /*|Display*|*/  arg0, System.IntPtr /*System.SByte*/ arg1, System.IntPtr /*System.Int32*/ arg2, System.IntPtr /*System.Int32*/ arg3, System.IntPtr /*System.Int32*/ arg4);
     
     [DllImport(LibPath)]
-    public static extern System.Int32 XQueryKeymap ( System.IntPtr /*|Display*|*/  arg0, char* arg1);
+    public static extern System.Int32 XQueryKeymap ( System.IntPtr /*|Display*|*/  arg0, IntPtr arg1);
     
     [DllImport(LibPath)]
     public static extern System.Int32 XQueryPointer ( System.IntPtr /*|Display*|*/  arg0, Window arg1, System.IntPtr /*|Window*|*/  arg2, System.IntPtr /*|Window*|*/  arg3, System.IntPtr /*System.Int32*/ arg4, System.IntPtr /*System.Int32*/ arg5, System.IntPtr /*System.Int32*/ arg6, System.IntPtr /*System.Int32*/ arg7, System.IntPtr /*System.Int32*/ arg8);
@@ -2270,7 +2270,7 @@ public static class X{
         [FieldOffset(0)] public Window window;
         [FieldOffset(0)] public Atom message_type;
         [FieldOffset(0)] public System.Int32 format;
-        [FieldOffset(0)] public fixed System.Int64 l[5];
+        [FieldOffset(0)] public _BUFFER40BYTES l;
     }
     
     [StructLayout(LayoutKind.Explicit)] 
