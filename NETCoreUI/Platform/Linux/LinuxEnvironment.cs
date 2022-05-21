@@ -26,13 +26,13 @@ namespace NETCoreUI.Platform.Linux
 
         protected override IWIndow CreateBaseWindow(string title)
         {
-            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0xff00ff00, 0xffffffff);
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0xff00ff00, 0xffffffff, 0x0);
         }
         
 
         protected override IWIndow CreateBaseWindow(string title, int width, int height)
         {
-            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, width, height, 0, 0xff00ff00, 0xffffffff);
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, width, height, 0, 0xff00ff00, 0xffffffff, 0x0);
         }
 
         protected override IWIndow CreateBaseWindowWithoutTitleBar()

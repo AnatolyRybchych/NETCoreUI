@@ -37,10 +37,11 @@ namespace NETCoreUI.Platform.Linux
 
         }
 
-        public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor) : base(environment)
+        public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor, long inputMask) : base(environment)
         {
             XID = X.XCreateSimpleWindow(LinuxEnvironamnt.Display, parent, x, y, (uint)width, (uint)height, (uint)borderWidth, borderColor, backgroundColor);
             X.XMapWindow(LinuxEnvironamnt.Display, XID);
+            X.XSelectInput(LinuxEnvironamnt.Display, XID, inputMask);
             windows.Add(this);
         }
 
