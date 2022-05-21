@@ -41,21 +41,16 @@ namespace NETCoreUI.Platform.Linux
                     OnMouseMove(new MouseMoveEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonPress:
-                    Console.WriteLine($"btn:{xEvent.xbutton.button}, state:{xEvent.xbutton.state}");
-                    if(xEvent.xbutton.state == 0)
-                    {
-                        if (xEvent.xbutton.button == 0)
-                            OnRigthMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                        else if (xEvent.xbutton.button == 1)
-                            OnLeftMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    }
-                    else if(xEvent.xbutton.state == 1)
-                    {
-                        if (xEvent.xbutton.button == 0)
-                            OnRightMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                        else if (xEvent.xbutton.button == 1)
-                            OnLeftMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    }
+                    if (xEvent.xbutton.button == 1)
+                        OnRightMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
+                    else if (xEvent.xbutton.button == 2)
+                        OnLeftMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
+                    break;
+                case EventType.ButtonRelease:
+                    if (xEvent.xbutton.button == 1)
+                        OnRigthMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
+                    else if (xEvent.xbutton.button == 2)
+                        OnLeftMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
             }
         }
