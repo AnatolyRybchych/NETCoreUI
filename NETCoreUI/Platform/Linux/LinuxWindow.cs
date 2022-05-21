@@ -41,6 +41,7 @@ namespace NETCoreUI.Platform.Linux
                     OnMouseMove(new MouseMoveEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonPress:
+                    Console.WriteLine($"btn:{xEvent.xbutton.button}, state:{xEvent.xbutton.state}");
                     if(xEvent.xbutton.state == 0)
                     {
                         if (xEvent.xbutton.button == 0)
