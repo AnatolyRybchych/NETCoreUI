@@ -36,15 +36,15 @@ namespace NETCoreUI.Platform.Crossplatform
         public abstract void Minimize();
         public abstract void Show();
 
-        public virtual void OnLeftMouseButtonDown(MouseButtonEventArgs e) => LeftMouseButtonDown?.Invoke(this, e);
+        public virtual void OnLeftMouseButtonDown(MouseButtonEventArgs e) => LeftMouseButtonDown?.Invoke(this, Environment, e);
 
-        public virtual void OnLeftMouseButtonUp(MouseButtonEventArgs e) => LeftMouseButtonUp?.Invoke(this, e);
+        public virtual void OnLeftMouseButtonUp(MouseButtonEventArgs e) => LeftMouseButtonUp?.Invoke(this, Environment, e);
 
-        public virtual void OnRightMouseButtonDown(MouseButtonEventArgs e) => RightMouseButtonDown?.Invoke(this, e);
+        public virtual void OnRightMouseButtonDown(MouseButtonEventArgs e) => RightMouseButtonDown?.Invoke(this, Environment, e);
 
-        public virtual void OnRigthMouseButtonUp(MouseButtonEventArgs e) => RightMouseButtonUp?.Invoke(this, e);
+        public virtual void OnRigthMouseButtonUp(MouseButtonEventArgs e) => RightMouseButtonUp?.Invoke(this, Environment, e);
 
-        public virtual void OnMouseMove(MouseMoveEventArgs e) => MouseMove?.Invoke(this, e);
+        public virtual void OnMouseMove(MouseMoveEventArgs e) => MouseMove?.Invoke(this, Environment, e);
 
         ~Window()
         {

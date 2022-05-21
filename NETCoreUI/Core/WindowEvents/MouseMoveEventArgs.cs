@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Core.WindowEvents
 {
-    public delegate void MouseMoveEventHandler(object sender, MouseMoveEventArgs e);
+    public delegate void MouseMoveEventHandler(object sender, IEnvironment environment, MouseMoveEventArgs e);
     public class MouseMoveEventArgs:EventArgs
     {
         public int X { get; private set; }

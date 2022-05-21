@@ -20,7 +20,7 @@ namespace NETCoreUI
             ev.JoinUIThread();
         }
 
-        private static void Window_RightMouseButtonDown(object sender, Core.WindowEvents.MouseButtonEventArgs e)
+        private static void Window_RightMouseButtonDown(object sender, IEnvironment environment, Core.WindowEvents.MouseButtonEventArgs e)
         {
             Console.WriteLine($"left mouse button {{{e.X}; {e.Y}}}");
         }

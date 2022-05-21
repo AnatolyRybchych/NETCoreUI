@@ -10,6 +10,7 @@ namespace NETCoreUI.Core
     {
         IEnvironment Environment { get; }
         void Execute(Action action);
+        public void Stop();
         bool IsCurrentThread { get; }
     }
 }

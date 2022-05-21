@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Core.WindowEvents
 {
-    public delegate void LeftMouseDownEventHandler(object sender, MouseButtonEventArgs e);
-    public delegate void LeftMouseUpEventHandler(object sender, MouseButtonEventArgs e);
-    public delegate void RightMouseDownEventHandler(object sender, MouseButtonEventArgs e);
-    public delegate void RightMouseUpEventHandler(object sender, MouseButtonEventArgs e);
+    public delegate void LeftMouseDownEventHandler(object sender, IEnvironment environment, MouseButtonEventArgs e);
+    public delegate void LeftMouseUpEventHandler(object sender, IEnvironment environment, MouseButtonEventArgs e);
+    public delegate void RightMouseDownEventHandler(object sender, IEnvironment environment, MouseButtonEventArgs e);
+    public delegate void RightMouseUpEventHandler(object sender, IEnvironment environment, MouseButtonEventArgs e);
 
     public class MouseButtonEventArgs: EventArgs
     {
