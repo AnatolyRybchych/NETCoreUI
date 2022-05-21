@@ -22,7 +22,7 @@ namespace NETCoreUI
 
         private static void Window_RightMouseButtonDown(object sender, Core.WindowEvents.MouseButtonEventArgs e)
         {
-            Console.WriteLine("qwe");
+            Console.WriteLine($"left mouse button {{{e.X}; {e.Y}}}");
         }
     }
 }

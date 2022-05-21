@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static NETCoreUI.Platform.Windows.CSWindows.Win32Macro;
+
 namespace NETCoreUI.Platform.Windows
 {
     public delegate IntPtr fnWndProc(IntPtr hwnd, WM msg, IntPtr wParam, IntPtr lParam);
@@ -64,19 +66,24 @@ namespace NETCoreUI.Platform.Windows
             switch (msg)
             {
                 case WM.WM_MOUSEMOVE:
-                    OnMouseMove(new MouseMoveEventArgs(0, 0));
+                    int dwLparam = lparam.ToInt32();
+                    OnMouseMove(new MouseMoveEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     break;
                 case WM.WM_LBUTTONDOWN:
-                    OnLeftMouseButtonDown(new MouseButtonEventArgs(0, 0));
+                    dwLparam = lparam.ToInt32();
+                    OnLeftMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     break;
                 case WM.WM_LBUTTONUP:
-                    OnLeftMouseButtonUp(new MouseButtonEventArgs(0, 0));
+                    dwLparam = lparam.ToInt32();
+                    OnLeftMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     break;
                 case WM.WM_RBUTTONDOWN:
-                    OnRightMouseButtonDown(new MouseButtonEventArgs(0, 0));
+                    dwLparam = lparam.ToInt32();
+                    OnRightMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     break;
                 case WM.WM_RBUTTONUP:
-                    OnRigthMouseButtonUp(new MouseButtonEventArgs(0, 0));
+                    dwLparam = lparam.ToInt32();
+                    OnRigthMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     break;
             }
             return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
