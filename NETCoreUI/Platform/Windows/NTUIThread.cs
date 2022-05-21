@@ -26,7 +26,7 @@ namespace NETCoreUI.Platform.Windows
                 case WAIT.OBJECT_0:
                     while (WinApi.PeekMessageW(out message, IntPtr.Zero, 0, 0, PM.REMOVE))
                     {
-                        if (message.Message == WM.QUIT)
+                        if (message.Message == WM.WM_QUIT)
                             Stop();
                         WinApi.TranslateMessage(in message);
                         WinApi.DispatchMessageW(in message);

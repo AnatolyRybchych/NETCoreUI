@@ -38,7 +38,6 @@ namespace NETCoreUI.Platform.Windows
             WNDCLASSEXW wc = new WNDCLASSEXW();
             wc.HInstance = HInstance;
             wc.CbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf<WNDCLASSEXW>();
-            __wndProcDelegate = WndProc;
             wc.LpfnWndProc = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(__wndProcDelegate);
             wc.LpszClassName = $"CoreUIWnd{counter++}";
 
@@ -49,6 +48,7 @@ namespace NETCoreUI.Platform.Windows
 
         public NTWindow(NTEnvironment environment, NTUIThread uiThread, IntPtr hInstance, string title,WS_EX ex_styles, WS styles, int x, int y, int width, int height, IntPtr parent):base(environment)
         {
+            __wndProcDelegate = WndProc;
             NTUIThread = uiThread;
             HInstance = hInstance;
 
@@ -63,19 +63,19 @@ namespace NETCoreUI.Platform.Windows
             WindowProc?.Invoke(hwnd, msg, wparam, lparam);
             switch (msg)
             {
-                case WM.MOUSEMOVE:
+                case WM.WM_MOUSEMOVE:
                     OnMouseMove(new MouseMoveEventArgs(0, 0));
                     break;
-                case WM.LBUTTONDOWN:
+                case WM.WM_LBUTTONDOWN:
                     OnLeftMouseButtonDown(new MouseButtonEventArgs(0, 0));
                     break;
-                case WM.LBUTTONUP:
+                case WM.WM_LBUTTONUP:
                     OnLeftMouseButtonUp(new MouseButtonEventArgs(0, 0));
                     break;
-                case WM.RBUTTONDOWN:
+                case WM.WM_RBUTTONDOWN:
                     OnRightMouseButtonDown(new MouseButtonEventArgs(0, 0));
                     break;
-                case WM.RBUTTONUP:
+                case WM.WM_RBUTTONUP:
                     OnRigthMouseButtonUp(new MouseButtonEventArgs(0, 0));
                     break;
             }
