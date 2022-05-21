@@ -25,12 +25,12 @@ namespace NETCoreUI.Platform.Crossplatform
         public event RightMouseDownEventHandler? RightMouseButtonDown;
         public event RightMouseUpEventHandler? RightMouseButtonUp;
         public event MouseMoveEventHandler? MouseMove;
-        public event MiddleMouseDownEventHandler MiddleMouseButtonDown;
-        public event MiddleMouseUpEventHandler MiddleMouseButtonUp;
-        public event Mouse4DownEventHandler Mouse4ButtonDown;
-        public event Mouse4UpEventHandler Mouse4ButtonUp;
-        public event Mouse5DownEventHandler Mouse5ButtonDown;
-        public event Mouse5UpEventHandler Mouse5ButtonUp;
+        public event MiddleMouseDownEventHandler? MiddleMouseButtonDown;
+        public event MiddleMouseUpEventHandler? MiddleMouseButtonUp;
+        public event Mouse4DownEventHandler? Mouse4ButtonDown;
+        public event Mouse4UpEventHandler? Mouse4ButtonUp;
+        public event Mouse5DownEventHandler? Mouse5ButtonDown;
+        public event Mouse5UpEventHandler? Mouse5ButtonUp;
 
         public Window(IEnvironment environment)
         {
