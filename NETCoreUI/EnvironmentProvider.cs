@@ -23,8 +23,8 @@ namespace NETCoreUI
                 throw new PlatformNotSupportedException();
         }
 
-        public static void SplitActionsByEnvironments(Action<LinuxEnvironment>? linuxAction, 
-            Action<NTEnvironment>? windowsAction)
+        public static void SplitActionsByEnvironments(Action<LinuxEnvironment>? linuxAction = null, 
+            Action<NTEnvironment>? windowsAction = null)
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
                 linuxAction?.Invoke((LinuxEnvironment)GetEnvironment());

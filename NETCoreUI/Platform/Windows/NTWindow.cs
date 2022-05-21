@@ -68,25 +68,46 @@ namespace NETCoreUI.Platform.Windows
                 case WM.WM_MOUSEMOVE:
                     int dwLparam = lparam.ToInt32();
                     OnMouseMove(new MouseMoveEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
-                    break;
+                    return IntPtr.Zero;
                 case WM.WM_LBUTTONDOWN:
                     dwLparam = lparam.ToInt32();
                     OnLeftMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
-                    break;
+                    return IntPtr.Zero;
                 case WM.WM_LBUTTONUP:
                     dwLparam = lparam.ToInt32();
                     OnLeftMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
-                    break;
+                    return IntPtr.Zero;
                 case WM.WM_RBUTTONDOWN:
                     dwLparam = lparam.ToInt32();
                     OnRightMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
-                    break;
+                    return IntPtr.Zero;
                 case WM.WM_RBUTTONUP:
                     dwLparam = lparam.ToInt32();
                     OnRigthMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
-                    break;
+                    return IntPtr.Zero;
+                case WM.WM_MBUTTONDOWN:
+                    dwLparam = lparam.ToInt32();
+                    OnMiddleMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    return IntPtr.Zero;
+                case WM.WM_MBUTTONUP:
+                    dwLparam = lparam.ToInt32();
+                    OnMiddleMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    return IntPtr.Zero;
+                case WM.WM_XBUTTONDOWN:
+                    dwLparam = lparam.ToInt32();
+                    int dwWparam = wparam.ToInt32();
+                    if(HIWORD(dwWparam) == 1) OnMouse4ButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    else OnMouse5ButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    return new IntPtr(1);
+                case WM.WM_XBUTTONUP:
+                    dwLparam = lparam.ToInt32();
+                    dwWparam = wparam.ToInt32();
+                    if (HIWORD(dwWparam) == 1) OnMouse4ButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    else OnMouse5ButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    return new IntPtr(1);
+                default:
+                    return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
             }
-            return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
         }
 
         public override void Close()

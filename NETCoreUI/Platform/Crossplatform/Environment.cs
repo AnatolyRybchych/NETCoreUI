@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static NETCoreUI.Core.Exceptions.RequireUiThread;
+
 namespace NETCoreUI.Platform.Crossplatform
 {
     public abstract class Environment : IEnvironment
@@ -24,49 +26,36 @@ namespace NETCoreUI.Platform.Crossplatform
         public IWIndow CreateWindow(string title)
         {
 #if DEBUG
-            if (uiThread.IsCurrentThread)
-                return CreateBaseWindow(title);
-            else
-                throw new NotUIThreadException();
-#else
-            return CreateBaseWindow(title);
+            RequireUIThread(UIThread);
 #endif
+            return CreateBaseWindow(title);
+
         }
 
         public IWIndow CreateWindow(string title, int width, int height)
         {
 #if DEBUG
-            if (uiThread.IsCurrentThread)
-                return CreateBaseWindow(title, width, height);
-            else
-                throw new NotUIThreadException();
-#else
-            return CreateBaseWindow(title, width, height);
+            RequireUIThread(UIThread);
 #endif
+            return CreateBaseWindow(title, width, height);
+
         }
 
         public IWIndow CreateWindowWithoutTitleBar()
         {
 #if DEBUG
-            if (uiThread.IsCurrentThread)
-                return CreateBaseWindowWithoutTitleBar();
-            else
-                throw new NotUIThreadException();
-#else
-            return CreateBaseWindowWithoutTitleBar();
+            RequireUIThread(UIThread);
 #endif
+            return CreateBaseWindowWithoutTitleBar();
         }
 
         public IWIndow CreateWindowWithoutTitleBar(int width, int height)
         {
 #if DEBUG
-            if (uiThread.IsCurrentThread)
-                return CreateBaseWindowWithoutTitleBar(width, height);
-            else
-                throw new NotUIThreadException();
-#else
-            return CreateBaseWindowWithoutTitleBar(width, height);
+            RequireUIThread(UIThread);
 #endif
+            return CreateBaseWindowWithoutTitleBar(width, height);
+
         }
     }
 }

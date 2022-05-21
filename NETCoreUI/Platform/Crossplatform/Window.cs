@@ -25,6 +25,12 @@ namespace NETCoreUI.Platform.Crossplatform
         public event RightMouseDownEventHandler? RightMouseButtonDown;
         public event RightMouseUpEventHandler? RightMouseButtonUp;
         public event MouseMoveEventHandler? MouseMove;
+        public event MiddleMouseDownEventHandler MiddleMouseButtonDown;
+        public event MiddleMouseUpEventHandler MiddleMouseButtonUp;
+        public event Mouse4DownEventHandler Mouse4ButtonDown;
+        public event Mouse4UpEventHandler Mouse4ButtonUp;
+        public event Mouse5DownEventHandler Mouse5ButtonDown;
+        public event Mouse5UpEventHandler Mouse5ButtonUp;
 
         public Window(IEnvironment environment)
         {
@@ -43,6 +49,18 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnRightMouseButtonDown(MouseButtonEventArgs e) => RightMouseButtonDown?.Invoke(this, Environment, e);
 
         public virtual void OnRigthMouseButtonUp(MouseButtonEventArgs e) => RightMouseButtonUp?.Invoke(this, Environment, e);
+
+        public virtual void OnMiddleMouseButtonDown(MouseButtonEventArgs e) => MiddleMouseButtonDown?.Invoke(this, Environment, e);
+
+        public virtual void OnMiddleMouseButtonUp(MouseButtonEventArgs e) => MiddleMouseButtonUp?.Invoke(this, Environment, e);
+
+        public virtual void OnMouse4ButtonDown(MouseButtonEventArgs e) => Mouse4ButtonDown?.Invoke(this, Environment, e);
+
+        public virtual void OnMouse4ButtonUp(MouseButtonEventArgs e) => Mouse4ButtonUp?.Invoke(this, Environment, e);
+
+        public virtual void OnMouse5ButtonDown(MouseButtonEventArgs e) => Mouse5ButtonDown?.Invoke(this, Environment, e);
+
+        public virtual void OnMouse5ButtonUp(MouseButtonEventArgs e) => Mouse5ButtonUp?.Invoke(this, Environment, e);
 
         public virtual void OnMouseMove(MouseMoveEventArgs e) => MouseMove?.Invoke(this, Environment, e);
 
