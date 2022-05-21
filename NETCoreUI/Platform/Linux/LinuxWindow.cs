@@ -44,14 +44,14 @@ namespace NETCoreUI.Platform.Linux
                     Console.WriteLine($"button: {xEvent.xbutton.button}");
                     if (xEvent.xbutton.button == 1)
                         OnRightMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    else if (xEvent.xbutton.button == 2)
+                    else if (xEvent.xbutton.button == 3)
                         OnLeftMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonRelease:
                     Console.WriteLine($"button: {xEvent.xbutton.button}");
                     if (xEvent.xbutton.button == 1)
                         OnRigthMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    else if (xEvent.xbutton.button == 2)
+                    else if (xEvent.xbutton.button == 3)
                         OnLeftMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
             }
