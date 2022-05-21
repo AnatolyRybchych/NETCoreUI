@@ -47,9 +47,9 @@ namespace NETCoreUI.Platform.Linux
                         OnLeftMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 2)
                         OnMiddleMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    else if (xEvent.xbutton.button == 4)
+                    else if (xEvent.xbutton.button == 8)
                         OnMouse4ButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    else if (xEvent.xbutton.button == 5)
+                    else if (xEvent.xbutton.button == 9)
                         OnMouse5ButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonRelease:
@@ -59,9 +59,9 @@ namespace NETCoreUI.Platform.Linux
                         OnLeftMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 2)
                         OnMiddleMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    else if (xEvent.xbutton.button == 4)
+                    else if (xEvent.xbutton.button == 8)
                         OnMouse4ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-                    else if (xEvent.xbutton.button == 5)
+                    else if (xEvent.xbutton.button == 9)
                         OnMouse5ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
             }
