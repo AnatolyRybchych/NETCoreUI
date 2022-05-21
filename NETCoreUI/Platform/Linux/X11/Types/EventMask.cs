@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NETCoreUI.Platform.Linux.X11.Types
 {
+    [Flags]
     public enum EventMask: long
     {
         NoEvent = 0L,
@@ -34,5 +35,7 @@ namespace NETCoreUI.Platform.Linux.X11.Types
         PropertyChange = (1L << 22),
         ColormapChange = (1L << 23),
         OwnerGrabButton = (1L << 24),
+
+        All = 0b1111111111111111111111111L,
     }
 }

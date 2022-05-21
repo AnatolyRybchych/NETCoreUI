@@ -1,5 +1,6 @@
 ﻿using NETCoreUI.Core;
 using NETCoreUI.Platform.Crossplatform;
+using NETCoreUI.Platform.Linux.X11.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace NETCoreUI.Platform.Linux
 
         protected override IWIndow CreateBaseWindow(string title)
         {
-            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0xff00ff00, 0xffffffff, 0x0);
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0xff00ff00, 0xffffffff, EventMask.All);
         }
         
 

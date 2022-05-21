@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using NETCoreUI.Platform.Linux.X11.Types;
+using System.Runtime.InteropServices;
 
 //source
 //https://github.com/AnatolyRybchych/PureX11
@@ -162,7 +163,7 @@ public struct __pthread_list_t {
 public struct XEvent {
     public const int StructSize = 24 * sizeof(long);
 
-    [System.Runtime.InteropServices.FieldOffset(0)] public int type;		/* must not be changed; first element */
+    [System.Runtime.InteropServices.FieldOffset(0)] public EventType type;		/* must not be changed; first element */
 	[System.Runtime.InteropServices.FieldOffset(0)] public XAnyEvent xany;
 	[System.Runtime.InteropServices.FieldOffset(0)] public XKeyEvent xkey;
 	[System.Runtime.InteropServices.FieldOffset(0)] public XButtonEvent xbutton;
@@ -1881,7 +1882,7 @@ public static class X{
     public static extern System.Int32 XScreenCount ( System.IntPtr /*|Display*|*/  arg0);
     
     [DllImport(LibPath)]
-    public static extern System.Int32 XSelectInput ( System.IntPtr /*|Display*|*/  arg0, Window arg1, System.Int64 arg2);
+    public static extern System.Int32 XSelectInput ( System.IntPtr /*|Display*|*/  arg0, Window arg1, EventMask arg2);
     
     [DllImport(LibPath)]
     public static extern System.Int32 XSendEvent ( System.IntPtr /*|Display*|*/  arg0, Window arg1, System.Int32 arg2, System.Int64 arg3, System.IntPtr /*|XEvent*|*/  arg4);
