@@ -436,6 +436,7 @@ public struct XButtonEvent {
     public Window root;
     public Window subwindow;
     public Time time;
+    public int x, y, root_x, root_y;
     public System.UInt32 state;
     public System.UInt32 button;
     public System.Int32 same_screen;
