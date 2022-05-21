@@ -31,6 +31,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public event Mouse4UpEventHandler? Mouse4ButtonUp;
         public event Mouse5DownEventHandler? Mouse5ButtonDown;
         public event Mouse5UpEventHandler? Mouse5ButtonUp;
+        public event HorisontalScrollHandler? HorisontalScroll;
+        public event VerticalScrollHandler? VericalScroll;
 
         public Window(IEnvironment environment)
         {
@@ -43,30 +45,19 @@ namespace NETCoreUI.Platform.Crossplatform
         public abstract void Show();
 
         public virtual void OnLeftMouseButtonDown(MouseButtonEventArgs e) => LeftMouseButtonDown?.Invoke(this, Environment, e);
-
         public virtual void OnLeftMouseButtonUp(MouseButtonEventArgs e) => LeftMouseButtonUp?.Invoke(this, Environment, e);
-
         public virtual void OnRightMouseButtonDown(MouseButtonEventArgs e) => RightMouseButtonDown?.Invoke(this, Environment, e);
-
         public virtual void OnRigthMouseButtonUp(MouseButtonEventArgs e) => RightMouseButtonUp?.Invoke(this, Environment, e);
-
         public virtual void OnMiddleMouseButtonDown(MouseButtonEventArgs e) => MiddleMouseButtonDown?.Invoke(this, Environment, e);
-
         public virtual void OnMiddleMouseButtonUp(MouseButtonEventArgs e) => MiddleMouseButtonUp?.Invoke(this, Environment, e);
-
         public virtual void OnMouse4ButtonDown(MouseButtonEventArgs e) => Mouse4ButtonDown?.Invoke(this, Environment, e);
-
         public virtual void OnMouse4ButtonUp(MouseButtonEventArgs e) => Mouse4ButtonUp?.Invoke(this, Environment, e);
-
         public virtual void OnMouse5ButtonDown(MouseButtonEventArgs e) => Mouse5ButtonDown?.Invoke(this, Environment, e);
-
         public virtual void OnMouse5ButtonUp(MouseButtonEventArgs e) => Mouse5ButtonUp?.Invoke(this, Environment, e);
-
         public virtual void OnMouseMove(MouseMoveEventArgs e) => MouseMove?.Invoke(this, Environment, e);
+        public virtual void OnHorisontalScroll(MouseScrollEventArgs e) => HorisontalScroll?.Invoke(this, Environment, e);
+        public virtual void OnVerticalScroll(MouseScrollEventArgs e) => VericalScroll?.Invoke(this, Environment, e);
 
-        ~Window()
-        {
-            Close();
-        }
+        ~Window() => Close();
     }
 }

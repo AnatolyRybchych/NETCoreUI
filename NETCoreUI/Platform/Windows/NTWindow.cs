@@ -66,45 +66,55 @@ namespace NETCoreUI.Platform.Windows
             switch (msg)
             {
                 case WM.WM_MOUSEMOVE:
-                    int dwLparam = lparam.ToInt32();
+                    uint dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnMouseMove(new MouseMoveEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_LBUTTONDOWN:
-                    dwLparam = lparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnLeftMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_LBUTTONUP:
-                    dwLparam = lparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnLeftMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_RBUTTONDOWN:
-                    dwLparam = lparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnRightMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_RBUTTONUP:
-                    dwLparam = lparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnRigthMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_MBUTTONDOWN:
-                    dwLparam = lparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnMiddleMouseButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_MBUTTONUP:
-                    dwLparam = lparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnMiddleMouseButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return IntPtr.Zero;
                 case WM.WM_XBUTTONDOWN:
-                    dwLparam = lparam.ToInt32();
-                    int dwWparam = wparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    uint dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
                     if(HIWORD(dwWparam) == 1) OnMouse4ButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     else OnMouse5ButtonDown(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return new IntPtr(1);
                 case WM.WM_XBUTTONUP:
-                    dwLparam = lparam.ToInt32();
-                    dwWparam = wparam.ToInt32();
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
                     if (HIWORD(dwWparam) == 1) OnMouse4ButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     else OnMouse5ButtonUp(new MouseButtonEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
                     return new IntPtr(1);
+                case WM.WM_MOUSEWHEEL:
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
+                    OnVerticalScroll(new MouseScrollEventArgs(GET_WHEEL_DELTA_WPARAM(dwWparam) > 0 ? 1 : -1));
+                    return IntPtr.Zero;
+                case WM.WM_MOUSEHWHEEL:
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
+                    OnHorisontalScroll(new MouseScrollEventArgs(GET_WHEEL_DELTA_WPARAM(dwWparam) > 0 ? 1 : -1));
+                    return IntPtr.Zero;
                 default:
                     return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
             }

@@ -23,6 +23,8 @@ namespace NETCoreUI.Core
         public event Mouse5DownEventHandler Mouse5ButtonDown;
         public event Mouse5UpEventHandler Mouse5ButtonUp;
         public event MouseMoveEventHandler MouseMove;
+        public event HorisontalScrollHandler? HorisontalScroll;
+        public event VerticalScrollHandler? VericalScroll;
 
         IUIThread UIThread { get; }
 

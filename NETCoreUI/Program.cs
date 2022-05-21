@@ -29,11 +29,24 @@ namespace NETCoreUI
                 window.Mouse5ButtonDown += Window_Mouse5ButtonDown;
                 window.Mouse5ButtonUp += Window_Mouse5ButtonUp;
 
+                window.VericalScroll += Window_VericalScroll;
+
                 window.MouseMove += Window_MouseMove;
+                window.HorisontalScroll += Window_HorisontalScroll;
 
             });
 
             ev.JoinUIThread();
+        }
+
+        private static void Window_HorisontalScroll(object sender, IEnvironment environment, Core.WindowEvents.MouseScrollEventArgs e)
+        {
+            Console.WriteLine($"horisontal scroll delta:{e.Delta}");
+        }
+
+        private static void Window_VericalScroll(object sender, IEnvironment environment, Core.WindowEvents.MouseScrollEventArgs e)
+        {
+            Console.WriteLine($"vertical scroll delta:{e.Delta}");
         }
 
         private static void Window_Mouse5ButtonUp(object sender, IEnvironment environment, Core.WindowEvents.MouseButtonEventArgs e)
