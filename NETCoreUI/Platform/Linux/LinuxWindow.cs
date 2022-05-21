@@ -53,12 +53,25 @@ namespace NETCoreUI.Platform.Linux
                         OnMouse5ButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonRelease:
+                    //mb1, mb2, mb3
                     if (xEvent.xbutton.button == 3)
                         OnRigthMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 1)
                         OnLeftMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 2)
                         OnMiddleMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
+
+                    //scrolls
+                    else if (xEvent.xbutton.button == 4)
+                        OnVerticalScroll(new MouseScrollEventArgs(1));
+                    else if (xEvent.xbutton.button == 5)
+                        OnVerticalScroll(new MouseScrollEventArgs(-1));
+                    else if (xEvent.xbutton.button == 6)
+                        OnHorisontalScroll(new MouseScrollEventArgs(1));
+                    else if (xEvent.xbutton.button == 7)
+                        OnHorisontalScroll(new MouseScrollEventArgs(-1));
+
+                    //mb4, mb5
                     else if (xEvent.xbutton.button == 8)
                         OnMouse4ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 9)
