@@ -261,7 +261,8 @@ namespace NETCoreUI.Platform.Windows.CSWindows
 
         public Key Convert(VK vitualKeyCode)
         {
-            return map[(ushort)vitualKeyCode];
+            if((ushort)vitualKeyCode >= (ushort)VK._VkLast) return Key.Unknown;
+            else return map[(ushort)vitualKeyCode];
         }
     }
 }
