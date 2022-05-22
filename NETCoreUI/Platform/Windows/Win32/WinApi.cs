@@ -10,6 +10,36 @@ namespace NETCoreUI.Platform.Windows.Win32
 {
     public static class WinApi
     {
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDC(IntPtr hwnd);
+
+        [DllImport("opengl32.dll")]
+        public static extern IntPtr wglCreateContext(IntPtr hdc);
+
+        [DllImport("opengl32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool wglDeleteContext(IntPtr hGlRc);
+
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetPixelFormat(IntPtr hdc, int format, ref PIXELFORMATDESCRIPTOR pfd);
+
+        [DllImport("gdi32.dll")]
+        public static extern int ChoosePixelFormat(IntPtr hdc, ref PIXELFORMATDESCRIPTOR pfd);
+
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SwapBuffers(IntPtr hdc);
+
+        [DllImport("opengl32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool wglMakeCurrent(IntPtr hdc, IntPtr hGlRc);
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool PeekMessageW(out MSG lpMsg, IntPtr hwnd, UInt32 msgFilterMin = 0, uint msgFiletMax = 0, PM removeMsg = PM.REMOVE);

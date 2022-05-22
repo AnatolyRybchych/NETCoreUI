@@ -1,16 +1,24 @@
 ﻿
 using NETCoreUI.Core;
+using NETCoreUI.Platform.Windows;
+using System.Runtime.InteropServices;
 
 namespace NETCoreUI
 {
     class Program
     {
+        [DllImport("opengl32.dll")]
+        public static extern void glClear(int mask);
+
+        [DllImport("opengl32.dll")]
+        public static extern void glClearColor(float r, float g, float b, float a);
+
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
             ev.StartUIThread();
-            IWIndow window;
+            IWIndow? window = null;
             ev.UIThread.Execute(() =>
             {
                 window = ev.CreateWindow("Window");
@@ -51,6 +59,14 @@ namespace NETCoreUI
         private static void Window_KeyDown(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)
         {
             Console.WriteLine($"KeyDown {e.Key}");
+            WindowsGraphicsContext g = new WindowsGraphicsContext(((NTWindow)sender).ToWindows());
+
+            g.GlContext.MakeCurrent();
+
+            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            glClear(0x00004000);
+
+            g.GlContext.SwapBuffers();
         }
 
         private static void Window_HorisontalScroll(object sender, IEnvironment environment, Core.WindowEvents.MouseScrollEventArgs e)
