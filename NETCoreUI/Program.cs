@@ -14,6 +14,7 @@ namespace NETCoreUI
             ev.UIThread.Execute(() =>
             {
                 window = ev.CreateWindow("Window");
+
                 window.RightMouseButtonDown += Window_RightMouseButtonDown;
                 window.RightMouseButtonUp += Window_RightMouseButtonUp;
 
