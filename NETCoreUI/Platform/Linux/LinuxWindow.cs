@@ -79,6 +79,7 @@ namespace NETCoreUI.Platform.Linux
                         OnMouse5ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.KeyPress:
+                    Console.WriteLine($"{xEvent.xkey.keycode}");
                     OnKeyDown(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
                 case EventType.KeyRelease:
