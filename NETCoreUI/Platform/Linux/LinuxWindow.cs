@@ -64,7 +64,6 @@ namespace NETCoreUI.Platform.Linux
                         OnMouse5ButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonRelease:
-                    Console.WriteLine($"button: {xEvent.xbutton.button}");
                     //mb1, mb2, mb3
                     if (xEvent.xbutton.button == 3)
                         OnRigthMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
