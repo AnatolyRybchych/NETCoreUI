@@ -15,6 +15,7 @@ namespace NETCoreUI.Platform.Linux
 {
     public class LinuxWindow : Crossplatform.Window
     {
+        public static readonly LinuxKeymap Keymap = new LinuxKeymap();
         public delegate void NewEventHandler(object sender, LinuxEnvironment environmant, in XEvent xEvent);
         public NewEventHandler? NewEvent;
 
@@ -76,6 +77,14 @@ namespace NETCoreUI.Platform.Linux
                         OnMouse4ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 9)
                         OnMouse5ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
+                    break;
+                case EventType.KeyPress:
+                    Console.WriteLine($"key down {xEvent.xkey.keycode}");
+                    OnKeyDown(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
+                    break;
+                case EventType.KeyRelease:
+                    Console.WriteLine($"key down {xEvent.xkey.keycode}");
+                    OnKeyUp(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
             }
         }

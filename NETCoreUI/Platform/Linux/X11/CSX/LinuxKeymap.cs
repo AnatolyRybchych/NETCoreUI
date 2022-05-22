@@ -19,7 +19,7 @@ namespace NETCoreUI.Platform.Linux.X11.CSX
             };
         }
 
-        public Key Convert(int linuxKeyCode)
+        public Key Convert(uint linuxKeyCode)
         {
             return Key.Unknown;
         }
