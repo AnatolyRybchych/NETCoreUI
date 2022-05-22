@@ -41,12 +41,24 @@ namespace NETCoreUI.Platform.Linux
                     OnMouseMove(new MouseMoveEventArgs(queryPointer.X, queryPointer.Y));
                     break;
                 case EventType.ButtonPress:
+                    Console.WriteLine($"button: {xEvent.xbutton.button}");
+                    //mb1, mb2, mb3
                     if (xEvent.xbutton.button == 3)
                         OnRightMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 1)
                         OnLeftMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 2)
                         OnMiddleMouseButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
+                    //scrolls
+                    else if (xEvent.xbutton.button == 4)
+                        OnVerticalScroll(new MouseScrollEventArgs(1));
+                    else if (xEvent.xbutton.button == 5)
+                        OnVerticalScroll(new MouseScrollEventArgs(-1));
+                    else if (xEvent.xbutton.button == 6)
+                        OnHorisontalScroll(new MouseScrollEventArgs(1));
+                    else if (xEvent.xbutton.button == 7)
+                        OnHorisontalScroll(new MouseScrollEventArgs(-1));
+                    //mb4, mb5
                     else if (xEvent.xbutton.button == 8)
                         OnMouse4ButtonDown(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 9)
@@ -60,17 +72,6 @@ namespace NETCoreUI.Platform.Linux
                         OnLeftMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
                     else if (xEvent.xbutton.button == 2)
                         OnMiddleMouseButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
-
-                    //scrolls
-                    else if (xEvent.xbutton.button == 4)
-                        OnVerticalScroll(new MouseScrollEventArgs(1));
-                    else if (xEvent.xbutton.button == 5)
-                        OnVerticalScroll(new MouseScrollEventArgs(-1));
-                    else if (xEvent.xbutton.button == 6)
-                        OnHorisontalScroll(new MouseScrollEventArgs(1));
-                    else if (xEvent.xbutton.button == 7)
-                        OnHorisontalScroll(new MouseScrollEventArgs(-1));
-
                     //mb4, mb5
                     else if (xEvent.xbutton.button == 8)
                         OnMouse4ButtonUp(new MouseButtonEventArgs(queryPointer.X, queryPointer.Y));
