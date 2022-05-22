@@ -34,9 +34,22 @@ namespace NETCoreUI
                 window.MouseMove += Window_MouseMove;
                 window.HorisontalScroll += Window_HorisontalScroll;
 
+                window.KeyDown += Window_KeyDown;
+                window.KeyUp += Window_KeyUp;
+
             });
 
             ev.JoinUIThread();
+        }
+
+        private static void Window_KeyUp(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)
+        {
+            Console.WriteLine($"KeyUp {e.Key}");
+        }
+
+        private static void Window_KeyDown(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)
+        {
+            Console.WriteLine($"KeyDown {e.Key}");
         }
 
         private static void Window_HorisontalScroll(object sender, IEnvironment environment, Core.WindowEvents.MouseScrollEventArgs e)

@@ -1,6 +1,6 @@
 ﻿using NETCoreUI.Core;
 using NETCoreUI.Core.WindowEvents;
-using NETCoreUI.Platform.Crossplatform.Primitives;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Linux.X11.CSX;
 using NETCoreUI.Platform.Linux.X11.Types;
 using System;

@@ -1,6 +1,6 @@
 ﻿using NETCoreUI.Core;
 using NETCoreUI.Core.WindowEvents;
-using NETCoreUI.Platform.Crossplatform.Primitives;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Windows.Win32;
 using NETCoreUI.Platform.Windows.Win32.Types;
 using System;
@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using static NETCoreUI.Platform.Windows.CSWindows.Win32Macro;
+using NETCoreUI.Platform.Windows.CSWindows;
 
 namespace NETCoreUI.Platform.Windows
 {
@@ -19,6 +20,7 @@ namespace NETCoreUI.Platform.Windows
 
     public class NTWindow : Crossplatform.Window
     {
+        private static readonly WindowsKeymap Keymap = new WindowsKeymap();
         private static int counter = 0;
         private fnWndProc __wndProcDelegate;
 
@@ -114,6 +116,19 @@ namespace NETCoreUI.Platform.Windows
                     dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
                     OnHorisontalScroll(new MouseScrollEventArgs(GET_WHEEL_DELTA_WPARAM(dwWparam) > 0 ? 1 : -1));
+                    return IntPtr.Zero;
+                case WM.WM_SYSKEYDOWN:
+                case WM.WM_KEYDOWN:
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
+                    
+                    if ((HIWORD(dwLparam) & 0x4000) != 0x4000)
+                        OnKeyDown(new KeyEventArgs(Keymap.Convert((VK)LOWORD(dwWparam))));
+                    return IntPtr.Zero;
+                case WM.WM_SYSKEYUP:
+                case WM.WM_KEYUP:
+                    dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
+                    OnKeyUp(new KeyEventArgs(Keymap.Convert((VK)LOWORD(dwWparam))));
                     return IntPtr.Zero;
                 default:
                     return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);

@@ -1,6 +1,6 @@
 ﻿using NETCoreUI.Core;
 using NETCoreUI.Core.WindowEvents;
-using NETCoreUI.Platform.Crossplatform.Primitives;
+using NETCoreUI.Core.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +33,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public event Mouse5UpEventHandler? Mouse5ButtonUp;
         public event HorisontalScrollHandler? HorisontalScroll;
         public event VerticalScrollHandler? VericalScroll;
+        public event KeyDownHandler? KeyDown;
+        public event KeyUpHandler? KeyUp;
 
         public Window(IEnvironment environment)
         {
@@ -57,6 +59,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnMouseMove(MouseMoveEventArgs e) => MouseMove?.Invoke(this, Environment, e);
         public virtual void OnHorisontalScroll(MouseScrollEventArgs e) => HorisontalScroll?.Invoke(this, Environment, e);
         public virtual void OnVerticalScroll(MouseScrollEventArgs e) => VericalScroll?.Invoke(this, Environment, e);
+        public virtual void OnKeyDown(KeyEventArgs e) => KeyDown?.Invoke(this, Environment, e);
+        public virtual void OnKeyUp(KeyEventArgs e) => KeyUp?.Invoke(this, Environment, e);
 
         ~Window() => Close();
     }

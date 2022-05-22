@@ -1,5 +1,5 @@
 ﻿using NETCoreUI.Core.WindowEvents;
-using NETCoreUI.Platform.Crossplatform.Primitives;
+using NETCoreUI.Core.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +25,8 @@ namespace NETCoreUI.Core
         public event MouseMoveEventHandler MouseMove;
         public event HorisontalScrollHandler? HorisontalScroll;
         public event VerticalScrollHandler? VericalScroll;
+        public event KeyDownHandler? KeyDown;
+        public event KeyUpHandler? KeyUp;
 
         IUIThread UIThread { get; }
 
@@ -32,12 +34,6 @@ namespace NETCoreUI.Core
         public Point Position { get; set; }
         public Size Size { get; set; }
         public Rect Rect { get; set; }
-
-        void OnLeftMouseButtonDown(MouseButtonEventArgs e);
-        void OnLeftMouseButtonUp(MouseButtonEventArgs e);
-        void OnRightMouseButtonDown(MouseButtonEventArgs e);
-        void OnRigthMouseButtonUp(MouseButtonEventArgs e);
-        void OnMouseMove(MouseMoveEventArgs e);
 
         void Show();
         void Maximize();
