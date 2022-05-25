@@ -36,7 +36,7 @@ namespace NETCoreUI.Platform.Linux
         public virtual void NextEvent(in XEvent xEvent)
         {
             NewEvent?.Invoke(this, LinuxEnvironamnt, xEvent);
-
+            Console.WriteLine($"event: {xEvent.type}");
             switch (xEvent.type)
             {
                 case EventType.MotionNotify:
