@@ -28,8 +28,8 @@ namespace NETCoreUI.Platform.Crossplatform
             {
                 while (isRunning)
                 {
-                    ReceiveMessages();
                     Thread.Sleep(MsTimeout);
+                    ReceiveMessages();
                 }
             });
         }
@@ -42,7 +42,7 @@ namespace NETCoreUI.Platform.Crossplatform
         public void Join() => thread.Join();
         public void Stop() => isRunning = false;
 
-        public int MsTimeout = 2;
+        public int MsTimeout { get; set; } = 4;
 
         public void Execute(Action action)
         {
