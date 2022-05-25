@@ -36,6 +36,6 @@ namespace NETCoreUI.Platform.Linux.X11.Types
         ColormapChange = (1L << 23),
         OwnerGrabButton = (1L << 24),
 
-        All = 0b1111111111111111111111111L,
+        All = 0b0011111111111111111111111L,
     }
 }
