@@ -629,6 +629,7 @@ public struct XResizeRequestEvent {
     public System.Int32 send_event;
     public System.IntPtr /*|Display*|*/  display;
     public Window window;
+    public int width, height;
 }
 
 public struct XConfigureRequestEvent {
