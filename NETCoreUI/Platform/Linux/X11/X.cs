@@ -157,7 +157,7 @@ public struct __pthread_list_t {
     public System.IntPtr /*|__pthread_internal_list*|*/  __next;
 }
 
-
+[StructLayout(LayoutKind.Sequential)]
 public struct XVisualInfo
 {
     public ulong red_mask;

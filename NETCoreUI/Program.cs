@@ -59,7 +59,7 @@ namespace NETCoreUI
         private static void Window_KeyDown(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)
         {
             Console.WriteLine($"KeyDown {e.Key}");
-            WindowsGraphicsContext g = new WindowsGraphicsContext(((NTWindow)sender).ToWindows());
+            GraphicsContext g = GraphicsContext.FromWindow((IWIndow)sender);
 
             g.GlContext.MakeCurrent();
 
