@@ -621,6 +621,7 @@ public struct XGravityEvent {
     public System.IntPtr /*|Display*|*/  display;
     public Window event_;
     public Window window;
+    public int x, y;
 }
 
 public struct XResizeRequestEvent {
