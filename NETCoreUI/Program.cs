@@ -14,7 +14,7 @@ namespace NETCoreUI
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            ev.StartUIThread();
+            
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
             {
@@ -45,9 +45,21 @@ namespace NETCoreUI
 
                 window.Redraw += Window_Redraw;
 
+                window.Resize += Window_Resize;
+                window.Move += Window_Move;
             });
-
+            ev.StartUIThread();
             ev.JoinUIThread();
+        }
+
+        private static void Window_Move(object sender, IEnvironment environment, Core.WindowEvents.MoveEventArgs e)
+        {
+            Console.WriteLine($"Move {{{e.Position.X}, {e.Position.Y}}}");
+        }
+
+        private static void Window_Resize(object sender, IEnvironment environment, Core.WindowEvents.ResizeEventArgs e)
+        {
+            Console.WriteLine($"Resize {{{e.Size.Width}, {e.Size.Height}}}");
         }
 
         private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)

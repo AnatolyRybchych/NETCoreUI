@@ -10,7 +10,7 @@ namespace NETCoreUI.Core.WindowEvents
 
     public class RedrawEventArgs:EventArgs
     {
-        public GraphicsContext Graphics;
+        public GraphicsContext Graphics { get; private set; }
 
         public RedrawEventArgs(GraphicsContext graphics)
         {

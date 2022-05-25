@@ -139,6 +139,14 @@ namespace NETCoreUI.Platform.Windows
                     OnRedraw(new RedrawEventArgs(Graphics));
                     WinApi.EndPaint(hwnd, in ps);
                     return IntPtr.Zero;
+                case WM.WM_SIZE:
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    OnResize(new ResizeEventArgs(new Size(LOWORD(dwLparam), HIWORD(dwLparam))));
+                    return IntPtr.Zero;
+                case WM.WM_MOVE:
+                    dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
+                    OnMove(new MoveEventArgs(new Point(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam))));
+                    return IntPtr.Zero;
                 default:
                     return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
             }

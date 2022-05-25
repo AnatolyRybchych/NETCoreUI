@@ -37,6 +37,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public event KeyDownHandler? KeyDown;
         public event KeyUpHandler? KeyUp;
         public event RedrawHandler? Redraw;
+        public event Resizehandler? Resize;
+        public event MoveHandler? Move;
 
         public Window(IEnvironment environment)
         {
@@ -64,6 +66,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnKeyDown(KeyEventArgs e) => KeyDown?.Invoke(this, Environment, e);
         public virtual void OnKeyUp(KeyEventArgs e) => KeyUp?.Invoke(this, Environment, e);
         public virtual void OnRedraw(RedrawEventArgs e) => Redraw?.Invoke(this, Environment, e);
+        public virtual void OnResize(ResizeEventArgs e) => Resize?.Invoke(this, Environment, e);
+        public virtual void OnMove(MoveEventArgs e) => Move?.Invoke(this, Environment, e);
 
         ~Window() => Close();
     }

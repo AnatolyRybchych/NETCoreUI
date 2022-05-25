@@ -28,6 +28,8 @@ namespace NETCoreUI.Core
         public event KeyDownHandler? KeyDown;
         public event KeyUpHandler? KeyUp;
         public event RedrawHandler? Redraw;
+        public event Resizehandler? Resize;
+        public event MoveHandler? Move;
 
         IUIThread UIThread { get; }
 

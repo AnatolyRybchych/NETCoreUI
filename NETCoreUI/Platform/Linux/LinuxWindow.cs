@@ -86,9 +86,12 @@ namespace NETCoreUI.Platform.Linux
                 case EventType.KeyRelease:
                     OnKeyUp(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
-                //case EventType.MapNotify:
                 case EventType.Expose:
                     OnRedraw(new RedrawEventArgs(Graphics));
+                    break;
+                case EventType.ConfigureNotify:
+                    OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
+                    OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
                     break;
             }
         }

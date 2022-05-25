@@ -608,7 +608,8 @@ public struct XConfigureEvent {
     public System.IntPtr /*|Display*|*/  display;
     public Window event_;
     public Window window;
-    public System.Int32 border_width;
+    public int x,y,width, height;
+    public int border_width;
     public Window above;
     public System.Int32 override_redirect;
 }
