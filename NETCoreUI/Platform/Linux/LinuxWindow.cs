@@ -92,7 +92,7 @@ namespace NETCoreUI.Platform.Linux
                     OnKeyUp(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
                 case EventType.Expose:
-                    OnRedraw(new RedrawEventArgs(Graphics));
+                    
                     break;
                 case EventType.ConfigureNotify:
                     if (prevX != xEvent.xconfigure.x || prevY != xEvent.xconfigure.y)
@@ -107,6 +107,7 @@ namespace NETCoreUI.Platform.Linux
                         prevWidth = xEvent.xconfigure.width;
                         prevHeigth = xEvent.xconfigure.height;
                     }
+                    OnRedraw(new RedrawEventArgs(Graphics));
                     break;
             }
         }
