@@ -158,6 +158,15 @@ public struct __pthread_list_t {
 }
 
 
+public struct XVisualInfo
+{
+    public ulong red_mask;
+    public ulong green_mask;
+    public ulong blue_mask;
+    int colormap_size;
+    int bits_per_rgb;
+}
+
 
 [StructLayout(LayoutKind.Explicit, Size = StructSize)]
 public struct XEvent {
@@ -1866,7 +1875,7 @@ public static class X{
     
     [DllImport(LibPath)]
     public static extern System.Int32 XReparentWindow ( System.IntPtr /*|Display*|*/  arg0, Window arg1, Window arg2, System.Int32 arg3, System.Int32 arg4);
-    
+
     [DllImport(LibPath)]
     public static extern System.Int32 XResetScreenSaver ( System.IntPtr /*|Display*|*/  arg0);
     
