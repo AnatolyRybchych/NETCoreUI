@@ -92,7 +92,7 @@ namespace NETCoreUI.Platform.Linux
                     OnKeyUp(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
                 case EventType.Expose:
-                    
+                    OnRedraw(new RedrawEventArgs(Graphics));
                     break;
                 case EventType.ConfigureNotify:
                     if (prevX != xEvent.xconfigure.x || prevY != xEvent.xconfigure.y)
@@ -107,7 +107,6 @@ namespace NETCoreUI.Platform.Linux
                         prevWidth = xEvent.xconfigure.width;
                         prevHeigth = xEvent.xconfigure.height;
                     }
-                    OnRedraw(new RedrawEventArgs(Graphics));
                     break;
             }
         }
@@ -115,6 +114,7 @@ namespace NETCoreUI.Platform.Linux
         public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor, EventMask inputMask) : base(environment)
         {
             XID = X.XCreateSimpleWindow(LinuxEnvironamnt.Display, parent, x, y, (uint)width, (uint)height, (uint)borderWidth, borderColor, backgroundColor);
+            X.XSetWindowBackgroundPixmap(LinuxEnvironamnt.Display, XID, 0);
             LinuxGraphics = new LinuxGraphicsContext(LinuxEnvironamnt.Display, XID);
             queryPointer = new QueryPointer(environment.Display, XID);
             windowGeometry = new WindowGeometry(environment.Display, XID);
