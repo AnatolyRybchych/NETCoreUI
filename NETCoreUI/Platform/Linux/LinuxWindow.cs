@@ -36,7 +36,6 @@ namespace NETCoreUI.Platform.Linux
         public virtual void NextEvent(in XEvent xEvent)
         {
             NewEvent?.Invoke(this, LinuxEnvironamnt, xEvent);
-            Console.WriteLine($"event: {xEvent.type}");
             switch (xEvent.type)
             {
                 case EventType.MotionNotify:
@@ -97,9 +96,6 @@ namespace NETCoreUI.Platform.Linux
                     break;
                 case EventType.GravityNotify:
                     OnMove(new MoveEventArgs(new Point(xEvent.xgravity.x, xEvent.xgravity.y)));
-                    break;
-                case EventType.PropertyNotify:
-
                     break;
             }
         }
