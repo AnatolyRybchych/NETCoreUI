@@ -90,11 +90,8 @@ namespace NETCoreUI.Platform.Linux
                     OnRedraw(new RedrawEventArgs(Graphics));
                     break;
                 case EventType.ConfigureNotify:
-                    windowGeometry.Get();
-                    if(windowGeometry.IsPosChanged)
-                        OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
-                    if(windowGeometry.IsSizeChanged)
-                        OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
+                    OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
+                    OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
                     break;
             }
         }
