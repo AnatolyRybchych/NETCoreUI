@@ -32,6 +32,7 @@ namespace NETCoreUI.Platform.Linux
         public override GraphicsContext Graphics => LinuxGraphics;
 
         private QueryPointer queryPointer;
+        private WindowGeometry windowGeometry;
 
         public virtual void NextEvent(in XEvent xEvent)
         {
@@ -89,14 +90,11 @@ namespace NETCoreUI.Platform.Linux
                     OnRedraw(new RedrawEventArgs(Graphics));
                     break;
                 case EventType.ConfigureNotify:
-                    OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
-                    OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
-                    break;
-                case EventType.ResizeRequest:
-                    OnResize(new ResizeEventArgs(new Size(xEvent.xresizerequest.width, xEvent.xresizerequest.height)));
-                    break;
-                case EventType.GravityNotify:
-                    OnMove(new MoveEventArgs(new Point(xEvent.xgravity.x, xEvent.xgravity.y)));
+                    windowGeometry.Get();
+                    if(windowGeometry.IsPosChanged)
+                        OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
+                    if(windowGeometry.IsSizeChanged)
+                        OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
                     break;
             }
         }
@@ -106,6 +104,7 @@ namespace NETCoreUI.Platform.Linux
             XID = X.XCreateSimpleWindow(LinuxEnvironamnt.Display, parent, x, y, (uint)width, (uint)height, (uint)borderWidth, borderColor, backgroundColor);
             LinuxGraphics = new LinuxGraphicsContext(LinuxEnvironamnt.Display, XID);
             queryPointer = new QueryPointer(environment.Display, XID);
+            windowGeometry = new WindowGeometry(environment.Display, XID);
             X.XMapWindow(LinuxEnvironamnt.Display, XID);
             X.XSelectInput(LinuxEnvironamnt.Display, XID, inputMask);
             windows.Add(this);
