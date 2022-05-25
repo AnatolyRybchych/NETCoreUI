@@ -3,15 +3,12 @@ using NETCoreUI.Core;
 using NETCoreUI.Platform.Windows;
 using System.Runtime.InteropServices;
 
+using static GL.GL;
+
 namespace NETCoreUI
 {
     class Program
     {
-        [DllImport("libGL.so")]
-        public static extern void glClear(int mask);
-
-        [DllImport("libGL.so")]
-        public static extern void glClearColor(float r, float g, float b, float a);
 
         static void Main(string[] args)
         {
