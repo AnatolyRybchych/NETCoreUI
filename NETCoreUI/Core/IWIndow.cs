@@ -35,6 +35,8 @@ namespace NETCoreUI.Core
         public Size Size { get; set; }
         public Rect Rect { get; set; }
 
+        public GraphicsContext Graphics { get;}
+
         void Show();
         void Maximize();
         void Minimize();

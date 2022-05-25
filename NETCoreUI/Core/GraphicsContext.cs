@@ -10,22 +10,6 @@ namespace NETCoreUI.Core
 {
     public abstract class GraphicsContext
     {
-        public static GraphicsContext FromWindow(IWIndow window)
-        {
-            GraphicsContext? result = null;
-            EnvironmentProvider.SplitActionsByEnvironments((linux) =>
-            {
-                LinuxWindow wnd = window.ToLinux();
-                result = new LinuxGraphicsContext(wnd.LinuxEnvironamnt.Display, wnd.XID);
-            }, (windows) =>
-            {
-                NTWindow wnd = window.ToWindows();
-                result = new WindowsGraphicsContext(wnd.HWindow);
-            });
-            if (result == null) throw new Exception("cannot create graphics context");
-            return result;
-        }
-
         private IOpenGlContext? glContext = null;
         public IOpenGlContext GlContext
         {

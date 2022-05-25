@@ -37,6 +37,9 @@ namespace NETCoreUI.Platform.Windows
         public override Rect Rect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string Title { get => "qwe"; set => throw new NotImplementedException(); }
 
+        public WindowsGraphicsContext WindowsGraphics { get; private set; }
+        public override GraphicsContext Graphics => WindowsGraphics;
+
         private string RegisterClass()
         {
             WNDCLASSEXW wc = new WNDCLASSEXW();
@@ -57,7 +60,7 @@ namespace NETCoreUI.Platform.Windows
             HInstance = hInstance;
 
             HWindow = WinApi.CreateWindowExW(ex_styles, RegisterClass(), title, styles, x, y, width, height, parent, IntPtr.Zero, HInstance, IntPtr.Zero);
-
+            WindowsGraphics = new WindowsGraphicsContext(HWindow);
             WinApi.ShowWindow(HWindow, SW.Normal);
             WinApi.UpdateWindow(HWindow);
         }

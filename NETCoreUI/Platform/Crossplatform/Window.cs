@@ -19,6 +19,7 @@ namespace NETCoreUI.Platform.Crossplatform
         public abstract Rect Rect { get; set; }
 
         public IEnvironment Environment { get; private set; }
+        public abstract GraphicsContext Graphics { get; }
 
         public event LeftMouseDownEventHandler? LeftMouseButtonDown;
         public event LeftMouseUpEventHandler? LeftMouseButtonUp;

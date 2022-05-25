@@ -28,6 +28,8 @@ namespace NETCoreUI.Platform.Linux
         public override Rect Rect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public LinuxGraphicsContext LinuxGraphics { get; private set; }
+        public override GraphicsContext Graphics => LinuxGraphics;
 
         private QueryPointer queryPointer;
 
@@ -90,6 +92,7 @@ namespace NETCoreUI.Platform.Linux
         public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor, EventMask inputMask) : base(environment)
         {
             XID = X.XCreateSimpleWindow(LinuxEnvironamnt.Display, parent, x, y, (uint)width, (uint)height, (uint)borderWidth, borderColor, backgroundColor);
+            LinuxGraphics = new LinuxGraphicsContext(LinuxEnvironamnt.Display, XID);
             queryPointer = new QueryPointer(environment.Display, XID);
             X.XMapWindow(LinuxEnvironamnt.Display, XID);
             X.XSelectInput(LinuxEnvironamnt.Display, XID, inputMask);
