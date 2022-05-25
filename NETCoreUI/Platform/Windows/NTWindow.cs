@@ -133,6 +133,12 @@ namespace NETCoreUI.Platform.Windows
                     dwWparam = (uint)(wparam.ToInt64() & 0x00000000ffffffff);
                     OnKeyUp(new KeyEventArgs(Keymap.Convert((VK)LOWORD(dwWparam))));
                     return IntPtr.Zero;
+                case WM.WM_PAINT:
+                    PAINTSTRUCT ps;
+                    IntPtr hdc = WinApi.BeginPaint(hwnd, out ps);
+                    OnRedraw(new RedrawEventArgs(Graphics));
+                    WinApi.EndPaint(hwnd, in ps);
+                    return IntPtr.Zero;
                 default:
                     return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
             }

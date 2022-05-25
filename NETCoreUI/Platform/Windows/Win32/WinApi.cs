@@ -1,4 +1,4 @@
-﻿using NETCoreUI.Platform.Windows.Win32.Types;
+﻿    using NETCoreUI.Platform.Windows.Win32.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,13 @@ namespace NETCoreUI.Platform.Windows.Win32
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetDC(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr BeginPaint(IntPtr hwnd, out PAINTSTRUCT ps);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EndPaint(IntPtr hwnd, in PAINTSTRUCT ps);
 
         [DllImport("opengl32.dll")]
         public static extern IntPtr wglCreateContext(IntPtr hdc);

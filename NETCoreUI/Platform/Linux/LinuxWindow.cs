@@ -86,6 +86,9 @@ namespace NETCoreUI.Platform.Linux
                 case EventType.KeyRelease:
                     OnKeyUp(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
+                case EventType.Expose:
+                    OnRedraw(new RedrawEventArgs(Graphics));
+                    break;
             }
         }
 

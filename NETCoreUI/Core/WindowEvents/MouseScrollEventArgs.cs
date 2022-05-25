@@ -9,7 +9,7 @@ namespace NETCoreUI.Core.WindowEvents
     public delegate void HorisontalScrollHandler(object sender, IEnvironment environment, MouseScrollEventArgs e);
     public delegate void VerticalScrollHandler(object sender, IEnvironment environment, MouseScrollEventArgs e);
 
-    public class MouseScrollEventArgs
+    public class MouseScrollEventArgs:EventArgs
     {
         public int Delta { get; private set; }
 

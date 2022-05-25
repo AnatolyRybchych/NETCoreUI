@@ -43,9 +43,23 @@ namespace NETCoreUI
                 window.KeyDown += Window_KeyDown;
                 window.KeyUp += Window_KeyUp;
 
+                window.Redraw += Window_Redraw;
+
             });
 
             ev.JoinUIThread();
+        }
+
+        private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
+        {
+            Console.WriteLine("Redraw");
+
+            e.Graphics.GlContext.MakeCurrent();
+
+            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            glClear(0x00004000);
+
+            e.Graphics.GlContext.SwapBuffers();
         }
 
         private static void Window_KeyUp(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)
@@ -56,16 +70,6 @@ namespace NETCoreUI
         private static void Window_KeyDown(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)
         {
             Console.WriteLine($"KeyDown {e.Key}");
-
-            IWIndow window = (IWIndow)sender;
-            GraphicsContext g = window.Graphics;
-
-            g.GlContext.MakeCurrent();
-
-            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-            glClear(0x00004000);
-
-            g.GlContext.SwapBuffers();
         }
 
         private static void Window_HorisontalScroll(object sender, IEnvironment environment, Core.WindowEvents.MouseScrollEventArgs e)

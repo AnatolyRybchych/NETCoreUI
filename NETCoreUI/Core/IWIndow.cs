@@ -27,6 +27,7 @@ namespace NETCoreUI.Core
         public event VerticalScrollHandler? VericalScroll;
         public event KeyDownHandler? KeyDown;
         public event KeyUpHandler? KeyUp;
+        public event RedrawHandler? Redraw;
 
         IUIThread UIThread { get; }
 

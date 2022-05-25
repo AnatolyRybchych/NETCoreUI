@@ -36,6 +36,7 @@ namespace NETCoreUI.Platform.Crossplatform
         public event VerticalScrollHandler? VericalScroll;
         public event KeyDownHandler? KeyDown;
         public event KeyUpHandler? KeyUp;
+        public event RedrawHandler? Redraw;
 
         public Window(IEnvironment environment)
         {
@@ -62,6 +63,7 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnVerticalScroll(MouseScrollEventArgs e) => VericalScroll?.Invoke(this, Environment, e);
         public virtual void OnKeyDown(KeyEventArgs e) => KeyDown?.Invoke(this, Environment, e);
         public virtual void OnKeyUp(KeyEventArgs e) => KeyUp?.Invoke(this, Environment, e);
+        public virtual void OnRedraw(RedrawEventArgs e) => Redraw?.Invoke(this, Environment, e);
 
         ~Window() => Close();
     }
