@@ -22,11 +22,6 @@ namespace NETCoreUI.Platform.Linux.X11.CSX
         private IntPtr border;
         private IntPtr depth;
 
-        public int PrevX { get; private set; }
-        public int PrevY { get; private set; }
-        public int PrevWidth { get; private set; }
-        public int PrevHeigth { get; private set; }
-
         public long Root => Marshal.PtrToStructure<long>(root);
         public int X => Marshal.PtrToStructure<int>(x);
         public int Y => Marshal.PtrToStructure<int>(y);
@@ -35,26 +30,14 @@ namespace NETCoreUI.Platform.Linux.X11.CSX
         public int Border => unchecked((int)Marshal.PtrToStructure<uint>(border));
         public int Depth => unchecked((int)Marshal.PtrToStructure<uint>(depth));
 
-        public bool IsPosChanged => PrevX != X || PrevY != Y;
-        public bool IsSizeChanged => PrevWidth != Width || PrevHeigth != Height;
-
-        public void Get()
-        {
-            PrevX = X;
-            PrevY = Y;
-            PrevWidth = Width;
-            PrevHeigth = Height;
-            XGetGeometry(Display, Window, root, x, y, width, height, border, depth);
-        }
+        public void Get() => XGetGeometry(Display, Window, root, x, y, width, height, border, depth);
+        
         
 
         public WindowGeometry(IntPtr display, long window)
         {
             Display = display;
             Window = window;
-
-            PrevX = PrevY = 0;
-            PrevWidth = PrevHeigth = 0;
 
             root = Marshal.AllocHGlobal(sizeof(long));
             x = Marshal.AllocHGlobal(sizeof(int));

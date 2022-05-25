@@ -34,6 +34,11 @@ namespace NETCoreUI.Platform.Linux
         private QueryPointer queryPointer;
         private WindowGeometry windowGeometry;
 
+        private int prevX = 0;
+        private int prevY = 0;
+        private int prevWidth = 0;
+        private int prevHeigth = 0;
+
         public virtual void NextEvent(in XEvent xEvent)
         {
             NewEvent?.Invoke(this, LinuxEnvironamnt, xEvent);
@@ -90,9 +95,18 @@ namespace NETCoreUI.Platform.Linux
                     OnRedraw(new RedrawEventArgs(Graphics));
                     break;
                 case EventType.ConfigureNotify:
-                    Console.WriteLine($"override {xEvent.xconfigure.override_redirect}");
-                    OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
-                    OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
+                    if (prevX != xEvent.xconfigure.x || prevY != xEvent.xconfigure.y)
+                    {
+                        OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
+                        prevX = xEvent.xconfigure.x;
+                        prevY = xEvent.xconfigure.y;
+                    }
+                    if(prevWidth != xEvent.xconfigure.width || prevHeigth != xEvent.xconfigure.height)
+                    {
+                        OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
+                        prevWidth = xEvent.xconfigure.width;
+                        prevHeigth = xEvent.xconfigure.height;
+                    }
                     break;
             }
         }
