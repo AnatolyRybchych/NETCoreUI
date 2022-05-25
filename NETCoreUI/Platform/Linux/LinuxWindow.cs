@@ -90,7 +90,7 @@ namespace NETCoreUI.Platform.Linux
                     OnRedraw(new RedrawEventArgs(Graphics));
                     break;
                 case EventType.ConfigureNotify:
-                    Console.WriteLine($"window: {xEvent.xconfigure.window}");
+                    Console.WriteLine($"override {xEvent.xconfigure.override_redirect}");
                     OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
                     OnResize(new ResizeEventArgs(new Size(xEvent.xconfigure.width, xEvent.xconfigure.height)));
                     break;
