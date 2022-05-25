@@ -62,7 +62,7 @@ namespace NETCoreUI.Platform.Linux
                 int best_fbc = -1, worst_fbc = -1, best_num_samp = -1, worst_num_samp = 999;
                 for (int i = 0; i < countEements; i++)
                 {
-                    IntPtr fbc = Marshal.PtrToStructure<IntPtr>(fbcPtr + i);
+                    IntPtr fbc = Marshal.PtrToStructure<IntPtr>(fbcPtr + i * Marshal.SizeOf<IntPtr>());
                     IntPtr viPtr = Glx.glXGetVisualFromFBConfig(GraphicsContext.Display, fbc);
 
                     if(viPtr != IntPtr.Zero)
@@ -87,7 +87,7 @@ namespace NETCoreUI.Platform.Linux
                     X.XFree(viPtr);
                 }
 
-                IntPtr bestFbc = Marshal.PtrToStructure<IntPtr>(fbcPtr + best_fbc);
+                IntPtr bestFbc = Marshal.PtrToStructure<IntPtr>(fbcPtr + best_fbc * Marshal.SizeOf<IntPtr>());
 
                 GlxContext = Glx.glXCreateNewContext(GraphicsContext.Display, bestFbc, GLX_RGBA_TYPE, IntPtr.Zero, true);
                 X.XFree(fbcPtr);
