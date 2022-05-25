@@ -12,30 +12,30 @@ namespace NETCoreUI.Platform.Linux.X11
         public const string lib = "libGL.so";
 
         [DllImport(lib)]
-        public static extern int glXQueryVersion(System.IntPtr display, out int minor, out int major);
+        public static extern int glXQueryVersion(IntPtr display, out int minor, out int major);
 
         [DllImport(lib)]
-        public static extern IntPtr glXGetFBConfigs(System.IntPtr display, int screen, out int countElements);
+        public static extern IntPtr glXGetFBConfigs(IntPtr display, int screen, out int countElements);
 
         [DllImport(lib)]
-        public static extern IntPtr glXGetVisualFromFBConfig(System.IntPtr display, IntPtr fbc);
+        public static extern IntPtr glXGetVisualFromFBConfig(IntPtr display, IntPtr fbc);
 
         [DllImport(lib)]
-        public static extern int glXGetFBConfigAttrib(System.IntPtr display, IntPtr fbc, int attribute, out int value);
+        public static extern int glXGetFBConfigAttrib(IntPtr display, IntPtr fbc, int attribute, out int value);
 
         [DllImport(lib)]
-        public static extern IntPtr glXChooseFBConfig(System.IntPtr display, int screen, 
+        public static extern IntPtr glXChooseFBConfig(IntPtr display, int screen, 
             [MarshalAs(UnmanagedType.LPArray)] int[] attribList , out int elementsCount);
 
         [DllImport(lib)]
-        public static extern IntPtr glXCreateNewContext(System.IntPtr display, IntPtr fbc, int renderType, 
+        public static extern IntPtr glXCreateNewContext(IntPtr display, IntPtr fbc, int renderType, 
             IntPtr /*glx context*/ shareList,[MarshalAs(UnmanagedType.Bool)] bool dirrect);
 
         [DllImport(lib)]
         [return:MarshalAs(UnmanagedType.Bool)]
-        public static extern bool glXMakeCurrent(System.IntPtr display, long drawable, IntPtr glxContext);
+        public static extern bool glXMakeCurrent(IntPtr display, long drawable, IntPtr glxContext);
 
         [DllImport(lib)]
-        public static extern void glXSwapBuffers(System.IntPtr display, IntPtr glxContext);
+        public static extern void glXSwapBuffers(IntPtr display, long drawable);
     }
 }

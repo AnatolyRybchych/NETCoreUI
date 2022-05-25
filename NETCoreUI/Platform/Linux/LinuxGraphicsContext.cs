@@ -94,7 +94,7 @@ namespace NETCoreUI.Platform.Linux
             }
 
             public void MakeCurrent() => Glx.glXMakeCurrent(GraphicsContext.Display, GraphicsContext.Drawable, GlxContext);
-            public void SwapBuffers() => Glx.glXSwapBuffers(GraphicsContext.Display, GlxContext);
+            public void SwapBuffers() => Glx.glXSwapBuffers(GraphicsContext.Display, GraphicsContext.Drawable);
 
             public const int GLX_X_RENDERABLE = 0x8012;
             public const int GLX_DRAWABLE_TYPE = 0x8010;
