@@ -7,10 +7,10 @@ namespace NETCoreUI
 {
     class Program
     {
-        [DllImport("opengl32.dll")]
+        [DllImport("libGL.dll")]
         public static extern void glClear(int mask);
 
-        [DllImport("opengl32.dll")]
+        [DllImport("libGL.dll")]
         public static extern void glClearColor(float r, float g, float b, float a);
 
         static void Main(string[] args)
