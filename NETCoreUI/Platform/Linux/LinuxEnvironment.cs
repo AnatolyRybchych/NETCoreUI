@@ -27,7 +27,7 @@ namespace NETCoreUI.Platform.Linux
 
         protected override IWIndow CreateBaseWindow(string title)
         {
-            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0xff00ff00, 0xffffffff
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, 800, 600, 0, 0x00000000, 0x00000000
                 , EventMask.Button1Motion
                 | EventMask.Button2Motion
                 | EventMask.Button3Motion
