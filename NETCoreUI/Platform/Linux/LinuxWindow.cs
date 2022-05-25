@@ -91,13 +91,15 @@ namespace NETCoreUI.Platform.Linux
                     break;
                 case EventType.ConfigureNotify:
                     OnMove(new MoveEventArgs(new Point(xEvent.xconfigure.x, xEvent.xconfigure.y)));
-                    OnResize(new ResizeEventArgs(new Size(xEvent.xresizerequest.width, xEvent.xresizerequest.height)));
                     break;
                 case EventType.ResizeRequest:
-                    
+                    OnResize(new ResizeEventArgs(new Size(xEvent.xresizerequest.width, xEvent.xresizerequest.height)));
                     break;
                 case EventType.GravityNotify:
                     OnMove(new MoveEventArgs(new Point(xEvent.xgravity.x, xEvent.xgravity.y)));
+                    break;
+                case EventType.PropertyNotify:
+
                     break;
             }
         }
