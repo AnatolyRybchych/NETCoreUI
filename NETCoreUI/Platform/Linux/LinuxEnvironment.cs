@@ -43,6 +43,8 @@ namespace NETCoreUI.Platform.Linux
                 | EventMask.PointerMotion
                 | EventMask.VisibilityChange
                 | EventMask.StructureNotify
+                | EventMask.Exposure
+                | EventMask.FocusChange
                 );
         }
         
