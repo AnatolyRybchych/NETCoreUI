@@ -50,9 +50,22 @@ namespace NETCoreUI
 
                 window.MouseEnter += Window_MouseEnter;
                 window.MouseLeave += Window_MouseLeave;
+
+                window.Focus += Window_Focus;
+                window.UnFocus += Window_UnFocus;
             });
             ev.StartUIThread();
             ev.JoinUIThread();
+        }
+
+        private static void Window_UnFocus(object sender, IEnvironment environment, Core.WindowEvents.UnFocusEventArgs e)
+        {
+            Console.WriteLine("UnFocus");
+        }
+
+        private static void Window_Focus(object sender, IEnvironment environment, Core.WindowEvents.FocusEventArgs e)
+        {
+            Console.WriteLine("Focus");
         }
 
         private static void Window_MouseLeave(object sender, IEnvironment environment, Core.WindowEvents.MouseLeaveEventArgs e)

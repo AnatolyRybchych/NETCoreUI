@@ -32,6 +32,8 @@ namespace NETCoreUI.Core
         public event MoveHandler? Move;
         public event MouseEnterHandler? MouseEnter;
         public event MouseLeaveHandler? MouseLeave;
+        public event FocusEventHandler? Focus;
+        public event UnFocusEventHandler? UnFocus;
 
         IUIThread UIThread { get; }
 

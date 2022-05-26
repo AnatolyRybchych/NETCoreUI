@@ -41,6 +41,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public event MoveHandler? Move;
         public event MouseEnterHandler? MouseEnter;
         public event MouseLeaveHandler? MouseLeave;
+        public event FocusEventHandler? Focus;
+        public event UnFocusEventHandler? UnFocus;
 
         public Window(IEnvironment environment)
         {
@@ -72,6 +74,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnMove(MoveEventArgs e) => Move?.Invoke(this, Environment, e);
         public virtual void OnMouseEnter(MouseEnterEventArgs e) => MouseEnter?.Invoke(this, Environment, e);
         public virtual void OnMouseLeave(MouseLeaveEventArgs e) => MouseLeave?.Invoke(this, Environment, e);
+        public virtual void OnFocus(FocusEventArgs e) => Focus?.Invoke(this, Environment, e);
+        public virtual void OnUnFocus(UnFocusEventArgs e) => UnFocus?.Invoke(this, Environment, e);
 
         ~Window() => Close();
     }

@@ -155,6 +155,10 @@ namespace NETCoreUI.Platform.Windows
                 case WM.WM_MOUSELEAVE:
                     OnMouseLeave(new MouseLeaveEventArgs());
                     return IntPtr.Zero;
+                case WM.WM_ACTIVATE:
+                    if (wparam != IntPtr.Zero) OnFocus(new FocusEventArgs());
+                    else OnUnFocus(new UnFocusEventArgs());
+                    return IntPtr.Zero;
                 default:
                     return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);
             }

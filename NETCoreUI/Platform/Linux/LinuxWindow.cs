@@ -115,6 +115,12 @@ namespace NETCoreUI.Platform.Linux
                 case EventType.LeaveNotify:
                     OnMouseLeave(new MouseLeaveEventArgs());
                     break;
+                case EventType.FocusIn:
+                    OnFocus(new FocusEventArgs());
+                    break;
+                case EventType.FocusOut:
+                    OnUnFocus(new UnFocusEventArgs());
+                    break;
             }
         }
 
