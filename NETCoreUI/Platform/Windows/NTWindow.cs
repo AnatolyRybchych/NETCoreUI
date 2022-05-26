@@ -73,6 +73,8 @@ namespace NETCoreUI.Platform.Windows
                 case WM.WM_MOUSEMOVE:
                     uint dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnMouseMove(new MouseMoveEventArgs(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam)));
+                    var tme = new TRACKMOUSEEVENT(hwnd, 1);
+                    WinApi.TrackMouseEvent(ref tme);
                     return IntPtr.Zero;
                 case WM.WM_LBUTTONDOWN:
                     dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
@@ -146,6 +148,12 @@ namespace NETCoreUI.Platform.Windows
                 case WM.WM_MOVE:
                     dwLparam = (uint)(lparam.ToInt64() & 0x00000000ffffffff);
                     OnMove(new MoveEventArgs(new Point(GET_X_LPARAM(dwLparam), GET_Y_LPARAM(dwLparam))));
+                    return IntPtr.Zero;
+                case WM.WM_MOUSEHOVER:
+                    OnMouseEnter(new MouseEnterEventArgs());
+                    return IntPtr.Zero;
+                case WM.WM_MOUSELEAVE:
+                    OnMouseLeave(new MouseLeaveEventArgs());
                     return IntPtr.Zero;
                 default:
                     return WinApi.DefWindowProcW(hwnd, msg, wparam, lparam);

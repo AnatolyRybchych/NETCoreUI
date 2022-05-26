@@ -39,6 +39,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public event RedrawHandler? Redraw;
         public event Resizehandler? Resize;
         public event MoveHandler? Move;
+        public event MouseEnterHandler? MouseEnter;
+        public event MouseLeaveHandler? MouseLeave;
 
         public Window(IEnvironment environment)
         {
@@ -68,6 +70,8 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnRedraw(RedrawEventArgs e) => Redraw?.Invoke(this, Environment, e);
         public virtual void OnResize(ResizeEventArgs e) => Resize?.Invoke(this, Environment, e);
         public virtual void OnMove(MoveEventArgs e) => Move?.Invoke(this, Environment, e);
+        public virtual void OnMouseEnter(MouseEnterEventArgs e) => MouseEnter?.Invoke(this, Environment, e);
+        public virtual void OnMouseLeave(MouseLeaveEventArgs e) => MouseLeave?.Invoke(this, Environment, e);
 
         ~Window() => Close();
     }

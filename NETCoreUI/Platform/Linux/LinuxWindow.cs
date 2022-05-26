@@ -92,6 +92,7 @@ namespace NETCoreUI.Platform.Linux
                     OnKeyUp(new KeyEventArgs(Keymap.Convert(xEvent.xkey.keycode)));
                     break;
                 case EventType.Expose:
+                    
                     OnRedraw(new RedrawEventArgs(Graphics));
                     break;
                 case EventType.ConfigureNotify:
@@ -108,12 +109,19 @@ namespace NETCoreUI.Platform.Linux
                         prevHeigth = xEvent.xconfigure.height;
                     }
                     break;
+                case EventType.EnterNotify:
+                    OnMouseEnter(new MouseEnterEventArgs());
+                    break;
+                case EventType.LeaveNotify:
+                    OnMouseLeave(new MouseLeaveEventArgs());
+                    break;
             }
         }
 
-        public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor, EventMask inputMask) : base(environment)
+        public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor, EventMask inputMask, string title) : base(environment)
         {
             XID = X.XCreateSimpleWindow(LinuxEnvironamnt.Display, parent, x, y, (uint)width, (uint)height, (uint)borderWidth, borderColor, backgroundColor);
+            X.XStoreName(LinuxEnvironamnt.Display, XID, title);
             LinuxGraphics = new LinuxGraphicsContext(LinuxEnvironamnt.Display, XID);
             queryPointer = new QueryPointer(environment.Display, XID);
             windowGeometry = new WindowGeometry(environment.Display, XID);

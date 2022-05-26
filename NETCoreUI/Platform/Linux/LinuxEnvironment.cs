@@ -45,13 +45,31 @@ namespace NETCoreUI.Platform.Linux
                 | EventMask.StructureNotify
                 | EventMask.Exposure
                 | EventMask.FocusChange
-                );
+                , title);
         }
         
 
         protected override IWIndow CreateBaseWindow(string title, int width, int height)
         {
-            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, width, height, 0, 0xff00ff00, 0xffffffff, 0x0);
+            return new LinuxWindow(this, X.XDefaultRootWindow(Display), 0, 0, width, height, 0, 0xff00ff00, 0xffffffff
+                , EventMask.Button1Motion
+                | EventMask.Button2Motion
+                | EventMask.Button3Motion
+                | EventMask.Button4Motion
+                | EventMask.Button5Motion
+                | EventMask.KeyPress
+                | EventMask.KeyRelease
+                | EventMask.EnterWindow
+                | EventMask.LeaveWindow
+                | EventMask.ButtonPress
+                | EventMask.ButtonRelease
+                | EventMask.ButtonMotion
+                | EventMask.PointerMotion
+                | EventMask.VisibilityChange
+                | EventMask.StructureNotify
+                | EventMask.Exposure
+                | EventMask.FocusChange
+                , title);
         }
 
         protected override IWIndow CreateBaseWindowWithoutTitleBar()

@@ -30,6 +30,8 @@ namespace NETCoreUI.Core
         public event RedrawHandler? Redraw;
         public event Resizehandler? Resize;
         public event MoveHandler? Move;
+        public event MouseEnterHandler? MouseEnter;
+        public event MouseLeaveHandler? MouseLeave;
 
         IUIThread UIThread { get; }
 

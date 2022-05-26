@@ -2021,7 +2021,7 @@ public static class X{
     public static extern System.Int32 XStoreColors ( System.IntPtr /*|Display*|*/  arg0, Colormap arg1, System.IntPtr /*|XColor*|*/  arg2, System.Int32 arg3);
     
     [DllImport(LibPath)]
-    public static extern System.Int32 XStoreName ( System.IntPtr /*|Display*|*/  arg0, Window arg1, System.IntPtr /*System.SByte*/ arg2);
+    public static extern System.Int32 XStoreName ( System.IntPtr /*|Display*|*/  arg0, Window arg1, [MarshalAs(UnmanagedType.LPStr)] string arg2);
     
     [DllImport(LibPath)]
     public static extern System.Int32 XStoreNamedColor ( System.IntPtr /*|Display*|*/  arg0, Colormap arg1, System.IntPtr /*System.SByte*/ arg2, System.Int64 arg3, System.Int32 arg4);

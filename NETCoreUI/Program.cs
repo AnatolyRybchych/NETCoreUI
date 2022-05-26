@@ -47,9 +47,22 @@ namespace NETCoreUI
 
                 window.Resize += Window_Resize;
                 window.Move += Window_Move;
+
+                window.MouseEnter += Window_MouseEnter;
+                window.MouseLeave += Window_MouseLeave;
             });
             ev.StartUIThread();
             ev.JoinUIThread();
+        }
+
+        private static void Window_MouseLeave(object sender, IEnvironment environment, Core.WindowEvents.MouseLeaveEventArgs e)
+        {
+            Console.WriteLine("Mouse leave");
+        }
+
+        private static void Window_MouseEnter(object sender, IEnvironment environment, Core.WindowEvents.MouseEnterEventArgs e)
+        {
+            Console.WriteLine("Mouse enter");
         }
 
         private static void Window_Move(object sender, IEnvironment environment, Core.WindowEvents.MoveEventArgs e)
