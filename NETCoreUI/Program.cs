@@ -5,6 +5,8 @@ using NETCoreUI.Platform.Linux;
 using NETCoreUI.Platform.Windows;
 using System.Runtime.InteropServices;
 
+using static GL.GL;
+
 namespace NETCoreUI
 {
 
@@ -18,7 +20,9 @@ namespace NETCoreUI
 
             buffer = new LinuxGraphicsImage(ev.ToLinux().Display, 200, 200);
 
-            buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(0, 0, 200, 200));
+            buffer.Graphics.GlContext.MakeCurrent();
+            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            buffer.Graphics.GlContext.SwapBuffers();
 
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
