@@ -173,25 +173,13 @@ namespace NETCoreUI.Platform.Linux
             windows.Add(this);
         }
 
-        public override void Close()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Close() => X.XDestroyWindow(LinuxEnvironamnt.Display, XID);
 
-        public override void Maximize()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Maximize() => X.XUnmapWindow(LinuxEnvironamnt.Display, XID);
 
-        public override void Minimize()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Minimize() => X.XIconifyWindow(LinuxEnvironamnt.Display, XID, LinuxEnvironamnt.DefaultScreen);
 
-        public override void Show()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Show() => X.XMapWindow(LinuxEnvironamnt.Display, XID);
 
         private static List<LinuxWindow> windows = new List<LinuxWindow>();
         public static void __NextEvent(in XEvent xEvent)

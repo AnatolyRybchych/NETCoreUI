@@ -205,25 +205,13 @@ namespace NETCoreUI.Platform.Windows
             }
         }
 
-        public override void Close()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Close() => WinApi.DestroyWindow(HWindow);
 
-        public override void Maximize()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Maximize() => WinApi.ShowWindow(HWindow, SW.Maximize);
 
-        public override void Minimize()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Minimize() => WinApi.ShowWindow(HWindow, SW.Minimize);
 
-        public override void Show()
-        {
-            throw new NotImplementedException();
-        }
+        public override void Show() => WinApi.ShowWindow(HWindow, SW.Show);
 
         ~NTWindow()
         {

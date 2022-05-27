@@ -86,6 +86,10 @@ namespace NETCoreUI.Platform.Windows.Win32
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DestroyWindow(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwndAfter, int x, int y, int width, int height, SWP flags);
 
         [DllImport("user32.dll")]
