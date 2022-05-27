@@ -157,6 +157,9 @@ namespace NETCoreUI.Platform.Linux
                 case EventType.FocusOut:
                     OnUnFocus(new UnFocusEventArgs());
                     break;
+                case EventType.NoExpose:
+                    Close();
+                    break;
             }
         }
 
