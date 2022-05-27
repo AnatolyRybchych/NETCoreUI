@@ -32,6 +32,26 @@ namespace NETCoreUI.Platform.Windows.Win32
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DeleteDC(IntPtr hdc);
 
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool Ellipse(IntPtr hdc, int left, int top, int rigth, int bottom);
+
+        [DllImport("user32.dll")]
+        public static extern int FillRect(IntPtr hdc, in RECT rect, IntPtr brush);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateSolidBrush(uint colorref);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr SelectObject(IntPtr hdc, IntPtr obj);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreatePen(int style = 5, int width = 0, uint colorref = 0);
+
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject(IntPtr gdiObj);
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool TrackMouseEvent(ref TRACKMOUSEEVENT trackEv);

@@ -1,4 +1,5 @@
 ﻿using NETCoreUI.Core;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Linux.X11;
 using NETCoreUI.Platform.Linux.X11.Types;
 using System;
@@ -18,10 +19,41 @@ namespace NETCoreUI.Platform.Linux
 
         protected override LinuxOpenGlContext CreateGlContext() =>  new LinuxOpenGlContext(this);
 
+        protected override ISimpleRenderer CreateSimpleRenderer() => new LinuxSimpleRenderer(this);
+
         public LinuxGraphicsContext(IntPtr display, long drawable)
         {
             Display = display;
             Drawable = drawable;
+        }
+
+        public class LinuxSimpleRenderer : ISimpleRenderer
+        {
+            public LinuxGraphicsContext Graphics { get; private set; }
+
+            public IntPtr Display { get; private set; }
+            public long Drawable { get; private set; }
+
+            public IntPtr Gc { get; private set; }
+
+            public LinuxSimpleRenderer(LinuxGraphicsContext graphics)
+            {
+                Graphics = graphics;
+                Display = graphics.Display;
+                Drawable = graphics.Drawable;
+                Gc = X.XCreateGC(Display, Drawable, 0, IntPtr.Zero);
+            }
+
+            public void FillAliasedCircle(Color color, Rect bounds)
+            {
+                X.XSetForeground(Display, Gc, color.COLORREF);
+                X.XFillRectangle(Display, Drawable, Gc, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+            }
+
+            public void FillAliasedRect(Color color, Rect rect)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         protected class LinuxOpenGlContext : IOpenGlContext

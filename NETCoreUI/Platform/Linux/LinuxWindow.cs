@@ -156,10 +156,6 @@ namespace NETCoreUI.Platform.Linux
             throw new NotImplementedException();
         }
 
-
-        
-
-
         private static List<LinuxWindow> windows = new List<LinuxWindow>();
         public static void __NextEvent(in XEvent xEvent)
         {

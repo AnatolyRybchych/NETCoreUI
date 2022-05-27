@@ -1,4 +1,5 @@
 ﻿using NETCoreUI.Core;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Windows.Win32.Types;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,44 @@ namespace NETCoreUI.Platform.Windows
         }
 
         protected override IOpenGlContext CreateGlContext() => new WindowsOpenGlContext(this);
+        protected override ISimpleRenderer CreateSimpleRenderer() => new WindowsSimpleRenderer(this);
+
+        public class WindowsSimpleRenderer:ISimpleRenderer
+        {
+            public WindowsGraphicsContext Graphics { get; private set; }
+            private IntPtr hdc;
+
+            public WindowsSimpleRenderer(WindowsGraphicsContext graphics)
+            {
+                Graphics = graphics;
+                hdc = Graphics.Hdc;
+            }
+
+            public void FillAliasedRect(Color color, Rect rect)
+            {
+                IntPtr brush = CreateSolidBrush(color.COLORREF);
+                Win32.WinApi.FillRect(hdc, new RECT()
+                {
+                    left = rect.Left,
+                    top = rect.Top,
+                    right = rect.Right,
+                    bottom = rect.Bottom
+                },
+                brush);
+                DeleteObject(brush);
+            }
+
+            public void FillAliasedCircle(Color color, Rect bounds)
+            {
+                IntPtr brush = CreateSolidBrush(color.COLORREF);
+                IntPtr pen = CreatePen();
+                SelectObject(hdc, brush);
+                SelectObject(hdc, pen);
+                Ellipse(hdc, bounds.Left, bounds.Top, bounds.Right, bounds.Bottom);
+                DeleteObject(pen);
+                DeleteObject(brush);
+            }
+        }
 
         protected class WindowsOpenGlContext : IOpenGlContext
         {

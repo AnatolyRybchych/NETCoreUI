@@ -16,6 +16,8 @@ namespace NETCoreUI.Platform.Crossplatform
         private Queue<Action> backActionsQueue;
         private object queueLocker;
 
+        public event Action? Loop;
+
         public UIThread(IEnvironment environment)
         {
             Environment = environment;
@@ -41,6 +43,7 @@ namespace NETCoreUI.Platform.Crossplatform
         public void Start() => thread.Start();
         public void Join() => thread.Join();
         public void Stop() => isRunning = false;
+        
 
         public int MsTimeout { get; set; } = 2;
 
@@ -56,6 +59,7 @@ namespace NETCoreUI.Platform.Crossplatform
             Action? action;
             while (actionsQueue.TryDequeue(out action))
                 action?.Invoke();
+            Loop?.Invoke();
         }
 
         private void SwapActionQueues()

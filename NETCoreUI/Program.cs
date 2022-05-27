@@ -1,5 +1,6 @@
 ﻿
 using NETCoreUI.Core;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Windows;
 using System.Runtime.InteropServices;
 
@@ -91,13 +92,8 @@ namespace NETCoreUI
         private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
         {
             Console.WriteLine("Redraw");
-
-            e.Graphics.GlContext.MakeCurrent();
-
-            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-            glClear(0x00004000);
-
-            e.Graphics.GlContext.SwapBuffers();
+            e.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(140, 70, 35), new Rect(100, 100));
+            e.Graphics.SimpleRenderer.FillAliasedCircle(new Color32RGB(140, 70, 35), new Rect(150, 0, 100, 100));
         }
 
         private static void Window_KeyUp(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)

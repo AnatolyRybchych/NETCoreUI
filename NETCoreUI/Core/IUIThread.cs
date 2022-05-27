@@ -10,6 +10,9 @@ namespace NETCoreUI.Core
     {
         IEnvironment Environment { get; }
 
+        event Action? Loop;
+        int MsTimeout { get; set; }
+
         //executes action in UI thread after handling events
         //can be called reqursively to handle on each event cycle
         void Execute(Action action);

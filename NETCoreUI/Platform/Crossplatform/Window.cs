@@ -47,6 +47,7 @@ namespace NETCoreUI.Platform.Crossplatform
         public Window(IEnvironment environment)
         {
             Environment = environment;
+            environment.UIThread.Execute(AlignStartState);
         }
 
         public abstract void Close();
@@ -76,6 +77,12 @@ namespace NETCoreUI.Platform.Crossplatform
         public virtual void OnMouseLeave(MouseLeaveEventArgs e) => MouseLeave?.Invoke(this, Environment, e);
         public virtual void OnFocus(FocusEventArgs e) => Focus?.Invoke(this, Environment, e);
         public virtual void OnUnFocus(UnFocusEventArgs e) => UnFocus?.Invoke(this, Environment, e);
+
+        protected virtual void AlignStartState()
+        {
+            OnRedraw(new RedrawEventArgs(Graphics));
+            OnFocus(new FocusEventArgs());
+        }
 
         ~Window() => Close();
     }
