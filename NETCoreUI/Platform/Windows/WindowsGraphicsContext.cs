@@ -35,6 +35,8 @@ namespace NETCoreUI.Platform.Windows
         protected override IOpenGlContext CreateGlContext() => new WindowsOpenGlContext(this);
         protected override ISimpleRenderer CreateSimpleRenderer() => new WindowsSimpleRenderer(this);
 
+        public WindowsSimpleRenderer WindowsRenderer => (WindowsSimpleRenderer)SimpleRenderer;
+
         public class WindowsSimpleRenderer:ISimpleRenderer
         {
             public WindowsGraphicsContext Graphics { get; private set; }

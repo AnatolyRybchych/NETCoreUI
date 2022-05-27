@@ -18,8 +18,9 @@ namespace NETCoreUI.Platform.Linux
         public long Drawable { get; private set; }
 
         protected override LinuxOpenGlContext CreateGlContext() =>  new LinuxOpenGlContext(this);
-
         protected override ISimpleRenderer CreateSimpleRenderer() => new LinuxSimpleRenderer(this);
+
+        public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
 
         public LinuxGraphicsContext(IntPtr display, long drawable)
         {

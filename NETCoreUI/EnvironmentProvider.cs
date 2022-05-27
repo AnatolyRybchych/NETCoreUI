@@ -53,5 +53,8 @@ namespace NETCoreUI
 
         public static LinuxUIThread ToLinux(this IUIThread uith) => (LinuxUIThread)uith;
         public static NTUIThread ToWindows(this IUIThread uith) => (NTUIThread)uith;
+
+        public static LinuxGraphicsContext ToLinux(this GraphicsContext g) => (LinuxGraphicsContext)g;
+        public static WindowsGraphicsContext ToWindows(this GraphicsContext g) => (WindowsGraphicsContext)g;
     }
 }
