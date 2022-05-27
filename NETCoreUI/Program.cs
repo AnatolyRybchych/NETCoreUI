@@ -20,12 +20,12 @@ namespace NETCoreUI
 
             buffer = ev.CreateGraphicsImage(200, 200);
 
-            buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(200, 200));
+            //buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(200, 200));
 
-            //buffer.Graphics.GlContext.MakeCurrent();
-            //glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-            //glClear(0x4000);
-            //buffer.Graphics.GlContext.SwapBuffers();
+            buffer.Graphics.GlContext.MakeCurrent();
+            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            glClear(0x4000);
+            buffer.Graphics.GlContext.SwapBuffers();
 
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
