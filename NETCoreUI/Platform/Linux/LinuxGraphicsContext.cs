@@ -57,6 +57,21 @@ namespace NETCoreUI.Platform.Linux
                 X.XFillRectangle(Display, Drawable, Gc, rect.X, rect.Y, rect.Width, rect.Height);
                 
             }
+
+            public void FillAliasedArc(Color color, Point position, int radius, float angleStart, float angleEnd)
+            {
+                X.XSetForeground(Display, Gc, color.XColor);
+                unchecked
+                {
+                    X.XFillArc(Display, Drawable, Gc, position.X, position.Y, radius, radius, (int)(angleStart * 64), (int)(angleEnd * 64));
+                }
+            }
+
+            public void DrawAliasedLine(Color color, Point p1, Point p2)
+            {
+                X.XSetForeground(Display, Gc, color.XColor);
+                X.XDrawLine(Display, Drawable, Gc, p1.X, p1.Y, p2.X, p2.Y);
+            }
         }
 
         protected class LinuxOpenGlContext : IOpenGlContext

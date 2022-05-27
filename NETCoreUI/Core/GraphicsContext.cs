@@ -38,6 +38,8 @@ namespace NETCoreUI.Core
         {
             public void FillAliasedRect(Color color, Rect rect);
             public void FillAliasedCircle(Color color, Rect bounds);
+            public void FillAliasedArc(Color color, Point position, int radius, float angleStart, float angleEnd);
+            public void DrawAliasedLine(Color color, Point p1, Point p2);
         }
 
         protected abstract IOpenGlContext CreateGlContext();

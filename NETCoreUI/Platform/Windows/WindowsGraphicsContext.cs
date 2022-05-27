@@ -72,6 +72,30 @@ namespace NETCoreUI.Platform.Windows
                 DeleteObject(pen);
                 DeleteObject(brush);
             }
+
+            public void FillAliasedArc(Color color, Point position, int radius, float angleStart, float angleEnd)
+            {
+                IntPtr brush = CreateSolidBrush(color.COLORREF);
+                SelectObject(hdc, brush);
+                BeginPath(hdc);
+                MoveToEx(hdc, position.X + radius, position.Y + radius, IntPtr.Zero);
+                AngleArc(hdc, position.X + radius, position.Y + radius, unchecked((uint)radius), angleStart, angleEnd);
+                EndPath(hdc);
+                FillPath(hdc);
+                DeleteObject(brush);
+            }
+
+            public void DrawAliasedLine(Color color, Point p1, Point p2)
+            {
+                IntPtr pen = CreatePen(0, 1, color.COLORREF);
+                SelectObject(hdc, pen);
+                BeginPath(hdc);
+                MoveToEx(hdc, p1.X, p1.Y, IntPtr.Zero);
+                LineTo(hdc, p2.X, p2.Y);
+                EndPath(hdc);
+                StrokePath(hdc);
+                DeleteObject(pen);
+            }
         }
 
         protected class WindowsOpenGlContext : IOpenGlContext
