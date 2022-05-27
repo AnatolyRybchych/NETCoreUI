@@ -9,7 +9,8 @@ namespace NETCoreUI
 
     class Program
     {
-        static WindowsGraphicsImage buffer = new WindowsGraphicsImage(200, 200);
+        static WindowsImage buffer = new WindowsImage(200, 200);
+
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
@@ -17,7 +18,9 @@ namespace NETCoreUI
             
             buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(0, 0, 200, 200));
 
-            
+            buffer.CreateBitmap32().SaveBmp("img.bmp");
+
+
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
             {
