@@ -63,7 +63,7 @@ namespace NETCoreUI.Platform.Linux
                 X.XSetForeground(Display, Gc, color.XColor);
                 unchecked
                 {
-                    X.XFillArc(Display, Drawable, Gc, position.X, position.Y, radius, radius, (int)(angleStart * 64), (int)(angleEnd * 64));
+                    X.XFillArc(Display, Drawable, Gc, position.X, position.Y, radius * 2, radius * 2, (int)(angleStart * 64), (int)(angleEnd * 64));
                 }
             }
 
