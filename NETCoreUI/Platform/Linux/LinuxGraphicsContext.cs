@@ -17,6 +17,7 @@ namespace NETCoreUI.Platform.Linux
         public IntPtr Display { get; private set; }
         public long Drawable { get; private set; }
         public IntPtr Gc { get; private set; }
+        public bool FromPixmap { get; private set; }
 
         protected override LinuxOpenGlContext CreateGlContext() =>  new LinuxOpenGlContext(this);
         protected override ISimpleRenderer CreateSimpleRenderer() => new LinuxSimpleRenderer(this);
@@ -33,8 +34,9 @@ namespace NETCoreUI.Platform.Linux
 
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
 
-        public LinuxGraphicsContext(IntPtr display, long drawable)
+        public LinuxGraphicsContext(IntPtr display, long drawable, bool fromPixmap = false)
         {
+            FromPixmap = fromPixmap;
             Display = display;
             Drawable = drawable;
             Gc = X.XCreateGC(Display, Drawable, 0, IntPtr.Zero);
@@ -95,10 +97,12 @@ namespace NETCoreUI.Platform.Linux
             {
                 GraphicsContext = graphicsContext;
 
+                int drawableType = GraphicsContext.FromPixmap ? GLX_PIXMAP_BIT : GLX_WINDOW_BIT;
+
                 int[] visualAttribs = new int[]
                 {
                     GLX_X_RENDERABLE, TRUE,
-                    GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+                    GLX_DRAWABLE_TYPE, drawableType,
                     GLX_RENDER_TYPE, GLX_RGBA_BIT,
                     GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
                     GLX_RED_SIZE, 8,
@@ -169,6 +173,7 @@ namespace NETCoreUI.Platform.Linux
             public const int GLX_STENCIL_SIZE = 13;
             public const int GLX_DOUBLEBUFFER = 5;
             public const int GLX_WINDOW_BIT = 1;
+            public const int GLX_PIXMAP_BIT = 2;
             public const int GLX_RGBA_BIT = 1;
             public const int GLX_TRUE_COLOR = 0x8002;
             public const int TRUE = 1;

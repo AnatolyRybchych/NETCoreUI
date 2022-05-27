@@ -15,10 +15,12 @@ namespace NETCoreUI.Platform.Windows
     public class WindowsGraphicsContext : GraphicsContext
     {
         public IntPtr Hdc { get; private set; }
+        public bool FromBitmap;
         private bool deleteDc;
 
-        public WindowsGraphicsContext(IntPtr hdc, bool deleteDcAutomaticly)
+        public WindowsGraphicsContext(IntPtr hdc, bool deleteDcAutomaticly, bool fromBitmap = false)
         {
+            FromBitmap = fromBitmap;
             deleteDc = deleteDcAutomaticly;
             Hdc = hdc;
         }
@@ -116,11 +118,13 @@ namespace NETCoreUI.Platform.Windows
                 GraphicsContext = graphicsContext;
                 wglMakeCurrent(GraphicsContext.Hdc, IntPtr.Zero);
 
+                PFD target = GraphicsContext.FromBitmap ? PFD.PFD_DRAW_TO_BITMAP : PFD.PFD_DRAW_TO_WINDOW;
+
                 PIXELFORMATDESCRIPTOR pfd = new PIXELFORMATDESCRIPTOR()
                 {
                     nSize = (ushort)Marshal.SizeOf<PIXELFORMATDESCRIPTOR>(),
                     nVersion = 1,
-                    dwFlags = (uint)(PFD.PFD_DRAW_TO_WINDOW | PFD.PFD_SUPPORT_OPENGL | PFD.PFD_DOUBLEBUFFER | PFD.PFD_DRAW_TO_BITMAP),
+                    dwFlags = (uint)(target | PFD.PFD_SUPPORT_OPENGL | PFD.PFD_DOUBLEBUFFER),
                     cColorBits = 32,
                     cDepthBits = 24,
                     cStencilBits = 8,

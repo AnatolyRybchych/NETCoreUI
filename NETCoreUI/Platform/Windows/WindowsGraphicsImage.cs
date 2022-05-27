@@ -27,7 +27,7 @@ namespace NETCoreUI.Platform.Windows
             HBitmap = Create(bmpDc, width, height);
             WinApi.SelectObject(bmpDc, HBitmap);
 
-            WindowsGraphics = new WindowsGraphicsContext(bmpDc, true);
+            WindowsGraphics = new WindowsGraphicsContext(bmpDc, true, true);
         }
 
         protected virtual IntPtr Create(IntPtr hdc, int width, int height) => WinApi.CreateBitmap(width, height, 1, 32, IntPtr.Zero);
