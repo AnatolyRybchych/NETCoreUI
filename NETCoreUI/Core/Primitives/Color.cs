@@ -14,5 +14,6 @@ namespace NETCoreUI.Core.Primitives
         public abstract float A { get; }
 
         public uint COLORREF => unchecked((uint)((byte)(B * 255) << 16) | (uint)((byte)(G * 255) << 8) | (uint)((byte)(R * 255)));
+        public uint XColor => unchecked((uint)((byte)(R * 255) << 16) | (uint)((byte)(G * 255) << 8) | (uint)((byte)(B * 255)));
     }
 }
