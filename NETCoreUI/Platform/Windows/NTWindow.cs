@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using static NETCoreUI.Platform.Windows.CSWindows.Win32Macro;
 using NETCoreUI.Platform.Windows.CSWindows;
+using System.Runtime.InteropServices;
 
 namespace NETCoreUI.Platform.Windows
 {
@@ -31,11 +32,51 @@ namespace NETCoreUI.Platform.Windows
 
         public event WndProcHandler? WindowProc;
 
-        public override IUIThread UIThread => NTUIThread;
-        public override Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Size Size { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Rect Rect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string Title { get => "qwe"; set => throw new NotImplementedException(); }
+        public override Point Position
+        {
+            get
+            {
+                RECT rect;
+                WinApi.GetWindowRect(HWindow, out rect);
+                return new Point(rect.left, rect.top);
+            }
+            set => WinApi.SetWindowPos(HWindow, IntPtr.Zero, value.X, value.Y, 0, 0, SWP.SWP_NOSIZE | SWP.SWP_NOZORDER);
+        }
+
+        public override Size Size
+        {
+            get
+            {
+                RECT rect;
+                WinApi.GetWindowRect(HWindow, out rect);
+                return new Size(rect.right - rect.left, rect.bottom - rect.top);
+            }
+            set => WinApi.SetWindowPos(HWindow, IntPtr.Zero, 0, 0, value.Width, value.Height, SWP.SWP_NOMOVE | SWP.SWP_NOZORDER);
+        }
+
+        public override Rect Rect
+        {
+            get
+            {
+                RECT rect;
+                WinApi.GetWindowRect(HWindow, out rect);
+                return new Rect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+            }
+            set => WinApi.SetWindowPos(HWindow, IntPtr.Zero, value.X, value.Y, value.Width, value.Height, SWP.SWP_NOZORDER);
+        }
+
+        public override string Title
+        {
+            get
+            {
+                IntPtr text = Marshal.AllocHGlobal(100);
+                int len = WinApi.GetWindowTextW(HWindow, text, 100);
+                string? res = Marshal.PtrToStringUni(text, len);
+                Marshal.FreeHGlobal(text);
+                return res ?? "";
+            }
+            set => WinApi.SetWindowTextW(HWindow, value);
+        }
 
         public WindowsGraphicsContext WindowsGraphics { get; private set; }
         public override GraphicsContext Graphics => WindowsGraphics;

@@ -80,6 +80,21 @@ namespace NETCoreUI.Platform.Windows.Win32
         [DllImport("user32.dll")]
         public static extern int FillRect(IntPtr hdc, in RECT rect, IntPtr brush);
 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hwnd, out RECT rect);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwndAfter, int x, int y, int width, int height, SWP flags);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetWindowTextW(IntPtr hwnd, [MarshalAs(UnmanagedType.LPWStr)]string text);
+
+        [DllImport("user32.dll")]
+        public static extern int GetWindowTextW(IntPtr hwnd, IntPtr text, int textMaxLen);
+
         [DllImport("gdi32.dll")]
         public static extern IntPtr CreateSolidBrush(uint colorref);
 

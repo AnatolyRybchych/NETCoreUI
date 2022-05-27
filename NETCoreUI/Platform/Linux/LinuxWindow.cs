@@ -22,11 +22,47 @@ namespace NETCoreUI.Platform.Linux
         public long XID { get; private set; }
         public LinuxEnvironment LinuxEnvironamnt => (LinuxEnvironment)Environment;
 
-        public override IUIThread UIThread => throw new NotImplementedException();
-        public override Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Size Size { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Rect Rect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override Point Position
+        {
+            get
+            {
+                windowGeometry.Get();
+                return new Point(windowGeometry.X, windowGeometry.Y);
+            }
+            set => X.XMoveWindow(LinuxEnvironamnt.Display, XID, value.X, value.Y);
+            
+        }
+
+        public override Size Size { 
+            get
+            {
+                windowGeometry.Get();
+                return new Size(windowGeometry.Width, windowGeometry.Height);
+            }
+            set => X.XResizeWindow(LinuxEnvironamnt.Display, XID, value.Width, value.Height);
+        }
+
+        public override Rect Rect
+        {
+            get
+            {
+                windowGeometry.Get();
+                return new Rect(windowGeometry.X, windowGeometry.Y, windowGeometry.Width, windowGeometry.Height);
+            }
+            set => X.XMoveResizeWindow(LinuxEnvironamnt.Display, XID, value.X, value.Y, value.Width, value.Height);
+        }
+
+        private string lastName;
+        public override string Title
+        {
+            get => lastName;
+            set
+            {
+                X.XStoreName(LinuxEnvironamnt.Display, XID, value);
+                lastName = value;
+            }
+            
+        }
 
         public LinuxGraphicsContext LinuxGraphics { get; private set; }
         public override GraphicsContext Graphics => LinuxGraphics;
@@ -126,6 +162,7 @@ namespace NETCoreUI.Platform.Linux
 
         public LinuxWindow(LinuxEnvironment environment, long parent, int x, int y, int width, int height, int borderWidth, long borderColor, long backgroundColor, EventMask inputMask, string title) : base(environment)
         {
+            lastName = title;
             XID = X.XCreateSimpleWindow(LinuxEnvironamnt.Display, parent, x, y, (uint)width, (uint)height, (uint)borderWidth, borderColor, backgroundColor);
             X.XStoreName(LinuxEnvironamnt.Display, XID, title);
             LinuxGraphics = new LinuxGraphicsContext(LinuxEnvironamnt.Display, XID);

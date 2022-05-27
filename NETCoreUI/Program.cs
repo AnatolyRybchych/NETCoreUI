@@ -21,6 +21,9 @@ namespace NETCoreUI
             {
                 window = ev.CreateWindow("Window");
 
+                window.Rect = new Rect(200, 200, 200, 200);
+                window.Title = "wfdsfgds";
+
                 window.RightMouseButtonDown += Window_RightMouseButtonDown;
                 window.RightMouseButtonUp += Window_RightMouseButtonUp;
 

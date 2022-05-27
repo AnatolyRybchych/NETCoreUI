@@ -35,8 +35,6 @@ namespace NETCoreUI.Core
         public event FocusEventHandler? Focus;
         public event UnFocusEventHandler? UnFocus;
 
-        IUIThread UIThread { get; }
-
         public string Title { get; set; }
         public Point Position { get; set; }
         public Size Size { get; set; }
