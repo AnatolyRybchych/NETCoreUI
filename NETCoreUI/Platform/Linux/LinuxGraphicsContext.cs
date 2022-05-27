@@ -47,12 +47,14 @@ namespace NETCoreUI.Platform.Linux
             public void FillAliasedCircle(Color color, Rect bounds)
             {
                 X.XSetForeground(Display, Gc, color.COLORREF);
-                X.XFillRectangle(Display, Drawable, Gc, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+                X.XFillArc(Display, Drawable, Gc, bounds.X, bounds.Y, bounds.Width, bounds.Height, 0, 360);
             }
 
             public void FillAliasedRect(Color color, Rect rect)
             {
-                throw new NotImplementedException();
+                X.XSetForeground(Display, Gc, color.COLORREF);
+                X.XFillRectangle(Display, Drawable, Gc, rect.X, rect.Y, rect.Width, rect.Height);
+                
             }
         }
 
