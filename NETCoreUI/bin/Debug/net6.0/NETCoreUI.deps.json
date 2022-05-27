@@ -7,19 +7,8 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "NETCoreUI/1.0.0": {
-        "dependencies": {
-          "PureGL": "1.0.0.0"
-        },
         "runtime": {
           "NETCoreUI.dll": {}
-        }
-      },
-      "PureGL/1.0.0.0": {
-        "runtime": {
-          "PureGL.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
         }
       }
     }
@@ -27,11 +16,6 @@
   "libraries": {
     "NETCoreUI/1.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "PureGL/1.0.0.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

@@ -20,6 +20,16 @@ namespace NETCoreUI.Platform.Linux
         protected override LinuxOpenGlContext CreateGlContext() =>  new LinuxOpenGlContext(this);
         protected override ISimpleRenderer CreateSimpleRenderer() => new LinuxSimpleRenderer(this);
 
+        public override void DrawImage(IGraphicsImage image, Size size)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DrawImage(IGraphicsImage image, Size size, Point pos)
+        {
+            throw new NotImplementedException();
+        }
+
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
 
         public LinuxGraphicsContext(IntPtr display, long drawable)

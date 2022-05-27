@@ -4,16 +4,19 @@ using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Windows;
 using System.Runtime.InteropServices;
 
-using static GL.GL;
-
 namespace NETCoreUI
 {
+
     class Program
     {
-
+        static WindowsGraphicsImage buffer = new WindowsGraphicsImage(200, 200);
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
+
+            
+            buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(0, 0, 200, 200));
+
             
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
@@ -61,6 +64,14 @@ namespace NETCoreUI
             ev.JoinUIThread();
         }
 
+        private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
+        {
+            Console.WriteLine("Redraw");
+
+            e.Graphics.DrawImage(buffer, new Size(200, 200));
+        }
+
+
         private static void Window_UnFocus(object sender, IEnvironment environment, Core.WindowEvents.UnFocusEventArgs e)
         {
             Console.WriteLine("UnFocus");
@@ -89,17 +100,6 @@ namespace NETCoreUI
         private static void Window_Resize(object sender, IEnvironment environment, Core.WindowEvents.ResizeEventArgs e)
         {
             Console.WriteLine($"Resize {{{e.Size.Width}, {e.Size.Height}}}");
-        }
-
-        private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
-        {
-            Console.WriteLine("Redraw");
-            e.Graphics.GlContext.MakeCurrent();
-
-            glClearColor(0.8f, 0.4f, 0.2f, 1.0f);
-            glClear(0x4000);
-
-            e.Graphics.GlContext.SwapBuffers();
         }
 
         private static void Window_KeyUp(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)

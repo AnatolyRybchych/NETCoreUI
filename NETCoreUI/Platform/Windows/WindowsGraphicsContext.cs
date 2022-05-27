@@ -35,6 +35,14 @@ namespace NETCoreUI.Platform.Windows
         protected override IOpenGlContext CreateGlContext() => new WindowsOpenGlContext(this);
         protected override ISimpleRenderer CreateSimpleRenderer() => new WindowsSimpleRenderer(this);
 
+        public override void DrawImage(IGraphicsImage image, Size size) => DrawImage(image, size, new Point());
+
+        public override void DrawImage(IGraphicsImage image, Size size, Point pos)
+        {
+            BitBlt(Hdc, pos.X, pos.Y, size.Width, size.Height, image.Graphics.ToWindows().Hdc, 0, 0);
+
+        }
+
         public WindowsSimpleRenderer WindowsRenderer => (WindowsSimpleRenderer)SimpleRenderer;
 
         public class WindowsSimpleRenderer:ISimpleRenderer

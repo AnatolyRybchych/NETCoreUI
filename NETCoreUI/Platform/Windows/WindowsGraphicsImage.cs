@@ -30,6 +30,6 @@ namespace NETCoreUI.Platform.Windows
             WindowsGraphics = new WindowsGraphicsContext(bmpDc, true);
         }
 
-        protected virtual IntPtr Create(IntPtr hdc, int width, int height) => WinApi.CreateCompatibleBitmap(hdc, width, height);
+        protected virtual IntPtr Create(IntPtr hdc, int width, int height) => WinApi.CreateBitmap(width, height, 1, 32, IntPtr.Zero);
     }
 }

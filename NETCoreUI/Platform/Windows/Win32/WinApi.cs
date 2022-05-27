@@ -82,7 +82,7 @@ namespace NETCoreUI.Platform.Windows.Win32
         public static extern IntPtr CreateDIBSection(IntPtr hdc, in BITMAPINFO bmpInfo, uint usage, out IntPtr bits, IntPtr hSection, ushort offset);
 
         [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateBitmap(IntPtr hdc, int width, int height, uint planes, uint bitsCount, IntPtr initData);
+        public static extern IntPtr CreateBitmap(int width, int height, uint planes, uint bitsCount, IntPtr initData);
 
         [DllImport("gdi32.dll")]
         public static extern int GetObject(IntPtr obj, int size, IntPtr data);
@@ -110,6 +110,10 @@ namespace NETCoreUI.Platform.Windows.Win32
         [DllImport("gdi32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool Ellipse(IntPtr hdc, int left, int top, int rigth, int bottom);
+
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool BitBlt(IntPtr hdc, int x, int y, int cx, int cy, IntPtr srcDc, int srcX, int srcY, uint rop = 0x00CC0020);
 
         [DllImport("user32.dll")]
         public static extern int FillRect(IntPtr hdc, in RECT rect, IntPtr brush);

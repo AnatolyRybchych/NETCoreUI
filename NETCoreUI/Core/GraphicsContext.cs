@@ -11,6 +11,9 @@ namespace NETCoreUI.Core
 {
     public abstract class GraphicsContext
     {
+        public abstract void DrawImage(IGraphicsImage image, Size size);
+        public abstract void DrawImage(IGraphicsImage image, Size size, Point pos);
+
         private ISimpleRenderer? simpleRenderer;
         public  ISimpleRenderer SimpleRenderer
         {
