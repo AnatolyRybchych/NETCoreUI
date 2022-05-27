@@ -17,7 +17,47 @@ namespace NETCoreUI
 
             
             IWIndow? window = null;
-            
+            ev.UIThread.Execute(() =>
+            {
+                window = ev.CreateWindow("Window");
+
+                window.Rect = new Rect(200, 200, 200, 200);
+                window.Title = "wfdsfgds";
+
+                window.RightMouseButtonDown += Window_RightMouseButtonDown;
+                window.RightMouseButtonUp += Window_RightMouseButtonUp;
+
+                window.LeftMouseButtonDown += Window_LeftMouseButtonDown;
+                window.LeftMouseButtonUp += Window_LeftMouseButtonUp;
+
+                window.MiddleMouseButtonDown += Window_MiddleMouseButtonDown;
+                window.MiddleMouseButtonUp += Window_MiddleMouseButtonUp;
+
+                window.Mouse4ButtonDown += Window_Mouse4ButtonDown;
+                window.Mouse4ButtonUp += Window_Mouse4ButtonUp;
+
+                window.Mouse5ButtonDown += Window_Mouse5ButtonDown;
+                window.Mouse5ButtonUp += Window_Mouse5ButtonUp;
+
+                window.VericalScroll += Window_VericalScroll;
+
+                window.MouseMove += Window_MouseMove;
+                window.HorisontalScroll += Window_HorisontalScroll;
+
+                window.KeyDown += Window_KeyDown;
+                window.KeyUp += Window_KeyUp;
+
+                window.Redraw += Window_Redraw;
+
+                window.Resize += Window_Resize;
+                window.Move += Window_Move;
+
+                window.MouseEnter += Window_MouseEnter;
+                window.MouseLeave += Window_MouseLeave;
+
+                window.Focus += Window_Focus;
+                window.UnFocus += Window_UnFocus;
+            });
             ev.StartUIThread();
             ev.JoinUIThread();
         }
