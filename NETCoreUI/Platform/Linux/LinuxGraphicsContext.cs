@@ -47,7 +47,7 @@ namespace NETCoreUI.Platform.Linux
             public void FillAliasedCircle(Color color, Rect bounds)
             {
                 X.XSetForeground(Display, Gc, color.COLORREF);
-                X.XFillArc(Display, Drawable, Gc, bounds.X, bounds.Y, bounds.Width, bounds.Height, 0, 360);
+                X.XFillArc(Display, Drawable, Gc, bounds.X, bounds.Y, bounds.Width, bounds.Height, 0, 360 * 64);
             }
 
             public void FillAliasedRect(Color color, Rect rect)
