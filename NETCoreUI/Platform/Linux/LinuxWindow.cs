@@ -158,6 +158,7 @@ namespace NETCoreUI.Platform.Linux
                     OnUnFocus(new UnFocusEventArgs());
                     break;
                 case EventType.DestroyNotify:
+                    Console.WriteLine("destroy");
                     Close();
                     break;
             }
