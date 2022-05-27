@@ -15,7 +15,7 @@ namespace NETCoreUI.Platform.Linux
     {
         public long Pixmap { get; private set; }
         public IntPtr Display { get; private set; }
-        public int Screen { get; private set; }
+        public long Root { get; private set; }
 
         public LinuxGraphicsContext LinuxGraphics { get; private set; }
         public GraphicsContext Graphics => LinuxGraphics;
@@ -23,9 +23,11 @@ namespace NETCoreUI.Platform.Linux
         public LinuxGraphicsImage(IntPtr display, int width, int heigth)
         {
             Display = display;
-            Screen = XDefaultScreen(Display);
+            Root = X.XDefaultRootWindow(Display);
 
-            XCreatePixmap(Display, Screen, width, heigth, 24);
+
+
+            XCreatePixmap(Display, Root, width, heigth, 24);
             LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap);
         }
 
