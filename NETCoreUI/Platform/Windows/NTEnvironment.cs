@@ -43,5 +43,7 @@ namespace NETCoreUI.Platform.Windows
 
         protected override IWIndow CreateBaseWindowWithoutTitleBar(int width, int height) =>
             new NTWindow(this, NTUIThread, HInstance, "", (WS_EX)0, WS.POPUPWINDOW, 0, 0, width, height, IntPtr.Zero);
+
+        public override IGraphicsImage CreateGraphicsImage(int width, int height) => new WindowsGraphicsImage(width, height);
     }
 }

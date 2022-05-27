@@ -12,17 +12,20 @@ namespace NETCoreUI
 
     class Program
     {
-        static LinuxGraphicsImage buffer;
+        static IGraphicsImage buffer;
 
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            buffer = new LinuxGraphicsImage(ev.ToLinux().Display, 200, 200);
+            buffer = ev.CreateGraphicsImage(200, 200);
 
-            buffer.Graphics.GlContext.MakeCurrent();
-            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-            buffer.Graphics.GlContext.SwapBuffers();
+            buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(200, 200));
+
+            //buffer.Graphics.GlContext.MakeCurrent();
+            //glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            //glClear(0x4000);
+            //buffer.Graphics.GlContext.SwapBuffers();
 
             IWIndow? window = null;
             ev.UIThread.Execute(() =>

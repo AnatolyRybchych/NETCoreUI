@@ -13,3 +13,4 @@ C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\refint\NETCore
 C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.pdb
 C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.genruntimeconfig.cache
 C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\ref\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Debug\net6.0\NETCoreUI.csproj.CopyComplete

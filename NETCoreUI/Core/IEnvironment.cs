@@ -13,6 +13,7 @@ namespace NETCoreUI.Core
         IWIndow CreateWindowWithoutTitleBar(int width, int height);
         IWIndow CreateWindow(string title);
         IWIndow CreateWindow(string title, int width, int height);
+        IGraphicsImage CreateGraphicsImage(int width, int height);
         void JoinUIThread();
         void StartUIThread();
     }

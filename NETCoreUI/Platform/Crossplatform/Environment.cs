@@ -57,5 +57,7 @@ namespace NETCoreUI.Platform.Crossplatform
             return CreateBaseWindowWithoutTitleBar(width, height);
 
         }
+
+        public abstract IGraphicsImage CreateGraphicsImage(int width, int height);
     }
 }
