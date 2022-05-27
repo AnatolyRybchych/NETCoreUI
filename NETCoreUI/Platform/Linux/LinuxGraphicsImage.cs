@@ -25,9 +25,7 @@ namespace NETCoreUI.Platform.Linux
             Display = display;
             Root = X.XDefaultRootWindow(Display);
 
-
-
-            XCreatePixmap(Display, Root, width, heigth, 24);
+            Pixmap = XCreatePixmap(Display, Root, width, heigth, 24);
             LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap);
         }
 
