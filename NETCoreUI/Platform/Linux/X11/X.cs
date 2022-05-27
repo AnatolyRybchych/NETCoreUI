@@ -2112,7 +2112,10 @@ public static class X{
     
     [DllImport(LibPath)]
     public static extern void XDestroyOC ( IntPtr arg0);
-    
+
+    [DllImport(LibPath)]
+    public static extern void XDestroyImage(IntPtr xImage);
+
     [DllImport(LibPath)]
     public static extern XOM XOMOfOC ( IntPtr arg0);
     

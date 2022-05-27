@@ -1,6 +1,7 @@
 ﻿
 using NETCoreUI.Core;
 using NETCoreUI.Core.Primitives;
+using NETCoreUI.Platform.Linux;
 using NETCoreUI.Platform.Windows;
 using System.Runtime.InteropServices;
 
@@ -9,17 +10,15 @@ namespace NETCoreUI
 
     class Program
     {
-        static WindowsImage buffer = new WindowsImage(200, 200);
+        static LinuxGraphicsImage buffer;
 
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            
+            buffer = new LinuxGraphicsImage(ev.ToLinux().Display, 200, 200);
+
             buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(0, 0, 200, 200));
-
-            buffer.CreateBitmap32().SaveBmp("img.bmp");
-
 
             IWIndow? window = null;
             ev.UIThread.Execute(() =>

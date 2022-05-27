@@ -16,18 +16,19 @@ namespace NETCoreUI.Platform.Linux
     {
         public IntPtr Display { get; private set; }
         public long Drawable { get; private set; }
+        public IntPtr Gc { get; private set; }
 
         protected override LinuxOpenGlContext CreateGlContext() =>  new LinuxOpenGlContext(this);
         protected override ISimpleRenderer CreateSimpleRenderer() => new LinuxSimpleRenderer(this);
 
-        public override void DrawImage(IGraphicsImage image, Size size)
-        {
-            throw new NotImplementedException();
-        }
+        public override void DrawImage(IGraphicsImage image, Size size) => DrawImage(image, size, new Point(0, 0));
 
         public override void DrawImage(IGraphicsImage image, Size size, Point pos)
         {
-            throw new NotImplementedException();
+            if(image is LinuxGraphicsImage)
+            {
+                X.XCopyArea(Display, ((LinuxGraphicsImage)image).Pixmap, Drawable, Gc, 0, 0, size.Width, size.Height, pos.X, pos.Y);
+            }
         }
 
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
@@ -36,6 +37,7 @@ namespace NETCoreUI.Platform.Linux
         {
             Display = display;
             Drawable = drawable;
+            Gc = X.XCreateGC(Display, Drawable, 0, IntPtr.Zero);
         }
 
         public class LinuxSimpleRenderer : ISimpleRenderer
@@ -45,14 +47,13 @@ namespace NETCoreUI.Platform.Linux
             public IntPtr Display { get; private set; }
             public long Drawable { get; private set; }
 
-            public IntPtr Gc { get; private set; }
+            public IntPtr Gc => Graphics.Gc;
 
             public LinuxSimpleRenderer(LinuxGraphicsContext graphics)
             {
                 Graphics = graphics;
                 Display = graphics.Display;
                 Drawable = graphics.Drawable;
-                Gc = X.XCreateGC(Display, Drawable, 0, IntPtr.Zero);
             }
 
             public void FillAliasedCircle(Color color, Rect bounds)
