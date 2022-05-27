@@ -112,7 +112,7 @@ namespace NETCoreUI.Platform.Windows
                 {
                     nSize = (ushort)Marshal.SizeOf<PIXELFORMATDESCRIPTOR>(),
                     nVersion = 1,
-                    dwFlags = (uint)(PFD.PFD_DRAW_TO_WINDOW | PFD.PFD_SUPPORT_OPENGL | PFD.PFD_DOUBLEBUFFER),
+                    dwFlags = (uint)(PFD.PFD_DRAW_TO_WINDOW | PFD.PFD_SUPPORT_OPENGL | PFD.PFD_DOUBLEBUFFER | PFD.PFD_DRAW_TO_BITMAP),
                     cColorBits = 32,
                     cDepthBits = 24,
                     cStencilBits = 8,

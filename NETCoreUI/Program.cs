@@ -14,7 +14,6 @@ namespace NETCoreUI
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
-
             
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
@@ -95,10 +94,12 @@ namespace NETCoreUI
         private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
         {
             Console.WriteLine("Redraw");
-            e.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(140, 70, 35), new Rect(100, 100));
-            e.Graphics.SimpleRenderer.FillAliasedCircle(new Color32RGB(140, 70, 35), new Rect(150, 0, 100, 100));
-            e.Graphics.SimpleRenderer.FillAliasedArc(new Color32RGB(140, 70, 35),new Point(0, 150), 50, 20.0f, 130.0f);
-            e.Graphics.SimpleRenderer.DrawAliasedLine(new Color32RGB(140, 70, 35), new Point(10, 100), new Point(190, 100));
+            e.Graphics.GlContext.MakeCurrent();
+
+            glClearColor(0.8f, 0.4f, 0.2f, 1.0f);
+            glClear(0x4000);
+
+            e.Graphics.GlContext.SwapBuffers();
         }
 
         private static void Window_KeyUp(object sender, IEnvironment environment, Core.WindowEvents.KeyEventArgs e)

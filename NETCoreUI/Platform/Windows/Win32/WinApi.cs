@@ -72,6 +72,40 @@ namespace NETCoreUI.Platform.Windows.Win32
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool LineTo(IntPtr hdc, int x, int y);
 
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int width, int height);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateDIBSection(IntPtr hdc, in BITMAPINFO bmpInfo, uint usage, out IntPtr bits, IntPtr hSection, ushort offset);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateBitmap(IntPtr hdc, int width, int height, uint planes, uint bitsCount, IntPtr initData);
+
+        [DllImport("gdi32.dll")]
+        public static extern int GetObject(IntPtr obj, int size, IntPtr data);
+
+        [DllImport("gdi32.dll")]
+        public static extern int GetDIBits(IntPtr hdc, IntPtr hBitmap, uint start, uint lines, IntPtr bitsOut, in BITMAPINFO bitmapInfo, uint usage = 0);
+
+        [DllImport("gdi32.dll")]
+        public static extern int GetDIBits(IntPtr hdc, IntPtr hBitmap, uint start, uint lines, IntPtr bits, IntPtr bitmapInfo, uint usage = 0);
+
+        public static BITMAPINFO GetHbitmapBitmapinfo(IntPtr hdc, IntPtr hBitmap)
+        {
+            BITMAPINFO __bmi = new BITMAPINFO();
+            __bmi.bmiHeader.biSize = (uint)Marshal.SizeOf<BITMAPINFOHEADER>();
+
+            IntPtr bmi = Marshal.AllocHGlobal(Marshal.SizeOf<BITMAPINFO>());
+            Marshal.StructureToPtr(__bmi, bmi, false);
+
+            GetDIBits(hdc, hBitmap, 0, 0, IntPtr.Zero, bmi);
+            BITMAPINFO result = Marshal.PtrToStructure<BITMAPINFO>(bmi);
+            Marshal.FreeHGlobal(bmi);
+            return result;
+        }
 
         [DllImport("gdi32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
