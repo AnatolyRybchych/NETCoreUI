@@ -18,11 +18,11 @@ namespace NETCoreUI.Core.Primitives
 
         public byte[] Bits { get; }
 
-        public Bitmap(int type, int width, int height, int widthBytes, uint planes, uint bitsPixel, byte[] bits)
+        public Bitmap(int width, int height, int widthBytes, uint planes, uint bitsPixel, byte[] bits)
         {
             unchecked
             {
-                Type = type;
+                Type = 0;
                 Width = width;
                 Height = height;
                 WidthBytes = widthBytes;

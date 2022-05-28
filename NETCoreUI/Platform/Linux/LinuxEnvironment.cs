@@ -1,9 +1,11 @@
 ﻿using NETCoreUI.Core;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Crossplatform;
 using NETCoreUI.Platform.Linux.X11.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using X11;
@@ -84,7 +86,19 @@ namespace NETCoreUI.Platform.Linux
 
         public override IGraphicsImage CreateGraphicsImage(int width, int height) => new LinuxGraphicsImage(Display ,width, height);
 
-        public override IImage CreateImage(int width, int height) => new LinuxImage(Display, width, height);
+        public override IImage CreateImageArgsChecked(int width, int height) => new LinuxImage(Display, width, height);
+
+        public override IImage CreateImage(Bitmap bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Size GetPrimaryDisplaySize()
+        {
+            IntPtr screenPtr = X.XDefaultScreenOfDisplay(Display);
+            Screen screen = Marshal.PtrToStructure<Screen>(screenPtr);
+            return new Size(screen.width, screen.height);
+        }
 
         ~LinuxEnvironment()
         {

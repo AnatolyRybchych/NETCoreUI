@@ -15,6 +15,9 @@ namespace NETCoreUI.Platform.Windows.Win32
         public static extern IntPtr GetDC(IntPtr hwnd);
 
         [DllImport("user32.dll")]
+        public static extern int GetSystemMetrics(SM metric);
+
+        [DllImport("user32.dll")]
         public static extern IntPtr BeginPaint(IntPtr hwnd, out PAINTSTRUCT ps);
 
         [DllImport("user32.dll")]

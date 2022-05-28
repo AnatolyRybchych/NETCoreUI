@@ -9,8 +9,8 @@ namespace NETCoreUI.Core.Primitives
     public class Color32RGB : Color
     {
         public byte red;
-        private byte green;
-        private byte blue;
+        public byte green;
+        public byte blue;
 
         public Color32RGB() => red = green = blue = 0;
 

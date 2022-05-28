@@ -21,19 +21,21 @@ namespace NETCoreUI.Platform.Windows
         private Size size;
         public Size Size => size;
 
-        public WindowsGraphicsImage(int width, int height)
+        public WindowsGraphicsImage(int width, int height, object? createHbmpArgs = null)
         {
             size = new Size(width, height);
             IntPtr descktopDc = WinApi.GetDC(IntPtr.Zero);
             IntPtr bmpDc = WinApi.CreateCompatibleDC(descktopDc);
             WinApi.DeleteDC(descktopDc);
 
-            HBitmap = Create(bmpDc, width, height);
+            HBitmap = Create(bmpDc, width, height, createHbmpArgs);
             WinApi.SelectObject(bmpDc, HBitmap);
 
             WindowsGraphics = new WindowsGraphicsContext(bmpDc, true, true);
         }
 
-        protected virtual IntPtr Create(IntPtr hdc, int width, int height) => WinApi.CreateBitmap(width, height, 1, 32, IntPtr.Zero);
+        protected virtual IntPtr Create(IntPtr hdc, int width, int height, object? createHbmpArgs) => WinApi.CreateBitmap(width, height, 1, 32, IntPtr.Zero);
+
+        ~WindowsGraphicsImage() => WinApi.DeleteObject(HBitmap);
     }
 }

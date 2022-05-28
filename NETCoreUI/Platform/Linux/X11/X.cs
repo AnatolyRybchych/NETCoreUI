@@ -278,6 +278,8 @@ public struct Screen {
     public System.IntPtr /*|XExtData*|*/  ext_data;
     public System.IntPtr /*|_XDisplay*|*/  display;
     public Window root;
+    public int width, height;
+    public int mwidth, mheight;
     public System.Int32 ndepths;
     public System.IntPtr /*|Depth*|*/  depths;
     public System.Int32 root_depth;
@@ -286,6 +288,7 @@ public struct Screen {
     public Colormap cmap;
     public System.UInt64 white_pixel;
     public System.UInt64 black_pixel;
+    public int max_maps, min_maps;
     public System.Int32 backing_store;
     public System.Int32 save_unders;
     public System.Int64 root_input_mask;

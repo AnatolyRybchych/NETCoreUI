@@ -31,7 +31,7 @@ namespace NETCoreUI.Platform.Linux
             byte[] bits = new byte[xImage.bytes_per_line * xImage.height];
             Marshal.Copy(xImage.data, bits, 0, bits.Length);
 
-            Bitmap result = new Bitmap(0, xImage.width, xImage.height, xImage.bytes_per_line, 1, (uint)xImage.bits_per_pixel, bits);
+            Bitmap result = new Bitmap(xImage.width, xImage.height, xImage.bytes_per_line, 1, (uint)xImage.bits_per_pixel, bits);
             XDestroyImage(image);
             return result;
         }

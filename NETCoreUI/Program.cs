@@ -18,9 +18,21 @@ namespace NETCoreUI
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            buffer = ev.CreateImage(200, 200);
+            Console.WriteLine($"Primary screen: {{{ev.GetPrimaryDisplaySize().Width}, {ev.GetPrimaryDisplaySize().Height}}}");
 
-            buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(200, 200));
+            Random r = new Random();
+
+            Color32RGB[,] bits = new Color32RGB[200, 200];
+
+            for (int x = 0; x < bits.GetLength(0); x++)
+            {
+                for (int y = 0; y < bits.GetLength(1); y++)
+                {
+                    bits[x, y] = new Color32RGB(255, 255, 255);
+                }
+            }
+
+            buffer = ev.CreateImage(bits);
             buffer.CreateBitmap32().SaveBmp("img.bmp");
 
             //buffer.Graphics.GlContext.MakeCurrent();

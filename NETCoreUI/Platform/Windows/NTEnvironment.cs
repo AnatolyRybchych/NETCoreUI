@@ -1,5 +1,6 @@
 ﻿using NETCoreUI.Core;
 using NETCoreUI.Core.Exceptions;
+using NETCoreUI.Core.Primitives;
 using NETCoreUI.Platform.Crossplatform;
 using NETCoreUI.Platform.Windows.Win32;
 using NETCoreUI.Platform.Windows.Win32.Types;
@@ -46,6 +47,11 @@ namespace NETCoreUI.Platform.Windows
 
         public override IGraphicsImage CreateGraphicsImage(int width, int height) => new WindowsGraphicsImage(width, height);
 
-        public override IImage CreateImage(int width, int height) => new WindowsImage(width, height);
+        public override IImage CreateImageArgsChecked(int width, int height) => new WindowsImage(width, height);
+
+        public override IImage CreateImage(Bitmap bitmap) => new WindowsImage(bitmap.Width, bitmap.Height, bitmap.Bits);
+
+        public Size GetDesktopSize() => new Size(WinApi.GetSystemMetrics(SM.SM_CXVIRTUALSCREEN), WinApi.GetSystemMetrics(SM.SM_CYVIRTUALSCREEN));
+        public override Size GetPrimaryDisplaySize() => new Size(WinApi.GetSystemMetrics(SM.SM_CXSCREEN), WinApi.GetSystemMetrics(SM.SM_CYSCREEN));
     }
 }
