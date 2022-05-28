@@ -42,7 +42,7 @@ namespace NETCoreUI.Platform.Linux
 
             IntPtr bitsPtr = Marshal.AllocHGlobal(width * heigth * 4);
             Marshal.Copy(data, 0, bitsPtr, data.Length);
-            Pixmap = XCreatePixmapFromBitmapData(Display, Root, bitsPtr , width, heigth, 0xffffffff, 0, 24);
+            Pixmap = XCreatePixmapFromBitmapData(Display, Root, bitsPtr , width, heigth, 0xffffffff, 0, 32);
             Marshal.FreeHGlobal(bitsPtr);
 
             LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap, true);
