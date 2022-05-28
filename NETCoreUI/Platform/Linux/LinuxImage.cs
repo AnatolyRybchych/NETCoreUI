@@ -15,6 +15,7 @@ namespace NETCoreUI.Platform.Linux
     public class LinuxImage : LinuxGraphicsImage, IImage
     {
         public const int XYPixmap = 1;
+        public const int ZPixmap = 2;
 
         public LinuxImage(IntPtr display, int width, int heigth) : base(display, width, heigth)
         {
@@ -22,7 +23,9 @@ namespace NETCoreUI.Platform.Linux
 
         public Bitmap CreateBitmap32()
         {
-            IntPtr image = XGetImage(Display, Pixmap, 0, 0, Size.Width, Size.Height, 0, XYPixmap);
+            IntPtr image = XGetImage(Display, Pixmap, 0, 0, Size.Width, Size.Height, 1, ZPixmap);
+            if (image == IntPtr.Zero) throw new BadImageFormatException($"cannot get XImage from {this}");
+
             XImage xImage = Marshal.PtrToStructure<XImage>(image);
 
             byte[] bits = new byte[xImage.bytes_per_line * xImage.height];
