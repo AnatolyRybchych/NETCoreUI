@@ -54,6 +54,7 @@ namespace NETCoreUI.Platform.Linux
             XDestroyImage(img);
             Console.WriteLine("4");
             Marshal.FreeHGlobal(bitsPtr);
+            Console.WriteLine("5");
         }
 
         ~LinuxGraphicsImage()
