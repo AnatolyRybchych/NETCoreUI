@@ -22,13 +22,13 @@ namespace NETCoreUI
 
             Random r = new Random();
 
-            Color32RGB[,] bits = new Color32RGB[200, 200];
+            Color[,] bits = new Color[200, 200];
 
             for (int x = 0; x < bits.GetLength(0); x++)
             {
                 for (int y = 0; y < bits.GetLength(1); y++)
                 {
-                    bits[x, y] = new Color32RGB(255, 0, 0); 
+                    bits[x, y] = new Color32RGBA(255, 0, 0, 100); 
                 }
             }
 
