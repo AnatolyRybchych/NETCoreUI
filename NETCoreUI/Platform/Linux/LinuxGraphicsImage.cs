@@ -45,7 +45,7 @@ namespace NETCoreUI.Platform.Linux
             Marshal.Copy(data, 0, bitsPtr, data.Length);
 
 
-            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, ZPixmap, 0, bitsPtr, width, heigth, 32, width * 4);
+            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 1, XYBitmap, 0, bitsPtr, width, heigth, 32, width * 4);
             Console.WriteLine($"{XPutImage(Display, this.LinuxGraphics.Drawable, this.LinuxGraphics.Gc, img, 0, 0, 0, 0, width, heigth)}");
             XDestroyImage(img);
             Console.WriteLine("1");
