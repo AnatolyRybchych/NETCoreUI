@@ -1,0 +1,2 @@
+* Initializing opengl context for bitmap /*windows*/
+* Initializing opengl context for pixmap /*linux*/

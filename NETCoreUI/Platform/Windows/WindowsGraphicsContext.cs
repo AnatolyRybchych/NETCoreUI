@@ -118,6 +118,8 @@ namespace NETCoreUI.Platform.Windows
                 GraphicsContext = graphicsContext;
                 wglMakeCurrent(GraphicsContext.Hdc, IntPtr.Zero);
 
+                if (GraphicsContext.FromBitmap) throw new NotImplementedException("opengl for bitmap");
+
                 PFD target = GraphicsContext.FromBitmap ? PFD.PFD_DRAW_TO_BITMAP : PFD.PFD_DRAW_TO_WINDOW;
 
                 PIXELFORMATDESCRIPTOR pfd = new PIXELFORMATDESCRIPTOR()

@@ -97,6 +97,8 @@ namespace NETCoreUI.Platform.Linux
             {
                 GraphicsContext = graphicsContext;
 
+                if (GraphicsContext.FromPixmap) throw new NotImplementedException("opengl for pixmap");
+
                 int drawableType = GraphicsContext.FromPixmap ? GLX_PIXMAP_BIT : GLX_WINDOW_BIT;
 
                 int[] visualAttribs = new int[]
