@@ -22,9 +22,9 @@ namespace NETCoreUI.Platform.Linux
         protected override LinuxOpenGlContext CreateGlContext() =>  new LinuxOpenGlContext(this);
         protected override ISimpleRenderer CreateSimpleRenderer() => new LinuxSimpleRenderer(this);
 
-        public override void DrawImage(IGraphicsImage image, Size size) => DrawImage(image, size, new Point(0, 0));
+        public override void DrawImageIgnoreAlpha(IGraphicsImage image, Size size) => DrawImageIgnoreAlpha(image, size, new Point(0, 0));
 
-        public override void DrawImage(IGraphicsImage image, Size size, Point pos)
+        public override void DrawImageIgnoreAlpha(IGraphicsImage image, Size size, Point pos)
         {
             if(image is LinuxGraphicsImage)
             {
