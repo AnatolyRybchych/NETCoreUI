@@ -41,15 +41,18 @@ namespace NETCoreUI.Platform.Linux
 
         public LinuxGraphicsImage(IntPtr display, int width, int heigth, byte[] data):this(display, width, heigth)
         {
-            IntPtr bitsPtr = Marshal.AllocHGlobal(width * heigth * 4);
-            Marshal.Copy(data, 0, bitsPtr, Math.Min(data.Length, width * heigth * 4));
+            while (true)
+            {
+                IntPtr bitsPtr = Marshal.AllocHGlobal(width * heigth * 4);
+                Marshal.Copy(data, 0, bitsPtr, Math.Min(data.Length, width * heigth * 4));
 
-            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, ZPixmap, 0, bitsPtr, width, heigth, 32, width * 4);
-            
-            Console.WriteLine($"{XPutImage(Display, this.LinuxGraphics.Drawable, this.LinuxGraphics.Gc, img, 0, 0, 0, 0, width, heigth)}");
-            XDestroyImage(img);
+                IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, ZPixmap, 0, bitsPtr, width, heigth, 32, width * 4);
 
-            Marshal.FreeHGlobal(bitsPtr);
+                XPutImage(Display, this.LinuxGraphics.Drawable, this.LinuxGraphics.Gc, img, 0, 0, 0, 0, width, heigth);
+                XDestroyImage(img);
+            }
+
+            //Marshal.FreeHGlobal(bitsPtr);
         }
 
         ~LinuxGraphicsImage()
