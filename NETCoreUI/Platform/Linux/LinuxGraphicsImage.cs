@@ -14,8 +14,10 @@ namespace NETCoreUI.Platform.Linux
 {
     public class LinuxGraphicsImage : IGraphicsImage
     {
+        public const int XYBitmap = 0;
         public const int XYPixmap = 1;
         public const int ZPixmap = 2;
+        
 
         public long Pixmap { get; private set; }
         public IntPtr Display { get; private set; }
@@ -42,7 +44,7 @@ namespace NETCoreUI.Platform.Linux
             IntPtr bitsPtr = Marshal.AllocHGlobal(width * heigth * 4);
             Marshal.Copy(data, 0, bitsPtr, data.Length);
 
-            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, ZPixmap, 0, bitsPtr, width, heigth, 32, width * 4);
+            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, XYBitmap, 0, bitsPtr, width, heigth, 32, width * 4);
             XPutImage(Display, this.LinuxGraphics.Drawable, this.LinuxGraphics.Gc, img, 0, 0, 0, 0, width, heigth);
             XDestroyImage(img);
 

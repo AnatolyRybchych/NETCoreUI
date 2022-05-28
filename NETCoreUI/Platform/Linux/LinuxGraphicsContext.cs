@@ -42,6 +42,12 @@ namespace NETCoreUI.Platform.Linux
             Gc = X.XCreateGC(Display, Drawable, 0, IntPtr.Zero);
         }
 
+
+        ~LinuxGraphicsContext()
+        {
+            X.XFreeGC(Display, Gc);
+        }
+
         public class LinuxSimpleRenderer : ISimpleRenderer
         {
             public LinuxGraphicsContext Graphics { get; private set; }
