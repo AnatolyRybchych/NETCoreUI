@@ -1,4 +1,5 @@
 ﻿using NETCoreUI.Core;
+using NETCoreUI.Core.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,12 @@ namespace NETCoreUI.Platform.Linux
         public LinuxGraphicsContext LinuxGraphics { get; private set; }
         public GraphicsContext Graphics => LinuxGraphics;
 
+        private Size size;
+        public Size Size => size;
+
         public LinuxGraphicsImage(IntPtr display, int width, int heigth)
         {
+            size = new Size(width, heigth);
             Display = display;
             Root = X.XDefaultRootWindow(Display);
 

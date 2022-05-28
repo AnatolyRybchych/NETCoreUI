@@ -352,6 +352,7 @@ public struct XServerInterpretedAddress {
 }
 
 public struct XImage {
+    public int width, height;
     public System.Int32 xoffset;
     public System.Int32 format;
     public System.IntPtr /*System.SByte*/ data;

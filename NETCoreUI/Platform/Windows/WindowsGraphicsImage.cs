@@ -18,8 +18,12 @@ namespace NETCoreUI.Platform.Windows
         public WindowsGraphicsContext WindowsGraphics { get; private set; }
         public GraphicsContext Graphics => WindowsGraphics;
 
+        private Size size;
+        public Size Size => size;
+
         public WindowsGraphicsImage(int width, int height)
         {
+            size = new Size(width, height);
             IntPtr descktopDc = WinApi.GetDC(IntPtr.Zero);
             IntPtr bmpDc = WinApi.CreateCompatibleDC(descktopDc);
             WinApi.DeleteDC(descktopDc);
