@@ -45,5 +45,7 @@ namespace NETCoreUI.Platform.Windows
             new NTWindow(this, NTUIThread, HInstance, "", (WS_EX)0, WS.POPUPWINDOW, 0, 0, width, height, IntPtr.Zero);
 
         public override IGraphicsImage CreateGraphicsImage(int width, int height) => new WindowsGraphicsImage(width, height);
+
+        public override IImage CreateImage(int width, int height) => new WindowsImage(width, height);
     }
 }

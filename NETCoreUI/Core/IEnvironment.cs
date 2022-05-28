@@ -14,6 +14,7 @@ namespace NETCoreUI.Core
         IWIndow CreateWindow(string title);
         IWIndow CreateWindow(string title, int width, int height);
         IGraphicsImage CreateGraphicsImage(int width, int height);
+        IImage CreateImage(int width, int height);
         void JoinUIThread();
         void StartUIThread();
     }

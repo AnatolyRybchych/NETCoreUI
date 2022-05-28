@@ -84,6 +84,8 @@ namespace NETCoreUI.Platform.Linux
 
         public override IGraphicsImage CreateGraphicsImage(int width, int height) => new LinuxGraphicsImage(Display ,width, height);
 
+        public override IImage CreateImage(int width, int height) => new LinuxImage(Display, width, height);
+
         ~LinuxEnvironment()
         {
             X.XCloseDisplay(Display);

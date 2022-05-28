@@ -12,15 +12,16 @@ namespace NETCoreUI
 
     class Program
     {
-        static IGraphicsImage buffer;
+        static IImage buffer;
 
         static void Main(string[] args)
         {
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            buffer = ev.CreateGraphicsImage(200, 200);
+            buffer = ev.CreateImage(200, 200);
 
             buffer.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 0, 0), new Rect(200, 200));
+            buffer.CreateBitmap32().SaveBmp("img.bmp");
 
             //buffer.Graphics.GlContext.MakeCurrent();
             //glViewport(0, 0, 200, 200);

@@ -59,5 +59,6 @@ namespace NETCoreUI.Platform.Crossplatform
         }
 
         public abstract IGraphicsImage CreateGraphicsImage(int width, int height);
+        public abstract IImage CreateImage(int width, int height);
     }
 }
