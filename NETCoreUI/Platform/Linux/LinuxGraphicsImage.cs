@@ -46,7 +46,8 @@ namespace NETCoreUI.Platform.Linux
 
             Console.WriteLine("1");
 
-            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, XYBitmap, 0, bitsPtr, width, heigth, 32, width * 4);
+            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, ZPixmap, 0, bitsPtr, width, heigth, 32, width * 4);
+            Console.WriteLine($"{img}");
             Console.WriteLine("2");
             XPutImage(Display, this.LinuxGraphics.Drawable, this.LinuxGraphics.Gc, img, 0, 0, 0, 0, width, heigth);
             Console.WriteLine("3");
