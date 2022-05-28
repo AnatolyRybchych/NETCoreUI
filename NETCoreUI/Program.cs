@@ -28,7 +28,7 @@ namespace NETCoreUI
             {
                 for (int y = 0; y < bits.GetLength(1); y++)
                 {
-                    bits[x, y] = new Color32RGB(255, 255, 255);
+                    bits[x, y] = new Color32RGB(255, 255, 255); 
                 }
             }
 
