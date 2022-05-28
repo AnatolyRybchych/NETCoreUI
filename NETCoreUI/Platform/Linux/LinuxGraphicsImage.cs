@@ -34,6 +34,20 @@ namespace NETCoreUI.Platform.Linux
             LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap, true);
         }
 
+        public LinuxGraphicsImage(IntPtr display, int width, int heigth, byte[] data)
+        {
+            size = new Size(width, heigth);
+            Display = display;
+            Root = X.XDefaultRootWindow(Display);
+
+            IntPtr bitsPtr = Marshal.AllocHGlobal(width * heigth * 4);
+            Marshal.Copy(data, 0, bitsPtr, data.Length);
+            Pixmap = XCreatePixmapFromBitmapData(Display, Root, bitsPtr , width, heigth, 0, 0, 24);
+            Marshal.FreeHGlobal(bitsPtr);
+
+            LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap, true);
+        }
+
         ~LinuxGraphicsImage()
         {
             XFreePixmap(Display, Pixmap);

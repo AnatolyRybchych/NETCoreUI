@@ -21,6 +21,11 @@ namespace NETCoreUI.Platform.Linux
         {
         }
 
+        public LinuxImage(IntPtr display, int width, int heigth, byte[] data) :base(display, width, heigth, data)
+        {
+
+        }
+
         public Bitmap CreateBitmap32()
         {
             IntPtr image = XGetImage(Display, Pixmap, 0, 0, Size.Width, Size.Height, 1, ZPixmap);

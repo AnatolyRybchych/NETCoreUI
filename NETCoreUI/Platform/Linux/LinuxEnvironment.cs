@@ -88,10 +88,7 @@ namespace NETCoreUI.Platform.Linux
 
         public override IImage CreateImageArgsChecked(int width, int height) => new LinuxImage(Display, width, height);
 
-        public override IImage CreateImage(Bitmap bitmap)
-        {
-            throw new NotImplementedException();
-        }
+        public override IImage CreateImage(Bitmap bitmap) => new LinuxImage(Display, bitmap.Width, bitmap.Height, bitmap.Bits);
 
         public override Size GetPrimaryDisplaySize()
         {
