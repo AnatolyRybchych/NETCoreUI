@@ -14,8 +14,7 @@ namespace NETCoreUI.Platform.Linux
 {
     public class LinuxImage : LinuxGraphicsImage, IImage
     {
-        public const int XYPixmap = 1;
-        public const int ZPixmap = 2;
+        
 
         public LinuxImage(IntPtr display, int width, int heigth) : base(display, width, heigth)
         {

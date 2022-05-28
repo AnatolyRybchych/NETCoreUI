@@ -14,6 +14,9 @@ namespace NETCoreUI.Platform.Linux
 {
     public class LinuxGraphicsImage : IGraphicsImage
     {
+        public const int XYPixmap = 1;
+        public const int ZPixmap = 2;
+
         public long Pixmap { get; private set; }
         public IntPtr Display { get; private set; }
         public long Root { get; private set; }
@@ -34,18 +37,16 @@ namespace NETCoreUI.Platform.Linux
             LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap, true);
         }
 
-        public LinuxGraphicsImage(IntPtr display, int width, int heigth, byte[] data)
+        public LinuxGraphicsImage(IntPtr display, int width, int heigth, byte[] data):this(display, width, heigth)
         {
-            size = new Size(width, heigth);
-            Display = display;
-            Root = X.XDefaultRootWindow(Display);
-
             IntPtr bitsPtr = Marshal.AllocHGlobal(width * heigth * 4);
             Marshal.Copy(data, 0, bitsPtr, data.Length);
-            Pixmap = XCreatePixmapFromBitmapData(Display, Root, bitsPtr , width, heigth, 0, 0, 24);
-            Marshal.FreeHGlobal(bitsPtr);
 
-            LinuxGraphics = new LinuxGraphicsContext(Display, Pixmap, true);
+            IntPtr img = XCreateImage(Display, XDefaultVisual(Display, XDefaultScreen(Display)), 24, ZPixmap, 0, bitsPtr, width, heigth, 32, width * 4);
+            XPutImage(Display, this.LinuxGraphics.Drawable, this.LinuxGraphics.Gc, img, 0, 0, 0, 0, width, heigth);
+            XDestroyImage(img);
+
+            Marshal.FreeHGlobal(bitsPtr);
         }
 
         ~LinuxGraphicsImage()
