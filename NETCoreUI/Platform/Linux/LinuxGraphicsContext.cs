@@ -32,6 +32,13 @@ namespace NETCoreUI.Platform.Linux
             }
         }
 
+        public override void DrawImageApplyAlpha(IGraphicsImage image, Size size) => DrawImageApplyAlpha(image, size, new Point(0, 0));
+
+        public override void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
+        {
+            throw new NotImplementedException();
+        }
+
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
 
         public LinuxGraphicsContext(IntPtr display, long drawable, bool fromPixmap = false)

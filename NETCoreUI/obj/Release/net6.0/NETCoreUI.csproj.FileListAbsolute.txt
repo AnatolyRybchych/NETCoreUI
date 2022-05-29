@@ -1,0 +1,17 @@
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Release\net6.0\NETCoreUI.exe
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Release\net6.0\NETCoreUI.deps.json
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Release\net6.0\NETCoreUI.runtimeconfig.json
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Release\net6.0\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Release\net6.0\NETCoreUI.pdb
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\bin\Release\net6.0\PureGL.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.csproj.AssemblyReference.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.AssemblyInfoInputs.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.AssemblyInfo.cs
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.csproj.CoreCompileInputs.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.csproj.CopyComplete
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\refint\NETCoreUI.dll
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.pdb
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\NETCoreUI.genruntimeconfig.cache
+C:\Users\Velichaisyi\Desktop\NETCoreUI\NETCoreUI\obj\Release\net6.0\ref\NETCoreUI.dll

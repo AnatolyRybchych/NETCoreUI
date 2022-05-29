@@ -91,7 +91,7 @@ namespace NETCoreUI
         {
             Console.WriteLine("Redraw");
 
-            e.Graphics.DrawImageIgnoreAlpha(buffer, new Size(200, 200));
+            e.Graphics.DrawImageApplyAlpha(buffer, new Size(200, 200));
         }
 
 

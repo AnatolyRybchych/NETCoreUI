@@ -42,7 +42,13 @@ namespace NETCoreUI.Platform.Windows
         public override void DrawImageIgnoreAlpha(IGraphicsImage image, Size size, Point pos)
         {
             BitBlt(Hdc, pos.X, pos.Y, size.Width, size.Height, image.Graphics.ToWindows().Hdc, 0, 0);
+        }
 
+        public override void DrawImageApplyAlpha(IGraphicsImage image, Size size) => DrawImageApplyAlpha(image, size, new Point(0, 0));
+
+        public override void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
+        {
+            AlphaBlend(Hdc, pos.X, pos.Y, size.Width, size.Height, image.Graphics.ToWindows().Hdc, 0, 0, size.Width, size.Height, new BLENDFUNCTION(255));
         }
 
         public WindowsSimpleRenderer WindowsRenderer => (WindowsSimpleRenderer)SimpleRenderer;

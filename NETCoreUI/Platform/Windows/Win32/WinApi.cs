@@ -118,6 +118,10 @@ namespace NETCoreUI.Platform.Windows.Win32
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool BitBlt(IntPtr hdc, int x, int y, int cx, int cy, IntPtr srcDc, int srcX, int srcY, uint rop = 0x00CC0020);
 
+        [DllImport("Msimg32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool AlphaBlend(IntPtr hdc, int x, int y, int cx, int cy, IntPtr srcDc, int srcX, int srcY, int srcCx, int srcCy, BLENDFUNCTION blendfunc);
+
         [DllImport("user32.dll")]
         public static extern int FillRect(IntPtr hdc, in RECT rect, IntPtr brush);
 
