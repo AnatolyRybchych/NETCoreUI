@@ -36,10 +36,46 @@ namespace NETCoreUI.Platform.Linux
 
         public override void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
         {
-            IntPtr img = X.XGetImage(Display, ((LinuxGraphicsImage)image).Pixmap, 0, 0, size.Width, size.Height, 0xffffffff, LinuxImage.ZPixmap);
-            if (img == IntPtr.Zero) throw new Exception($"Cannot get XImage from {image.GetType().Name}");
-            X.XPutImage(Display, Drawable, Gc, img, 0, 0, pos.X, pos.Y, size.Width, size.Height);
-            X.XDestroyImage(img);
+            int dstY = pos.Y;
+            int dstX = pos.X;
+
+            int srcY = 0;
+            int srcX = 0;
+
+            IntPtr src = X.XGetImage(Display, ((LinuxGraphicsImage)image).Pixmap, srcX, srcY, size.Width, size.Height, 0xffffffff, LinuxImage.ZPixmap);
+            if (src == IntPtr.Zero) throw new Exception($"Cannot get XImage from {image.GetType().Name}");
+            IntPtr dst = X.XGetImage(Display, Drawable, dstX, dstY, size.Width, size.Height, 0xffffffff, LinuxImage.ZPixmap);
+            if (dst == IntPtr.Zero) throw new Exception($"Cannot get XImage from {this.GetType().Name}");
+
+            unsafe
+            {
+                XImage *srcImg = (XImage*)src;
+                XImage *dstImg = (XImage*)dst;
+
+                int srcCyRowStep = srcImg->bytes_per_line / sizeof(int);
+                int dstCyRowStep = dstImg->bytes_per_line / sizeof(int);
+
+                int* srcPx = (int*)srcImg->data;
+                int* dstPx = (int*)dstImg->data;
+
+                for (int y = 0; y < dstImg->height; y++)
+                {
+                    int* srcEnd = srcPx + dstImg->width;
+                    while(srcPx != srcEnd)
+                    {
+                        byte srcAlpha = (byte)(*srcPx >> 24);
+                        byte dstAlpha = (byte)(*dstPx >> 24);
+
+                        *dstPx = *dstPx / 255 * dstAlpha + *srcPx / 255 * srcAlpha;
+
+                        srcPx++;
+                        dstPx++;
+                    }
+                    srcPx += srcCyRowStep;
+                    dstPx += dstCyRowStep;
+                }
+            }
+            X.XPutImage(Display, Drawable, Gc, dst, srcX, srcY, dstX, dstY, size.Width, size.Height);
         }
 
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
