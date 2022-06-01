@@ -91,7 +91,7 @@ namespace NETCoreUI
         {
             Console.WriteLine("Redraw");
             e.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 255, 255), new Rect(200, 200));
-            e.Graphics.DrawImageApplyAlpha(buffer, new Size(200, 200));
+            //e.Graphics.DrawImageApplyAlpha(buffer, new Size(200, 200));
         }
 
 
