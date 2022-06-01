@@ -42,6 +42,7 @@ namespace NETCoreUI.Core
 
         public GraphicsContext Graphics { get;}
 
+        public void ForceRedraw();
         void Show();
         void Maximize();
         void Minimize();

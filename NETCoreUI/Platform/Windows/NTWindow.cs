@@ -213,6 +213,11 @@ namespace NETCoreUI.Platform.Windows
 
         public override void Show() => WinApi.ShowWindow(HWindow, SW.Show);
 
+        public override void ForceRedraw()
+        {
+            WinApi.InvalidateRect(HWindow, IntPtr.Zero, false);
+        }
+
         ~NTWindow()
         {
         }

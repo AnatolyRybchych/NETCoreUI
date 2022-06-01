@@ -1905,7 +1905,7 @@ public static class X{
     public static extern System.Int32 XSelectInput ( System.IntPtr /*|Display*|*/  arg0, Window arg1, EventMask arg2);
     
     [DllImport(LibPath)]
-    public static extern System.Int32 XSendEvent ( System.IntPtr /*|Display*|*/  arg0, Window arg1, System.Int32 arg2, System.Int64 arg3, System.IntPtr /*|XEvent*|*/  arg4);
+    public static extern System.Int32 XSendEvent ( System.IntPtr /*|Display*|*/  arg0, Window arg1, int arg2, EventMask arg3, in XEvent arg4);
     
     [DllImport(LibPath)]
     public static extern System.Int32 XSetAccessControl ( System.IntPtr /*|Display*|*/  arg0, System.Int32 arg1);

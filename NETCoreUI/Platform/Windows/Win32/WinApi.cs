@@ -15,6 +15,14 @@ namespace NETCoreUI.Platform.Windows.Win32
         public static extern IntPtr GetDC(IntPtr hwnd);
 
         [DllImport("user32.dll")]
+        [return:MarshalAs(UnmanagedType.Bool)]
+        public static extern IntPtr InvalidateRect(IntPtr hwnd, IntPtr rect, bool Erase);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern IntPtr InvalidateRect(IntPtr hwnd, in RECT rect, bool Erase);
+
+        [DllImport("user32.dll")]
         public static extern int GetSystemMetrics(SM metric);
 
         [DllImport("user32.dll")]

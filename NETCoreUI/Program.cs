@@ -172,6 +172,7 @@ namespace NETCoreUI
 
         private static void Window_MiddleMouseButtonDown(object sender, IEnvironment environment, Core.WindowEvents.MouseButtonEventArgs e)
         {
+            (sender as IWIndow).ForceRedraw();
             Console.WriteLine($"middle mouse button {{{e.X}; {e.Y}}}");
         }
 

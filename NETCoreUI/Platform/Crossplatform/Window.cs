@@ -48,6 +48,8 @@ namespace NETCoreUI.Platform.Crossplatform
             environment.UIThread.Execute(AlignStartState);
         }
 
+        public abstract void ForceRedraw();
+
         public abstract void Close();
         public abstract void Maximize();
         public abstract void Minimize();

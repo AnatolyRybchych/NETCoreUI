@@ -192,5 +192,13 @@ namespace NETCoreUI.Platform.Linux
                 }
             }
         }
+
+        public override void ForceRedraw()
+        {
+            XEvent ev = new XEvent();
+            ev.type = EventType.Expose;
+            X.XSendEvent(LinuxEnvironamnt.Display, XID, 1, EventMask.Exposure, in ev);
+            throw new NotImplementedException();
+        }
     }
 }
