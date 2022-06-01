@@ -32,19 +32,20 @@ namespace NETCoreUI.Platform.Linux
             }
         }
 
-        public override void DrawImageApplyAlpha(IGraphicsImage image, Size size) => DrawImageApplyAlpha(image, size, new Point(0, 0));
+        public /*override*/ void DrawImageApplyAlpha(IGraphicsImage image, Size size) => DrawImageApplyAlpha(image, size, new Point(0, 0));
 
-        public override void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
+        public /*override*/ void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
         {
+            throw new NotImplementedException();
             int dstY = pos.Y;
             int dstX = pos.X;
 
             int srcY = 0;
             int srcX = 0;
 
-            IntPtr src = X.XGetImage(Display, ((LinuxGraphicsImage)image).Pixmap, 0, 0, 10, 10, 0xffffffff, LinuxImage.ZPixmap);
+            IntPtr src = X.XGetImage(Display, ((LinuxGraphicsImage)image).Pixmap, srcX, srcY, size.Width, size.Height, 0xffffffff, LinuxImage.ZPixmap);
             if (src == IntPtr.Zero) throw new Exception($"Cannot get XImage from {image.GetType().Name}");
-            IntPtr dst = X.XGetImage(Display, Drawable, 0, 0, 10, 10, 0xffffffff, LinuxImage.ZPixmap);
+            IntPtr dst = X.XGetImage(Display, Drawable, dstX, dstY, size.Width, size.Height, 0xffffffff, LinuxImage.ZPixmap);
             if (dst == IntPtr.Zero) throw new Exception($"Cannot get XImage from {this.GetType().Name}");
 
             XImage srcImg = Marshal.PtrToStructure<XImage>(src);
