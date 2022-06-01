@@ -27,7 +27,7 @@ namespace NETCoreUI.Platform.Linux
 
         public Bitmap CreateBitmap32()
         {
-            IntPtr image = XGetImage(Display, Pixmap, 0, 0, Size.Width, Size.Height, 1, ZPixmap);
+            IntPtr image = XGetImage(Display, Pixmap, 0, 0, Size.Width, Size.Height, 0xffffffff, ZPixmap);
             if (image == IntPtr.Zero) throw new BadImageFormatException($"cannot get XImage from {this}");
 
             XImage xImage = Marshal.PtrToStructure<XImage>(image);
