@@ -36,7 +36,7 @@ namespace NETCoreUI.Platform.Linux
 
         public override void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
         {
-            throw new NotImplementedException();
+            DrawImageIgnoreAlpha(image, size, pos);
         }
 
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
