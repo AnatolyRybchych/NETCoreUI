@@ -47,35 +47,36 @@ namespace NETCoreUI.Platform.Linux
             IntPtr dst = X.XGetImage(Display, Drawable, dstX, dstY, size.Width, size.Height, 0xffffffff, LinuxImage.ZPixmap);
             if (dst == IntPtr.Zero) throw new Exception($"Cannot get XImage from {this.GetType().Name}");
 
-            unsafe
+            XImage srcImg = Marshal.PtrToStructure<XImage>(src);
+            XImage dstImg = Marshal.PtrToStructure<XImage>(dst);
+
+            int dataSize = srcImg.width * srcImg.height * 4;
+            byte[] srcData = new byte[dataSize];
+            byte[] dstData = new byte[dataSize];
+
+            Marshal.Copy(src, srcData, 0, dataSize);
+            Marshal.Copy(dst, dstData, 0, dataSize);
+
+            for (int i = 0; i < dataSize; i+=4)
             {
-                XImage *srcImg = (XImage*)src;
-                XImage *dstImg = (XImage*)dst;
+                byte srcAlpha = srcData[i + 3];
+                byte dstAlpha = dstData[i + 3];
 
-                int srcCyRowStep = srcImg->bytes_per_line / sizeof(int);
-                int dstCyRowStep = dstImg->bytes_per_line / sizeof(int);
-
-                int* srcPx = (int*)srcImg->data;
-                int* dstPx = (int*)dstImg->data;
-
-                for (int y = 0; y < dstImg->height; y++)
+                unchecked
                 {
-                    int* srcEnd = srcPx + dstImg->width;
-                    while(srcPx != srcEnd)
-                    {
-                        byte srcAlpha = (byte)(*srcPx >> 24);
-                        byte dstAlpha = (byte)(*dstPx >> 24);
-
-                        *dstPx = *dstPx / 255 * dstAlpha + *srcPx / 255 * srcAlpha;
-
-                        srcPx++;
-                        dstPx++;
-                    }
-                    srcPx += srcCyRowStep;
-                    dstPx += dstCyRowStep;
-                }
+                    srcData[i + 0] = (byte)(srcData[i + 0] * (255 / srcAlpha) + dstData[i + 0] * (255 / dstAlpha)); 
+                    srcData[i + 1] = (byte)(srcData[i + 1] * (255 / srcAlpha) + dstData[i + 1] * (255 / dstAlpha)); 
+                    srcData[i + 2] = (byte)(srcData[i + 2] * (255 / srcAlpha) + dstData[i + 2] * (255 / dstAlpha));
+                    srcData[i + 3] = (byte)(srcAlpha + dstAlpha);
+                } 
             }
+
+            Marshal.Copy(dstData, 0, dst, dataSize);
+
             X.XPutImage(Display, Drawable, Gc, dst, srcX, srcY, dstX, dstY, size.Width, size.Height);
+
+            X.XDestroyImage(src);
+            X.XDestroyImage(dst);
         }
 
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
