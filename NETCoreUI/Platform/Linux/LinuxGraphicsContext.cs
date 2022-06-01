@@ -36,7 +36,9 @@ namespace NETCoreUI.Platform.Linux
 
         public override void DrawImageApplyAlpha(IGraphicsImage image, Size size, Point pos)
         {
-            DrawImageIgnoreAlpha(image, size, pos);
+            IntPtr img = X.XGetImage(Display, ((LinuxGraphicsImage)image).Pixmap, pos.X, pos.Y, size.Width, size.Height, 1, LinuxImage.ZPixmap);
+            X.XPutImage(Display, Drawable, Gc, img, 0, 0, pos.X, pos.Y, size.Width, size.Height);
+            X.XDestroyImage(img);
         }
 
         public LinuxSimpleRenderer LinuxRenderer => (LinuxSimpleRenderer)SimpleRenderer;
