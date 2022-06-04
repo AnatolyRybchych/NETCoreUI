@@ -1,96 +1,20 @@
 ﻿
 using NETCoreUI.Core;
 using NETCoreUI.Core.Primitives;
-using NETCoreUI.Platform.Linux;
-using NETCoreUI.Platform.Windows;
-using System.Runtime.InteropServices;
-
-using OpenTK.Graphics.OpenGL;
-using static OpenTK.Graphics.OpenGL.GL;
 
 namespace NETCoreUI
 {
-
-    class GlBindingProvider
-    {
-
-        public OpenTK.IBindingsContext Get()
-        {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT) 
-                return new WindowsGlBinding();
-            else 
-                return new LinuxGlBinding();
-        }
-
-        private class LinuxGlBinding : OpenTK.IBindingsContext
-        {
-            [DllImport("libdl.so")]
-            protected static extern IntPtr dlopen(string filename, int flags);
-
-            [DllImport("libdl.so")]
-            protected static extern IntPtr dlsym(IntPtr handle, string symbol);
-
-            [DllImport("libdl.so")]
-            protected static extern IntPtr dlclose(IntPtr handle);
-
-            private IntPtr glLib;
-            private const string Lib = "libGL.so";
-            const int RTLD_NOW = 2; // for dlopen's flags 
-
-            public LinuxGlBinding()
-            {
-                glLib = dlopen(Lib, RTLD_NOW);
-                if (glLib == IntPtr.Zero) throw new DllNotFoundException(Lib);
-            }
-
-            public IntPtr GetProcAddress(string procName) => dlsym(glLib, procName);
-
-            ~LinuxGlBinding() => dlclose(glLib);
-        }
-
-        private class WindowsGlBinding : OpenTK.IBindingsContext
-        {
-            [DllImport("kernel32.dll")]
-            private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
-
-            [DllImport("kernel32.dll")]
-            private static extern IntPtr LoadLibraryW([MarshalAs(UnmanagedType.LPWStr)] string libName);
-
-            [DllImport("kernel32.dll")] 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            private static extern bool FreeLibrary(IntPtr hModule);
-
-            private IntPtr glLib;
-            private const string Lib = "opengl32.dll";
-
-            public WindowsGlBinding()
-            {
-                glLib = LoadLibraryW(Lib);
-                if (glLib == IntPtr.Zero) throw new DllNotFoundException(Lib);
-            }
-
-            public IntPtr GetProcAddress(string procName) => GetProcAddress(glLib, procName);
-
-            ~WindowsGlBinding() => FreeLibrary(glLib);
-        }
-    }
-
-
     class Program
     {
-
+        static IImage? img = null;
         static void Main(string[] args)
         {
 
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            LoadBindings(new GlBindingProvider().Get());
-
-
-            IWIndow? window = null;
             ev.UIThread.Execute(() =>
             {
-                window = ev.CreateWindow("Window");
+                IWIndow window = ev.CreateWindow("Window");
 
                 window.Rect = new Rect(200, 200, 200, 200);
                 window.Title = "wfdsfgds";
@@ -129,17 +53,29 @@ namespace NETCoreUI
                 window.Focus += Window_Focus;
                 window.UnFocus += Window_UnFocus;
             });
+
+            img = ev.CreateImage(100, 100);
+            img.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(160, 80, 40), new Rect(100, 100));
+            img.CreateBitmap32().SaveBmp("img.bmp");
+
+
             ev.StartUIThread();
+
             ev.JoinUIThread();
         }
 
         private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
         {
-            e.Graphics.GlContext.MakeCurrent();
-            
-            ClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-            Clear(ClearBufferMask.ColorBufferBit);
-            e.Graphics.GlContext.SwapBuffers();
+            e.Graphics.DrawImageIgnoreAlpha(img, new Size(100, 100));
+
+            //e.Graphics.GlContext.MakeCurrent();
+
+            //glClearColor(1.0f, 1.0f, 0.5f, 1.0f);
+            //glClear(GL_COLOR_BUFFER_BIT);
+
+            //e.Graphics.GlContext.SwapBuffers();
+
+            Console.WriteLine("Redraw");
         }
 
 
