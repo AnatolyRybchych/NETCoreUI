@@ -5,41 +5,87 @@ using NETCoreUI.Platform.Linux;
 using NETCoreUI.Platform.Windows;
 using System.Runtime.InteropServices;
 
-using static GL.GL;
+using OpenTK.Graphics.OpenGL;
+using static OpenTK.Graphics.OpenGL.GL;
 
 namespace NETCoreUI
 {
 
+    class GlBindingProvider
+    {
+
+        OpenTK.IBindingsContext Get()
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT) 
+                return new WindowsGlBinding();
+            else 
+                return new LinuxGlBinding();
+        }
+
+        private class LinuxGlBinding : OpenTK.IBindingsContext
+        {
+            [DllImport("libdl.so")]
+            protected static extern IntPtr dlopen(string filename, int flags);
+
+            [DllImport("libdl.so")]
+            protected static extern IntPtr dlsym(IntPtr handle, string symbol);
+
+            [DllImport("libdl.so")]
+            protected static extern IntPtr dlclose(IntPtr handle);
+
+            private IntPtr glLib;
+            private const string Lib = "GL";
+            const int RTLD_NOW = 2; // for dlopen's flags 
+
+            public LinuxGlBinding()
+            {
+                glLib = dlopen(Lib, RTLD_NOW);
+                if (glLib == IntPtr.Zero) throw new DllNotFoundException(Lib);
+            }
+
+            public IntPtr GetProcAddress(string procName) => dlsym(glLib, procName);
+
+            ~LinuxGlBinding() => dlclose(glLib);
+        }
+
+        private class WindowsGlBinding : OpenTK.IBindingsContext
+        {
+            [DllImport("kernel32.dll")]
+            private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+            [DllImport("kernel32.dll")]
+            private static extern IntPtr LoadLibraryW([MarshalAs(UnmanagedType.LPWStr)] string libName);
+
+            [DllImport("kernel32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            private static extern bool FreeLibrary(IntPtr hModule);
+
+            private IntPtr glLib;
+            private const string Lib = "opengl32.dll";
+
+            public WindowsGlBinding()
+            {
+                glLib = LoadLibraryW(Lib);
+                if (glLib == IntPtr.Zero) throw new DllNotFoundException(Lib);
+            }
+
+            public IntPtr GetProcAddress(string procName) => GetProcAddress(glLib, procName);
+
+            ~WindowsGlBinding() => FreeLibrary(glLib);
+        }
+    }
+
+
     class Program
     {
-        static IImage buffer;
 
         static void Main(string[] args)
         {
+            GlBinding binding = new GlBinding();
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            Console.WriteLine($"Primary screen: {{{ev.GetPrimaryDisplaySize().Width}, {ev.GetPrimaryDisplaySize().Height}}}");
+            LoadBindings(binding);
 
-            Random r = new Random();
-
-            Color[,] bits = new Color[200, 200];
-
-            for (int x = 0; x < bits.GetLength(0); x++)
-            {
-                for (int y = 0; y < bits.GetLength(1); y++)
-                {
-                    bits[x, y] = new Color32RGBA(255, 0, 0, 100); 
-                }
-            }
-
-            buffer = ev.CreateImage(bits);
-            buffer.CreateBitmap32().SaveBmp("img.bmp");
-
-            //buffer.Graphics.GlContext.MakeCurrent();
-            //glViewport(0, 0, 200, 200);
-            //glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-            //glClear(0x4000);
-            //buffer.Graphics.GlContext.SwapBuffers();
 
             IWIndow? window = null;
             ev.UIThread.Execute(() =>
@@ -89,9 +135,11 @@ namespace NETCoreUI
 
         private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
         {
-            Console.WriteLine("Redraw");
-            e.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(255, 255, 255), new Rect(200, 200));
-            e.Graphics.DrawImageIgnoreAlpha(buffer, new Size(200, 200));
+            e.Graphics.GlContext.MakeCurrent();
+            
+            ClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            Clear(ClearBufferMask.ColorBufferBit);
+            e.Graphics.GlContext.SwapBuffers();
         }
 
 
@@ -172,7 +220,6 @@ namespace NETCoreUI
 
         private static void Window_MiddleMouseButtonDown(object sender, IEnvironment environment, Core.WindowEvents.MouseButtonEventArgs e)
         {
-            (sender as IWIndow).ForceRedraw();
             Console.WriteLine($"middle mouse button {{{e.X}; {e.Y}}}");
         }
 

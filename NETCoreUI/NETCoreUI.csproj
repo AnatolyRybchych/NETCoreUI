@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenTK" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="PureGL">
       <HintPath>bin\Debug\net6.0\PureGL.dll</HintPath>
     </Reference>
