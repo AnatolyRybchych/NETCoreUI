@@ -14,7 +14,7 @@ namespace NETCoreUI
     class GlBindingProvider
     {
 
-        OpenTK.IBindingsContext Get()
+        public OpenTK.IBindingsContext Get()
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT) 
                 return new WindowsGlBinding();
@@ -81,10 +81,10 @@ namespace NETCoreUI
 
         static void Main(string[] args)
         {
-            GlBinding binding = new GlBinding();
+
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
 
-            LoadBindings(binding);
+            LoadBindings(new GlBindingProvider().Get());
 
 
             IWIndow? window = null;
