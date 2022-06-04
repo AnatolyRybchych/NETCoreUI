@@ -34,7 +34,7 @@ namespace NETCoreUI
             protected static extern IntPtr dlclose(IntPtr handle);
 
             private IntPtr glLib;
-            private const string Lib = "GL";
+            private const string Lib = "libGL.so";
             const int RTLD_NOW = 2; // for dlopen's flags 
 
             public LinuxGlBinding()
