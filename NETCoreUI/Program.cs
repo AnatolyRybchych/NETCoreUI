@@ -56,7 +56,7 @@ namespace NETCoreUI
             [DllImport("kernel32.dll")]
             private static extern IntPtr LoadLibraryW([MarshalAs(UnmanagedType.LPWStr)] string libName);
 
-            [DllImport("kernel32.dll")]
+            [DllImport("kernel32.dll")] 
             [return: MarshalAs(UnmanagedType.Bool)]
             private static extern bool FreeLibrary(IntPtr hModule);
 
