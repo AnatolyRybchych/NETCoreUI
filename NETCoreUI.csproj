@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="PureGL">
-      <HintPath>bin\Debug\net6.0\PureGL.dll</HintPath>
-    </Reference>
+
   </ItemGroup>
 
 </Project>

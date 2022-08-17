@@ -6,7 +6,6 @@ namespace NETCoreUI
 {
     class Program
     {
-        static IImage? img = null;
         static void Main(string[] args)
         {
 
@@ -54,11 +53,6 @@ namespace NETCoreUI
                 window.UnFocus += Window_UnFocus;
             });
 
-            img = ev.CreateImage(100, 100);
-            img.Graphics.SimpleRenderer.FillAliasedRect(new Color32RGB(160, 80, 40), new Rect(100, 100));
-            img.CreateBitmap32().SaveBmp("img.bmp");
-
-
             ev.StartUIThread();
 
             ev.JoinUIThread();
@@ -66,14 +60,6 @@ namespace NETCoreUI
 
         private static void Window_Redraw(object sender, IEnvironment environment, Core.WindowEvents.RedrawEventArgs e)
         {
-            e.Graphics.DrawImageIgnoreAlpha(img, new Size(100, 100));
-
-            //e.Graphics.GlContext.MakeCurrent();
-
-            //glClearColor(1.0f, 1.0f, 0.5f, 1.0f);
-            //glClear(GL_COLOR_BUFFER_BIT);
-
-            //e.Graphics.GlContext.SwapBuffers();
 
             Console.WriteLine("Redraw");
         }
