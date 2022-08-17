@@ -11,9 +11,9 @@ namespace NETCoreUI
         {
 
             IEnvironment ev = EnvironmentProvider.GetEnvironment();
-
             ev.UIThread.Execute(() =>
             {
+                
                 IWIndow window = ev.CreateWindow("Window");
 
                 window.Rect = new Rect(200, 200, 200, 200);
